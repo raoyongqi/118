@@ -120,6 +120,10 @@
 \RequirePackage[top=3cm, bottom=2.54cm,outer=3.17cm, inner=3.17cm, headheight=1cm, footskip=0.54cm, heightrounded]{geometry}
 
 
+\geometry{headheight=1cm, footskip=0.54cm} % 显式设置页眉和页脚高度
+\RequirePackage{changepage}
+
+
 %=======package
 %代码风格设置
 %=======package
@@ -157,6 +161,7 @@
 % \RequirePackage{amsfonts}
 % \RequirePackage{amssymb}
 \RequirePackage{mathrsfs}
+\RequirePackage{longtable}%摄氏度
 
 \RequirePackage{graphicx}
 \graphicspath{{figures/}{figure/}{pictures/}

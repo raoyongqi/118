@@ -456,30 +456,186 @@ WorldClim数据集气候数据通常通过全球气象站点的观测数据进�
 
    
    \begin{table}[H]
-       \centering
-       \begin{tabular}{|l|l|l|l|}
-           \hline
-           \textbf{类别} & \textbf{计数} & \textbf{类别} & \textbf{计数} \\ \hline
-           甘肃省 & 13 & 吉林省 & 9 \\ \hline
-           云南省 & 13 & 山东省 & 9 \\ \hline
-           河北省 & 12 & 河南省 & 9 \\ \hline
-           陕西省 & 11 & 湖北省 & 9 \\ \hline
-           黑龙江省 & 11 & 湖南省 & 9 \\ \hline
-           贵州省 & 10 & 内蒙古自治区 & 8 \\ \hline
-           广西壮族自治区 & 10 & 江苏省 & 8 \\ \hline
-           广东省 & 10 & 安徽省 & 8 \\ \hline
-           山西省 & 7 & 四川省 & 8 \\ \hline
-           江西省 & 7 & 新疆维吾尔自治区 & 6 \\ \hline
-           福建省 & 7 & 浙江省 & 5 \\ \hline
-           辽宁省 & 4 & 重庆市 & 4 \\ \hline
-           海南省 & 4 & 宁夏回族自治区 & 2 \\ \hline
-       \end{tabular}
-       \caption{各省/自治区的计数}
-       \label{tab:category_count}
+   	\centering
+   	\begin{tabular}{ll|ll}
+   		\toprule
+   		\textbf{类别} & \textbf{计数} & \textbf{类别} & \textbf{计数} \\
+   		\midrule
+   		甘肃省 & 13 & 吉林省 & 9 \\
+   		云南省 & 13 & 山东省 & 9 \\
+   		河北省 & 12 & 河南省 & 9 \\
+   		陕西省 & 11 & 湖北省 & 9 \\
+   		黑龙江省 & 11 & 湖南省 & 9 \\
+   		贵州省 & 10 & 内蒙古自治区 & 8 \\
+   		广西壮族自治区 & 10 & 江苏省 & 8 \\
+   		广东省 & 10 & 安徽省 & 8 \\
+   		山西省 & 7 & 四川省 & 8 \\
+   		江西省 & 7 & 新疆维吾尔自治区 & 6 \\
+   		福建省 & 7 & 浙江省 & 5 \\
+   		辽宁省 & 4 & 重庆市 & 4 \\
+   		海南省 & 4 & 宁夏回族自治区 & 2 \\
+   		\bottomrule
+   	\end{tabular}
+   	\caption{各省/自治区的计数}
+   	\label{tab:category_count}
    \end{table}
    
+   
    统计结果显示，各个省份和自治区在数据中的出现频次有所不同。甘肃省和云南省的数据量最大，每个省份分别出现了13次，其次是河北省，出现了12次。陕西省和黑龙江省分别出现了11次，位居第三。贵州省、广西壮族自治区和广东省的出现次数均为10次，紧随其后。其他省份如吉林省、山东省、河南省、湖北省和湖南省的出现次数为9次，显示出它们在数据中的较高频次。内蒙古自治区和江苏省的频次为8次，而安徽省和四川省则分别为8次，表明这些省份在数据中的频次也较为集中。山西省、江西省和福建省的出现次数为7次，相对较少。新疆维吾尔自治区的出现次数为6次，而浙江省为5次，显示出它们在该数据集中的出现频次较低。辽宁省、重庆市、海南省和宁夏回族自治区的出现次数则较少，分别为4次和2次，显示出这些地区在数据中的比例较小。总体来看，数据集中不同省份和自治区的分布存在一定的差异，部分省份的数据频次较高，而其他省份的频次则相对较低。
+   \section{数据的汇总与描述性统计}
 
+   \setlength{\LTleft}{-3.17cm}  % 手动偏移表格，确保左对齐 PDF 左边
+   \begin{longtable}[H]{lcccc}
+	   \caption{Variable, Mean, and Std Dev of Each Column} \label{tab:range} \\
+   
+	   \toprule
+	   Variable & Simplified Name & Mean & Std Dev & Range \\ \midrule
+	   \endfirsthead  % 表格的第一页头部
+	   \multicolumn{5}{c}{\textit{Continued from previous page}} \\ \midrule
+	   Variable & Simplified Name & Mean & Std Dev & Range \\ \midrule
+	   \endhead  % 后续页的表头
+   
+	   \midrule
+	   \endfoot  % 表格末尾页脚
+   
+	   \bottomrule
+	   \endlastfoot  % 最后一页的表格末尾
+   
+	   lon & Longitude & 114.002121 & 6.927369 & 99.883725 -- 130.816964 \\
+	   lat & Latitude & 32.669348 & 7.021396 & 21.567881 -- 48.834139 \\
+	   bio\_1 & Bio1 & 13.79 & 5.36 & -2.07 - 23.24 \\
+	   bio\_2 & Bio2 & 9.63 & 2.05 & 6.14 - 14.37 \\
+	   bio\_3 & Bio3 & 29.07 & 5.78 & 21.16 - 52.83 \\
+	   bio\_4 & Bio4 & 909.45 & 286.13 & 337.74 - 1645.90 \\
+	   bio\_5 & Bio5 & 29.76 & 2.53 & 20.22 - 33.98 \\
+	   bio\_6 & Bio6 & -4.27 & 10.16 & -30.09 - 12.02 \\
+	   bio\_7 & Bio7 & 34.03 & 8.97 & 19.47 - 56.34 \\
+	   bio\_8 & Bio8 & 23.03 & 2.8 & 13.32 - 28.57 \\
+	   bio\_9 & Bio9 & 2.66 & 9.37 & -20.05 - 19.24 \\
+	   bio\_10 & Bio10 & 24.43 & 2.94 & 14.14 - 28.61 \\
+	   bio\_11 & Bio11 & 2.03 & 8.84 & -21.93 - 17.70 \\
+	   bio\_12 & Bio12 & 996.48 & 440.85 & 294.00 - 2205.00 \\
+	   bio\_13 & Bio13 & 198.69 & 61.47 & 82.00 - 420.00 \\
+	   bio\_14 & Bio14 & 17.4 & 14.63 & 1.00 - 51.00 \\
+	   bio\_15 & Bio15 & 82.12 & 23.32 & 41.31 - 148.33 \\
+	   bio\_16 & Bio16 & 507.04 & 178.15 & 209.00 - 1194.00 \\
+	   bio\_17 & Bio17 & 64.67 & 54.76 & 5.00 - 191.00 \\
+	   bio\_18 & Bio18 & 469.93 & 157.76 & 201.00 - 1194.00 \\
+	   bio\_19 & Bio19 & 72.73 & 66.76 & 5.00 - 251.00 \\
+	   elev & Elevation & 469.74 & 529.79 & 0.00 - 2529.00 \\
+	   prec\_01 & Precipitation Jan & 20.96 & 19.72 & 1.00 - 75.00 \\
+	   prec\_02 & Precipitation Feb & 21.17 & 19.09 & 1.00 - 72.00 \\
+	   prec\_03 & Precipitation Mar & 51.76 & 49.53 & 2.00 - 190.00 \\
+	   prec\_04 & Precipitation Apr & 84.72 & 66.24 & 9.00 - 247.00 \\
+	   prec\_05 & Precipitation May & 120.99 & 83.99 & 16.00 - 374.00 \\
+	   prec\_06 & Precipitation Jun & 150.53 & 81.08 & 47.00 - 362.00 \\
+	   prec\_07 & Precipitation Jul & 169.67 & 50.54 & 72.00 - 415.00 \\
+	   prec\_08 & Precipitation Aug & 151.77 & 56.41 & 72.00 - 420.00 \\
+	   prec\_09 & Precipitation Sep & 100.36 & 42.1 & 33.00 - 264.00 \\
+	   prec\_10 & Precipitation Oct & 59.36 & 29.77 & 9.00 - 149.00 \\
+	   prec\_11 & Precipitation Nov & 34.99 & 21.76 & 4.00 - 92.00 \\
+	   prec\_12 & Precipitation Dec & 18.65 & 14.35 & 1.00 - 51.00 \\
+	   srad\_01 & SolarRadiation Jan & 9015.86 & 1645.92 & 5711.00 - 15246.00 \\
+	   srad\_02 & SolarRadiation Feb & 10887.98 & 1725.55 & 7220.00 - 18348.00 \\
+	   srad\_03 & SolarRadiation Mar & 13720.4 & 1998.74 & 9822.00 - 20506.00 \\
+	   srad\_04 & SolarRadiation Apr & 16455.97 & 2024.93 & 11789.00 - 20801.00 \\
+	   srad\_05 & SolarRadiation May & 18511.04 & 2446.57 & 14676.00 - 22826.00 \\
+	   srad\_06 & SolarRadiation Jun & 19234.68 & 2625.26 & 15143.00 - 23824.00 \\
+	   srad\_07 & SolarRadiation Jul & 19804.02 & 1721.77 & 14451.00 - 22823.00 \\
+	   srad\_08 & SolarRadiation Aug & 18976.82 & 1394.69 & 15023.00 - 21241.00 \\
+	   srad\_09 & SolarRadiation Sep & 15963.24 & 1493.48 & 11398.00 - 18867.00 \\
+	   srad\_10 & SolarRadiation Oct & 12691.83 & 1773.63 & 8263.00 - 17075.00 \\
+	   srad\_11 & SolarRadiation Nov & 9889.79 & 1774.68 & 6422.00 - 14382.00 \\
+	   srad\_12 & SolarRadiation Dec & 8495.85 & 1785.38 & 4514.00 - 13298.00 \\
+	   tavg\_01 & TemperatureAvg Jan & 0.5 & 9.36 & -24.33 - 17.10 \\
+	   tavg\_02 & TemperatureAvg Feb & 2.96 & 8.33 & -20.65 - 18.96 \\
+	   tavg\_03 & TemperatureAvg Mar & 8.05 & 6.53 & -11.28 - 21.66 \\
+	   tavg\_04 & TemperatureAvg Apr & 14.67 & 4.68 & -0.29 - 24.33 \\
+	   tavg\_05 & TemperatureAvg May & 19.59 & 3.55 & 7.93 - 26.90 \\
+	   tavg\_06 & TemperatureAvg Jun & 23.27 & 2.91 & 12.83 - 28.36 \\
+	   tavg\_07 & TemperatureAvg Jul & 25.34 & 2.88 & 15.05 - 29.62 \\
+	   tavg\_08 & TemperatureAvg Aug & 24.66 & 3.15 & 14.34 - 29.24 \\
+	   tavg\_09 & TemperatureAvg Sep & 20.49 & 4.13 & 7.87 - 27.51 \\
+	   tavg\_10 & TemperatureAvg Oct & 15.04 & 5.49 & -1.15 - 24.91 \\
+	   tavg\_11 & TemperatureAvg Nov & 8.35 & 7.44 & -12.09 - 21.05 \\
+	   tavg\_12 & TemperatureAvg Dec & 2.64 & 8.85 & -20.81 - 17.34 \\
+	   tmax\_01 & MaxTemperature Jan & 5.27 & 8.68 & -18.58 - 24.09 \\
+	   tmax\_02 & MaxTemperature Feb & 7.83 & 7.53 & -13.84 - 27.14 \\
+	   tmax\_03 & MaxTemperature Mar & 13.0 & 5.93 & -4.77 - 30.23 \\
+	   tmax\_04 & MaxTemperature Apr & 19.93 & 3.97 & 6.06 - 31.82 \\
+	   tmax\_05 & MaxTemperature May & 24.79 & 2.74 & 15.36 - 31.24 \\
+	   tmax\_06 & MaxTemperature Jun & 27.98 & 2.51 & 18.09 - 32.31 \\
+	   tmax\_07 & MaxTemperature Jul & 29.62 & 2.57 & 20.22 - 33.98 \\
+	   tmax\_08 & MaxTemperature Aug & 29.03 & 2.73 & 19.74 - 33.64 \\
+	   tmax\_09 & MaxTemperature Sep & 25.17 & 3.44 & 14.40 - 31.13 \\
+	   tmax\_10 & MaxTemperature Oct & 19.98 & 4.76 & 5.03 - 28.66 \\
+	   tmax\_11 & MaxTemperature Nov & 13.2 & 6.93 & -6.77 - 25.15 \\
+	   tmax\_12 & MaxTemperature Dec & 7.51 & 8.43 & -15.58 - 22.74 \\
+	   tmin\_01 & Min Temperature Jan & -4.27 & 10.16 & -30.09 - 12.02 \\
+	   tmin\_02 & Min Temperature Feb & -1.91 & 9.3 & -27.44 - 13.45 \\
+	   tmin\_03 & Min Temperature Mar & 3.09 & 7.35 & -18.11 - 16.78 \\
+	   tmin\_04 & Min Temperature Apr & 9.4 & 5.63 & -6.62 - 20.76 \\
+	   tmin\_05 & Min Temperature May & 14.39 & 4.6 & 0.50 - 23.89 \\
+	   tmin\_06 & Min Temperature Jun & 18.56 & 3.66 & 6.25 - 25.38 \\
+	   tmin\_07 & Min Temperature Jul & 21.06 & 3.31 & 9.88 - 25.86 \\
+	   tmin\_08 & Min Temperature Aug & 20.28 & 3.64 & 8.29 - 25.74 \\
+	   tmin\_09 & Min Temperature Sep & 15.81 & 4.95 & 1.34 - 24.45 \\
+	   tmin\_10 & Min Temperature Oct & 10.1 & 6.34 & -7.32 - 21.48 \\
+	   tmin\_11 & Min Temperature Nov & 3.49 & 8.02 & -17.42 - 17.05 \\
+	   tmin\_12 & Min Temperature Dec & -2.23 & 9.36 & -26.03 - 13.19 \\
+	   vapr\_01 & Vapor Pressure Jan & 0.52 & 0.33 & 0.06 - 1.31 \\
+	   vapr\_02 & Vapor Pressure Feb & 0.59 & 0.35 & 0.08 - 1.47 \\
+	   vapr\_03 & Vapor Pressure Mar & 0.78 & 0.42 & 0.14 - 1.89 \\
+	   vapr\_04 & Vapor Pressure Apr & 1.14 & 0.52 & 0.27 - 2.42 \\
+	   vapr\_05 & Vapor Pressure May & 1.55 & 0.58 & 0.43 - 2.89 \\
+	   vapr\_06 & Vapor Pressure Jun & 2.05 & 0.53 & 1.01 - 3.13 \\
+	   vapr\_07 & Vapor Pressure Jul & 2.49 & 0.46 & 1.26 - 3.21 \\
+	   vapr\_08 & Vapor Pressure Aug & 2.41 & 0.47 & 1.23 - 3.17 \\
+	   vapr\_09 & Vapor Pressure Sep & 1.82 & 0.52 & 0.66 - 2.86 \\
+	   vapr\_10 & Vapor Pressure Oct & 1.26 & 0.49 & 0.29 - 2.26 \\
+	   vapr\_11 & Vapor Pressure Nov & 0.84 & 0.41 & 0.15 - 1.73 \\
+	   vapr\_12 & Vapor Pressure Dec & 0.58 & 0.34 & 0.08 - 1.41 \\
+	   wind\_01 & Wind Speed Jan & 2.18 & 0.66 & 0.90 - 4.59 \\
+	   wind\_02 & Wind Speed Feb & 2.35 & 0.64 & 1.19 - 4.64 \\
+	   wind\_03 & Wind Speed Mar & 2.64 & 0.74 & 1.28 - 4.82 \\
+	   wind\_04 & Wind Speed Apr & 2.74 & 0.92 & 1.30 - 5.28 \\
+	   wind\_05 & Wind Speed May & 2.57 & 0.85 & 1.37 - 4.70 \\
+	   wind\_06 & Wind Speed Jun & 2.36 & 0.65 & 1.14 - 3.98 \\
+	   wind\_07 & Wind Speed Jul & 2.23 & 0.55 & 1.08 - 3.84 \\
+	   wind\_08 & Wind Speed Aug & 2.03 & 0.53 & 1.02 - 3.69 \\
+	   wind\_09 & Wind Speed Sep & 2.04 & 0.58 & 0.96 - 3.74 \\
+	   wind\_10 & Wind Speed Oct & 2.16 & 0.75 & 0.84 - 4.95 \\
+	   wind\_11 & Wind Speed Nov & 2.17 & 0.75 & 0.81 - 4.98 \\
+	   wind\_12 & Wind Speed Dec & 2.1 & 0.66 & 0.90 - 4.44 \\
+	   awc\_class & AWC Class & 1.26 & 0.65 & 1.00 - 4.89 \\
+	   awt\_s\_soc\_sum\_s\_c\_1 & AWT Soil Organic Carbon Sum S C 1 & 5.11 & 1.59 & 2.34 - 16.31 \\
+	   awt\_t\_soc\_sum\_t\_c\_12 & AWT Soil Organic Carbon Sum T C 12 & 4.43 & 1.75 & 1.88 - 11.59 \\
+	   issoil & IS Soil & 0.99 & 0.04 & 0.70 - 1.00 \\
+	   mu\_global & MU Global & 11546.44 & 220.61 & 11026.44 - 11886.19 \\
+	   ref\_depth & Reference Depth & 98.8 & 4.53 & 70.37 - 100.00 \\
+	   roots & Roots & 0.0 & 0.0 & 0.00 - 0.00 \\
+	   s\_bulk & Soil Bulk & 1.42 & 0.07 & 1.14 - 1.61 \\
+	   s\_cec & Soil CEC & 43.08 & 20.96 & 9.50 - 118.60 \\
+	   s\_clay & Soil Clay & 29.39 & 10.63 & 8.33 - 56.95 \\
+	   s\_c & Soil C & 5.11 & 1.59 & 2.34 - 16.31 \\
+	   s\_gravel & Soil Gravel & 10.47 & 4.97 & 3.00 - 28.00 \\
+	   s\_oc & Soil Organic Carbon & 0.56 & 0.76 & 0.23 - 10.95 \\
+	   s\_ph & Soil pH & 6.69 & 1.07 & 4.73 - 8.24 \\
+	   s\_ref & Soil Reference & 1.36 & 0.07 & 1.22 - 1.65 \\
+	   s\_sand & Soil Sand & 37.9 & 10.45 & 15.00 - 81.67 \\
+	   s\_silt & Soil Silt & 31.4 & 8.13 & 10.00 - 46.22 \\
+	   t\_bulk & Topsoil Bulk & 1.36 & 0.06 & 1.10 - 1.50 \\
+	   t\_cec & Topsoil CEC & 40.22 & 17.6 & 8.36 - 94.76 \\
+	   t\_clay & Topsoil Clay & 25.16 & 8.97 & 9.00 - 49.94 \\
+	   t\_c & Topsoil C & 4.43 & 1.75 & 1.88 - 11.59 \\
+	   t\_gravel & Topsoil Gravel & 9.06 & 4.58 & 1.73 - 26.42 \\
+	   t\_oc & Topsoil Organic Carbon & 1.15 & 0.87 & 0.45 - 11.51 \\
+	   t\_ph & Topsoil pH & 6.55 & 1.02 & 4.80 - 8.20 \\
+	   t\_ref & Topsoil Reference & 1.39 & 0.07 & 1.23 - 1.62 \\
+	   t\_sand & Topsoil Sand & 39.91 & 10.9 & 14.00 - 80.00 \\
+	   t\_silt & Topsoil Silt & 34.01 & 8.36 & 11.00 - 50.00 \\
+   \end{longtable}
+   
 \chapter{模型构建}
 
 \section{地理信息处理方式}
@@ -647,7 +803,22 @@ Carneiro 等（2020）基于 GEE 平台开展了巴西特雷西纳—帝蒙城�
 	
 	近年来，随着大数据和机器学习的发展，研究者如Lin等（2011）提出了一种基于VIF的快速回归算法，能够在处理大规模数据时有效识别和解决多重共线性问题\cite{lin2011}。Lipovetsky和Conklin（2001）则从多目标回归的角度出发，探讨了在多重共线性存在的情况下，如何通过调整回归模型的结构来减小VIF的影响\cite{lipovetsky2001}。这些研究充分展示了VIF在不同研究领域中的重要性，特别是在优化回归模型、提高预测精度和稳定性方面起到了关键作用。
 	
+\section{shap图}
 
+
+
+
+SHAP（SHapley Additive exPlanations）图是一种基于 Shapley 值的解释工具，用于揭示机器学习模型中的特征贡献。Shapley 值最早来自合作博弈论，用于衡量每个参与者对总体收益的贡献；在模型解释中，每个特征的贡献被视为参与者。SHAP 图利用了 Shapley 值的加性特性，将各个特征的贡献加和成模型的预测值，以可视化模型输出对输入特征的敏感性和依赖性。
+
+在计算单个特征的 SHAP 值时，所有可能的特征组合都被考虑，并通过求取平均边际贡献来表示该特征的贡献大小。给定一个机器学习模型 \( f \) 和输入特征集合 \( \mathbf{x} \)，某一特征 \( x_i \) 的 Shapley 值 \( \phi_i \) 定义如下：
+
+\[
+\phi_i(f) = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|! (|N| - |S| - 1)!}{|N|!} \left( f(S \cup \{i\}) - f(S) \right)
+\]
+
+其中，\( S \subseteq N \setminus \{i\} \) 表示特征集合 \( S \) 是除了 \( x_i \) 外的所有特征子集，\( f(S \cup \{i\}) \) 表示模型在特征 \( x_i \) 和 \( S \) 的联合特征集上的预测值，而 \( f(S) \) 表示没有特征 \( x_i \) 时的预测值。公式中的系数 \( \frac{|S|! (|N| - |S| - 1)!}{|N|!} \) 是用于权衡所有特征组合的权重。
+
+SHAP 图将特征的 Shapley 值绘制为不同颜色的条形或散点图，其中每个点代表一个样本实例，每个特征的贡献大小和方向可视化地表达为模型预测的加性影响。
 \chapter{结果}
 
 \section{绘制变量变量之间的散点图}
@@ -666,10 +837,8 @@ Carneiro 等（2020）基于 GEE 平台开展了巴西特雷西纳—帝蒙城�
 通过这张图，我们可以看到样点的气温和降水和植物病害的严重程度在数值上比较分散，但两端的数据比较少，气温和降水与植物病害之间的线性趋势不太明显。
 
 \section{绘制变量重要性图和相关性图}
-    
-	
-	
-	
+
+
     	\subsection{方法}
 	
         为了构建随机森林模型，可以使用 Python 的 \texttt{scikit-learn} 库，\texttt{scikit-learn} 是一个强大的机器学习库，提供了丰富的工具和方法来处理数据、训练模型以及进行评估。随机森林（Random Forest）是一种集成学习方法，通常用于分类和回归问题。它通过生成多棵决策树，并将它们的预测结果综合起来，以提高预测的准确性和鲁棒性。下面我们将通过详细的步骤来实现随机森林模型。
@@ -715,6 +884,106 @@ Carneiro 等（2020）基于 GEE 平台开展了巴西特雷西纳—帝蒙城�
 从变量分类来看，特征被划分为土壤特征（\textit{soil}）和气候特征（\textit{clim}）。土壤特征中，\texttt{T\_SAND\_T\_SAND} 明显占据主导地位，表明土壤中砂的含量对目标变量具有核心影响。其他土壤特征如 \texttt{T\_GRAVEL\_T\_GRAVEL} 和 \texttt{S\_PH\_H2O\_S\_PH\_H2O} 的重要性评分虽然相对较低，但仍然对预测结果提供了一定的解释力。气候特征中，\texttt{SRAD}（太阳辐射）相关变量的重要性普遍较高，如 \texttt{WC2.1\_5M\_SRAD\_02} 和 \texttt{WC2.1\_5M\_SRAD\_06}，反映出太阳辐射在模型中的重要性。此外，气候特征整体数量较多，虽然单个特征的重要性评分不及 \texttt{T\_SAND\_T\_SAND}，但其累积贡献不可忽视，表明气候因素对目标变量的预测具有广泛作用。
 
 进一步观察可以发现，变量的重要性评分呈现出一定的集中性。\texttt{T\_SAND\_T\_SAND} 的评分显著高于其他变量，而其余变量的重要性评分均低于 0.04。这种分布特征表明模型对某些核心特征具有较高依赖性，同时也突出了其余变量的相对次要性。
+
+
+\section{多种模型的比较}
+	            
+	\subsection{操作步骤}
+
+	
+	首先从一个 Excel 文件中加载气候和土壤特征数据，并将目标变量与特征分离。接着，将数据集划分为训练集和测试集，并对特征数据进行标准化处理，以提高模型的训练稳定性和预测性能。
+	
+	随后，构建了多个回归模型，包括神经网络、XGBoost、随机森林和 LightGBM。对于神经网络模型，设计了一个包含两层隐藏层的网络结构，使用 ReLU 作为激活函数，并以均方误差作为损失函数。其他模型如 XGBoost、随机森林和 LightGBM 则利用各自的默认参数完成回归任务。
+	
+	最后，为了评估模型性能，代码生成了每个模型的预测结果与真实值之间的可视化对比图。这些图包括散点图、核密度图、理想的参考线和拟合曲线，从多角度展示了模型的拟合效果。所有生成的图像均保存为文件，便于后续分析和使用。
+	
+	总结而言，该方法通过数据预处理、模型训练、预测和可视化四个步骤，全面比较了不同回归模型的性能，为选择最佳模型提供了直观的依据。
+	
+	
+	
+	\subsection{结果}
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{lccc}
+				\toprule
+				\textbf{Model} & \textbf{Time (s)} & \textbf{MSE} & \textbf{R2} \\
+				\midrule
+				Neural Network & 5.024361 & 25.321228 & 0.295341 \\
+				XGBoost        & 0.466127 & 27.281396 & 0.240792 \\
+				Random Forest  & 3.437109 & 25.818668 & 0.281498 \\
+				LightGBM       & 0.240390 & 26.196418 & 0.270985 \\
+				\bottomrule
+			\end{tabular}
+			\caption{Model Performance Results}
+			\label{tab:model_performance}
+		\end{table}
+
+	
+	神经网络模型训练时间最长，为5.02秒，其MSE为25.32，R2值为0.30，表现较好。XGBoost模型是训练时间最短的，
+    仅为0.47秒，但其MSE为27.28，R2值较低，为0.24，表现不如其他模型。随机森林模型的训练时间为3.44秒，MSE为25.82，R2为0.28，整体性能略逊色于神经网络。
+    LightGBM模型训练时间仅为0.24秒，MSE为26.20，R2为0.27，尽管速度较快，但在性能上与其他模型差距不大。总体来看，尽管XGBoost最快，但其MSE和R2表现不如其他模型，特别是神经网络。
+
+\section{绘制shap图}
+
+\subsection{方法}
+SHAP 图的绘制方法旨在通过可视化特征对模型预测的贡献，以增强对模型决策过程的理解。在使用 Python 绘制 SHAP 图之前，首先需要安装相关的库，通常需要安装 \texttt{shap} 和 \texttt{matplotlib} 包。可以通过运行 \texttt{pip install shap matplotlib} 来完成安装。安装完成后，首先加载所需的库，包括 \texttt{shap} 和模型库，例如 \texttt{sklearn} 或 \texttt{xgboost}。接下来，训练一个机器学习模型并使用训练好的模型进行预测。在训练完模型后，使用 SHAP 库中的 \texttt{Explainer} 类来计算每个特征的 Shapley 值。具体地，使用 \texttt{shap.Explainer(model)} 初始化解释器，其中 \texttt{model} 是之前训练的模型。然后，通过调用 \texttt{explainer.shap\_values(X)}，其中 \texttt{X} 是待解释的特征数据集，来计算特征的 Shapley 值。
+
+一旦计算得到 Shapley 值，可以通过调用 \texttt{shap.summary\_plot(shap\_values, X)} 来生成 SHAP 概要图，这将展示每个特征在所有样本中的重要性和影响。此外，还可以使用 \texttt{shap.dependence\_plot()} 方法绘制特征与 SHAP 值之间的关系图，以观察特征对模型输出的影响。该方法通常需要提供特征名称和对应的 SHAP 值。通过这些步骤，SHAP 图能够直观地呈现模型的决策逻辑，帮助用户理解各个特征在预测中的作用。
+\subsection{结果}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{特征}                         & \textbf{SHAP值} \\ \hline
+		T\_SAND\_T\_SAND\_resampled            & 0.632217        \\ \hline
+		WC2.1\_5M\_SRAD\_08                   & 0.467212        \\ \hline
+		T\_SILT\_T\_SILT\_resampled            & 0.428839        \\ \hline
+		WC2.1\_5M\_WIND\_03                   & 0.367951        \\ \hline
+		WC2.1\_5M\_BIO\_3                      & 0.337206        \\ \hline
+		S\_GRAVEL\_S\_GRAVEL\_resampled       & 0.310465        \\ \hline
+		WC2.1\_5M\_SRAD\_02                   & 0.279634        \\ \hline
+		WC2.1\_5M\_TAVG\_09                   & 0.231049        \\ \hline
+		WC2.1\_5M\_SRAD\_01                   & 0.205439        \\ \hline
+		WC2.1\_5M\_SRAD\_06                   & 0.204011        \\ \hline
+	\end{tabular}
+	\caption{特征与SHAP值}
+	\label{tab:shap_values}
+\end{table}
+
+
+
+\section{构建预测模型}
+
+
+\subsection{方法}
+根据SHAP值的结果，我们可以看出，在影响模型预测的特征中，\texttt{\break T\_SAND\_T\_SAND\_resampled} 对预测结果的影响最大，SHAP值为 0.632217，表明该特征对模型输出的贡献较大。紧随其后的是 \texttt{WC2.1\_5M\_SRAD\_08}，其SHAP值为 0.467212，也对模型输出有显著影响。此外，\texttt{T\_SILT\_T\_SILT\_resampled}、\texttt{WC2.1\_5M\_WIND\_03} 和 \texttt{WC2.1\_5M\_BIO\_3} 这些特征的SHAP值分别为 0.428839、0.367951 和 0.337206，显示它们也在模型预测中占有一定的重要性。其他特征如 \texttt{S\_GRAVEL\_S\_GRAVEL\_resampled} 和 \texttt{WC2.1\_5M\_SRAD\_02} 的影响相对较小，其SHAP值分别为 0.310465 和 0.279634。最终，\texttt{WC2.1\_5M\_TAVG\_09}、\texttt{WC2.1\_5M\_SRAD\_01} 和 \texttt{WC2.1\_5M\_SRAD\_06} 对模型输出的贡献相对较小，SHAP值分别为 0.231049、0.205439 和 0.204011。
+
+整体而言，这些特征的SHAP值显示了各个特征对模型预测结果的不同贡献程度，可以为特征选择和模型优化提供依据。
+
+
+从多个TIFF文件中提取数据、使用随机森林回归模型进行预测，并将预测结果保存为新的TIFF文件。首先，代码定义了一个名为\texttt{read\_tif\_with\_coords}的方法，用于读取TIFF文件，提取其数据、仿射变换信息以及对应的经纬度坐标。通过\texttt{rasterio}库，这个方法能够将像素的行列号转换为地理坐标。
+
+接着，代码读取一个Excel文件，提取出特征列（以 \texttt{\_resampled} 结尾、以 'wc' 开头的列以及经纬度列）和目标变量（\texttt{ratio}列）。然后，使用\texttt{train\_test\_split}函数将数据集分割为训练集和测试集，之后使用随机森林回归模型\texttt{RandomForestRegressor}进行训练，并对测试集进行预测。模型性能通过均方误差（MSE）和R²得分进行评估。
+
+接下来，代码遍历两个文件夹中的TIFF文件，调用\texttt{read\_tif\_with\_coords}方法读取数据并提取经纬度信息。对于每个TIFF文件，数据被存储在一个列表中，并且只有第一个文件的经纬度信息被保存下来。然后，所有TIFF文件的数据被堆叠成一个三维数组，并且将经纬度信息与TIFF数据一同转换为二维数组，作为模型的输入特征。
+
+接着，代码创建一个\texttt{DataFrame}，将特征和经纬度信息组合在一起，并使用已训练的随机森林模型进行预测。预测结果被转换为二维数组，表示为与原始图像相同大小的预测值。最后，预测结果被保存为一个新的TIFF文件，输出到指定的文件夹中。
+
+通过这种方式，代码实现了对多种环境数据的空间预测，并能够将预测结果以地理空间数据的形式输出。
+\subsection{结果}
+
+
+
+\section{气候变化对植物病害变化的影响}
+\subsection{方法}
+首先，导入所需的库，包括 \texttt{rasterio} 和 \texttt{numpy}。接下来，指定输入的两个 TIFF 文件路径，其中第一个文件 \texttt{tiff\_file1} 为 \texttt{'cropped\_data/result/cropped\_cmip6\_rf.tif'}，第二个文件 \texttt{tiff\_file2} 为 \texttt{'cropped\_data/result/cropped\_predicted\_rf.tif'}，同时指定输出文件路径 \texttt{output\_file} 为 \texttt{'cropped\_data/result/sub\_rf.tif'}。然后，使用 \texttt{rasterio.open()} 函数打开第一个 TIFF 文件，并读取其第一波段的数据，同时获取文件的元数据并存储在变量 \texttt{profile} 中。接着，使用相同的方式打开第二个 TIFF 文件，并读取其第一波段的数据。
+
+在读取完数据后，确保两个数据数组的形状相同。如果两个数组的形状不匹配，则抛出一个 \texttt{ValueError} 错误。之后，执行相减运算，计算 \texttt{data1} 与 \texttt{data2} 的差值，并将结果存储在 \texttt{result\_data} 中。
+
+接下来，更新输出文件的元数据 \texttt{profile}，可以根据需要修改数据类型为 \texttt{'float32'}，并将波段数设置为 1，因为输出文件只包含一个波段。最后，使用 \texttt{rasterio.open()} 函数以写入模式打开输出文件，并将计算结果写入到新的 TIFF 文件中。完成后，打印输出文件的路径，确认输出操作已成功执行。
+
+\subsection{结果}
 
 \section{贝叶斯混合效应模型}
 
@@ -764,7 +1033,9 @@ Carneiro 等（2020）基于 GEE 平台开展了巴西特雷西纳—帝蒙城�
 
 \Thanks
 
-这里是致谢页。
+\Thanks
+
+感谢刘向老师三年以来的指导和培养，感谢父母在学费，生活费给与的支持，感谢同班同学，师兄师姐的关心与帮助。
 
 
 
