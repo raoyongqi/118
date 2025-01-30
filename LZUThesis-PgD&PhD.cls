@@ -350,8 +350,9 @@
 \def\LZU@underline[#1]#2{%
     \underline{\hbox to #1{\hfill#2\hfill}}}
 \def\LZUunderline{\@ifnextchar[\LZU@underline\underline}
-
 \RequirePackage{makecell}
+\RequirePackage{caption}
+\RequirePackage{multirow}
 %\RequirePackage{pgffor}
 \RequirePackage{forloop}
 \RequirePackage{xstring}
