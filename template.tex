@@ -497,7 +497,7 @@
 	\section{数据的预处理}
 	
 	在特征处理环节中，为了一些气候变量构建综合指标，
-	代码对以特定前缀命名的列（如 \texttt{prec\_} 表示降水量）进行了求和操作，将结果存储为新变量（如 \texttt{MAP} 表示年均降水量）。类似地，对于其他气候变量，如 \texttt{wind\_}、\texttt{tmax\_}、\texttt{tmin\_} 和 \texttt{tavg\_}，分别计算了总和或平均值，并生成了新的变量，例如 \texttt{WIND}（总风速）、\texttt{MAXMAT}（最大平均气温）、\texttt{MINMAT}（最小平均气温）和 \texttt{AVGMAT}（平均气温）。此外，还处理了变量 \texttt{srad\_} 和 \texttt{vapr\_}，分别生成了代表辐射和蒸汽压力总和的变量 \texttt{SARD} 和 \texttt{VAPR}。生成这些综合指标后，原始的气候相关列被移除，以减少冗余。
+	代码对以特定前缀命名的列（如 \texttt{prec\_} 表示降水量）进行了求和操作，将结果存储为新变量（如 \texttt{MAP} 表示年均降水量）。类似地，对于其他气候变量，如 \texttt{wind\_}、\texttt{tmax\_}、\texttt{tmin\_} 和 \texttt{tavg\_}，分别计算了总和或平均值，并生成了新的变量，例如 \texttt{WIND}（总风速）、\texttt{MAXMAT}（最大平均气温）、\texttt{MINMAT}（最小平均气温）和 \texttt{AVGMAT}（平均气温）。此外，还处理了变量 \texttt{srad\_} 和 \texttt{vapr\_}，分别生成了代表辐射和蒸汽压力总和的变量 \texttt{SRAD} 和 \texttt{VAPR}。生成这些综合指标后，原始的气候相关列被移除，以减少冗余。
 	
 	完成变量构造后，代码进一步清理了数据，删除了一些不需要的列（如 \texttt{REF\_DEPTH}、\texttt{LANDMASK}、\texttt{ROOTS} 和 \texttt{ISSOIL}），并将剩余列名统一转化为大写格式。最后，将目标变量 \texttt{RATIO} 与其他特征分离，准备用于模型训练和测试。在建模阶段，代码首先将数据分为训练集和测试集（比例为 7:3），并使用随机森林回归模型作为基模型。为了进一步提升特征选择的科学性与稳健性，代码使用了 \texttt{Boruta} 算法对训练集特征进行重要性排序，
 	
@@ -524,7 +524,7 @@
 	
 	为了分析自变量和因变量之间的关系，我们计算了自变量与因变量之间的距离矩阵，采用欧几里得距离度量。在此基础上，我们定义了一个 mantel\_test 函数，计算了自变量和因变量的距离矩阵之间的 Pearson 相关系数和 p 值，来评估它们之间的空间相关性。通过遍历每个自变量列，我们完成了每个自变量与因变量的 Mantel 检验，并将结果保留为两位小数，同时对 p 值小于 0.05 的结果进行加粗显示，表示其具有显著性。
 	
-	大多数气候和土壤变量与响应变量之间具有显著的相关性，特别是太阳辐射 (SARD)、土壤砂含量 (S SAND)、气压 (VAPR)、海拔 (ELEV)、纬度 (LAT) 等与植物病害之间的相关性显示出非常显著的负相关关系。另一方面，风速 (WIND) 和表层土壤砾石含量 (T GRAVEL) 与响应变量之间的相关性并不显著，p 值较高，分别为 0.38 和 0.89。这些结果表明，在这些变量中，有些与植物病害存在较强的负相关关系，而有些则与植物病害的关系较弱或不显著。
+	大多数气候和土壤变量与响应变量之间具有显著的相关性，特别是太阳辐射 (SRAD)、土壤砂含量 (S SAND)、气压 (VAPR)、海拔 (ELEV)、纬度 (LAT) 等与植物病害之间的相关性显示出非常显著的负相关关系。另一方面，风速 (WIND) 和表层土壤砾石含量 (T GRAVEL) 与响应变量之间的相关性并不显著，p 值较高，分别为 0.38 和 0.89。这些结果表明，在这些变量中，有些与植物病害存在较强的负相关关系，而有些则与植物病害的关系较弱或不显著。
 	
 	
 	% 欧几里得距离公式
@@ -565,7 +565,7 @@
 			\toprule
 			Variable (Unit) & Simplified Name & Mean & Std Dev & Range \\
 			\midrule
-			SARD (W/m²) & Solar Radiation & 14470.63 & 1171.5 & 10799.58 - 16821.33 \\
+			SRAD (W/m²) & Solar Radiation & 14470.63 & 1171.5 & 10799.58 - 16821.33 \\
 			LON (°) & Longitude & 114.0 & 6.93 & 99.88 - 130.82 \\
 			S SAND (\%) & Soil Sand & 37.97 & 14.11 & 0.00 - 90.00 \\
 			WIND (m/s) & Wind Speed & 27.56 & 7.83 & 13.47 - 51.19 \\
@@ -598,7 +598,7 @@
 		\hspace*{-3.17cm}
 		\begin{tabular}{p{1.6cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}}
 			\toprule
-			\multicolumn{1}{c}{Spearman r}  & \textbf{SARD} & \textbf{LON} & \textbf{S} \par \textbf{SAND} & \textbf{WIND} & \textbf{VAPR} & \textbf{ELEV} & \textbf{LAT} & \textbf{MAX} \par \textbf{MAT} & \textbf{AVG} \par \textbf{MAT} & \textbf{MIN} \par \textbf{MAT} & \textbf{MAP} & \textbf{T} \par \textbf{SAND} & \textbf{MU} \par \textbf{GLOBAL} & \textbf{T} \par \textbf{REF} \par \textbf{BULK} & \textbf{S} \par \textbf{CLAY} & \textbf{S} \par \textbf{REF} \par \textbf{BULK} & \textbf{T} \par \textbf{GRAVEL} \\
+			\multicolumn{1}{c}{Spearman r}  & \textbf{SRAD} & \textbf{LON} & \textbf{S} \par \textbf{SAND} & \textbf{WIND} & \textbf{VAPR} & \textbf{ELEV} & \textbf{LAT} & \textbf{MAX} \par \textbf{MAT} & \textbf{AVG} \par \textbf{MAT} & \textbf{MIN} \par \textbf{MAT} & \textbf{MAP} & \textbf{T} \par \textbf{SAND} & \textbf{MU} \par \textbf{GLOBAL} & \textbf{T} \par \textbf{REF} \par \textbf{BULK} & \textbf{S} \par \textbf{CLAY} & \textbf{S} \par \textbf{REF} \par \textbf{BULK} & \textbf{T} \par \textbf{GRAVEL} \\
 			\midrule
 			\textbf{LON} & 0.23* &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
 			\textbf{S SAND} & 0.19* & 0.09* &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
@@ -629,7 +629,7 @@
 			\toprule
 			spec.variable & env.variable & Mantel r & p-value \\
 			\midrule
-			Plant Disease & SARD & 0.06 & \textbf{0.0} \\
+			Plant Disease & SRAD & 0.06 & \textbf{0.0} \\
 			Plant Disease & LON & -0.00 & \textbf{0.04} \\
 			Plant Disease & S SAND & 0.08 & \textbf{0.0} \\
 			Plant Disease & WIND & 0.00 & 0.38 \\
@@ -819,7 +819,7 @@
 	\section{贝叶斯回归模型}
 	我们使用了贝叶斯回归模型拟合数据并对结果进行总结。首先，通过加载必要的库 \texttt{bayesplot}、\texttt{rstanarm} 和 \texttt{ggplot2}，我们设置工作目录并读取了名为 \texttt{selection.csv} 的数据文件。接着，我们对数据中的自变量进行了标准化，保持因变量 \texttt{RATIO} 不变。然后，使用标准化后的数据进行拟合，得到一个贝叶斯回归模型，并提取其参数。为了展示回归系数的后验分布，我们排除了某些不需要展示的参数，并绘制了一个包含80\%置信区间的 MCMC 后验分布图。接着，我们计算了每个回归系数的点估计（中位数）以及其95\%的置信区间。计算完成后，整理并格式化了一个包含这些结果的数据框，最后使用 \texttt{xtable} 包将该数据框转化为 LaTeX 格式的表格，并打印出相应的 LaTeX 代码。
 	
-	贝叶斯回归分析结果显示了17个气候、地理与土壤变量对响应变量（植物病害）的影响。自变量中，“土壤砂含量”（S SAND）的回归系数为2.82，95\%可信区间为0.45至5.16，表明其对植物病害有显著的正向影响。相比之下，“经度”（LON）和“海拔”（ELEV）的回归系数分别为-0.90和-1.22，95\%可信区间分别为-2.36至0.66和-3.23至0.89，表明它们对植物病害的影响为负。其他变量，如“太阳辐射”（SARD）、“风速”（WIND）和“气压”（VAPR）对植物病害的影响较小，且可信区间较宽，反映出它们的影响较为不确定。此外，“表层土壤砂含量”（T SAND）和“表层土壤砾石含量”（T GRAVEL）也呈负相关，但后者的可信区间包含零，意味着其可能没有显著影响。总体来说，这些结果表明，不同的气候、地理和土壤变量对植物病害有不同程度的影响，其中部分变量呈显著的正向或负向关联，而其他变量则影响较小或较为不确定。
+	贝叶斯回归分析结果显示了17个气候、地理与土壤变量对响应变量（植物病害）的影响。自变量中，“土壤砂含量”（S SAND）的回归系数为2.82，95\%可信区间为0.45至5.16，表明其对植物病害有显著的正向影响。相比之下，“经度”（LON）和“海拔”（ELEV）的回归系数分别为-0.90和-1.22，95\%可信区间分别为-2.36至0.66和-3.23至0.89，表明它们对植物病害的影响为负。其他变量，如“太阳辐射”（SRAD）、“风速”（WIND）和“气压”（VAPR）对植物病害的影响较小，且可信区间较宽，反映出它们的影响较为不确定。此外，“表层土壤砂含量”（T SAND）和“表层土壤砾石含量”（T GRAVEL）也呈负相关，但后者的可信区间包含零，意味着其可能没有显著影响。总体来说，这些结果表明，不同的气候、地理和土壤变量对植物病害有不同程度的影响，其中部分变量呈显著的正向或负向关联，而其他变量则影响较小或较为不确定。
 	
 	
 	\begin{table}[H]
@@ -830,7 +830,7 @@
 			\hline
 			Response & Predictor & Estimate & Est.error & 95\% CI \par (Credible intervals) ) \\ 
 			\hline
-			Plant Disease & SARD & -0.70 & 0.86 & -1.56-0.18 \\ 
+			Plant Disease & SRAD & -0.70 & 0.86 & -1.56-0.18 \\ 
 			Plant Disease & LON & -0.90 & 1.46 & -2.36-0.66 \\ 
 			Plant Disease & S SAND & 2.82 & 2.37 & 0.45-5.16 \\ 
 			Plant Disease & WIND & 0.09 & 0.93 & -0.84-0.97 \\ 
@@ -852,7 +852,7 @@
 	\section{集成学习模型}
 	我们在特征选择完成后，我们使用随机森林回归模型重新训练了一个模型，获取了各个特征的重要性。我们将特征的重要性值与对应的特征名存储在一个 DataFrame 中，并根据特征的重要性进行排序。为了使特征名更加清晰易懂，我们用 apply() 方法替换了特征名中的下划线为空格。
 	
-	随机森林变量重要性结果显示了17个气候、地理与土壤变量对响应变量（植物病害）的贡献。在这些变量中，气候因素“太阳辐射”（SARD）对植物病害的影响最为显著，其重要性值为0.16。地理因素“经度”（LON）和“纬度”（LAT）以及土壤因素“土壤砂含量”（S SAND）对植物病害的贡献次之，重要性值均为0.08。气候因素“气压”（VAPR）和“风速”（WIND）以及地理因素“海拔”（ELEV）的重要性值分别为0.08和0.07，表明它们对植物病害也具有一定的影响。其他气候因素，如“最大温度”（MAX MAT）、“年均降水量”（MAP）、“平均温度”（AVG MAT）和“最小温度”（MIN MAT），对植物病害的影响较小，重要性值均低于0.06。土壤因素如“土壤黏土含量”（S CLAY）、“表层土壤砂含量”（T SAND）、“土壤参考容重”（T REF BULK）以及“表层土壤参考容重”（S REF BULK）等的贡献更为有限，重要性值均低于0.03。总体而言，气候因素在解释植物病害时占主导地位，而土壤和地理因素的贡献较小。
+	随机森林变量重要性结果显示了17个气候、地理与土壤变量对响应变量（植物病害）的贡献。在这些变量中，气候因素“太阳辐射”（SRAD）对植物病害的影响最为显著，其重要性值为0.16。地理因素“经度”（LON）和“纬度”（LAT）以及土壤因素“土壤砂含量”（S SAND）对植物病害的贡献次之，重要性值均为0.08。气候因素“气压”（VAPR）和“风速”（WIND）以及地理因素“海拔”（ELEV）的重要性值分别为0.08和0.07，表明它们对植物病害也具有一定的影响。其他气候因素，如“最大温度”（MAX MAT）、“年均降水量”（MAP）、“平均温度”（AVG MAT）和“最小温度”（MIN MAT），对植物病害的影响较小，重要性值均低于0.06。土壤因素如“土壤黏土含量”（S CLAY）、“表层土壤砂含量”（T SAND）、“土壤参考容重”（T REF BULK）以及“表层土壤参考容重”（S REF BULK）等的贡献更为有限，重要性值均低于0.03。总体而言，气候因素在解释植物病害时占主导地位，而土壤和地理因素的贡献较小。
 	
 	我们使用了多个机器学习模型来预测气候土壤数据中的植物病害变量，并评估了它们的性能。首先，我们加载并清洗了包含气候和土壤数据的Excel文件，处理了列名并合并了相关的特征。然后，我们根据特征列和目标变量植物病害拆分了数据集，并对数据进行了标准化。接着，我们训练并评估了三种模型：XGBoost、随机森林和LightGBM，分别计算了它们的均方误差（MSE）和$R^2$评分，并记录了训练时间。表格展示了基于17个气候、地理与土壤变量的随机森林、XGBoost和LightGBM模型的表现比较，评估指标为$R^2$评分和训练时间。在这三种模型中，随机森林模型的$R^2$评分最高，达到0.2939，表示它对数据的拟合效果较好，但其训练时间也最长，为0.6427。相比之下，XGBoost和LightGBM的$R^2$评分分别为0.2630和0.2607，训练时间显著较短。XGBoost的训练时间为0.2127，而LightGBM则是最快的，仅需0.1158的训练时间。这表明，尽管随机森林提供了稍好的预测性能，但XGBoost和LightGBM在训练时间上更为高效，适用于需要高计算效率的场景。
 	
@@ -865,7 +865,7 @@
 			\toprule
 			Response & Feature & Category & Importance \\
 			\midrule
-			Plant Disease & SARD & Climate & 0.16 \\
+			Plant Disease & SRAD & Climate & 0.16 \\
 			Plant Disease & LON & Geography & 0.08 \\
 			Plant Disease & S SAND & Soil & 0.08 \\
 			Plant Disease & LAT & Geography & 0.08 \\
@@ -1449,7 +1449,7 @@
 	\section{数据的预处理}
 	
 	在特征处理环节中，为了一些气候变量构建综合指标，
-	代码对以特定前缀命名的列（如 \texttt{prec\_} 表示降水量）进行了求和操作，将结果存储为新变量（如 \texttt{MAP} 表示年均降水量）。类似地，对于其他气候变量，如 \texttt{wind\_}、\texttt{tmax\_}、\texttt{tmin\_} 和 \texttt{tavg\_}，分别计算了总和或平均值，并生成了新的变量，例如 \texttt{WIND}（总风速）、\texttt{MAXMAT}（最大平均气温）、\texttt{MINMAT}（最小平均气温）和 \texttt{AVGMAT}（平均气温）。此外，还处理了变量 \texttt{srad\_} 和 \texttt{vapr\_}，分别生成了代表辐射和蒸汽压力总和的变量 \texttt{SARD} 和 \texttt{VAPR}。生成这些综合指标后，原始的气候相关列被移除，以减少冗余。
+	代码对以特定前缀命名的列（如 \texttt{prec\_} 表示降水量）进行了求和操作，将结果存储为新变量（如 \texttt{MAP} 表示年均降水量）。类似地，对于其他气候变量，如 \texttt{wind\_}、\texttt{tmax\_}、\texttt{tmin\_} 和 \texttt{tavg\_}，分别计算了总和或平均值，并生成了新的变量，例如 \texttt{WIND}（总风速）、\texttt{MAXMAT}（最大平均气温）、\texttt{MINMAT}（最小平均气温）和 \texttt{AVGMAT}（平均气温）。此外，还处理了变量 \texttt{srad\_} 和 \texttt{vapr\_}，分别生成了代表辐射和蒸汽压力总和的变量 \texttt{SRAD} 和 \texttt{VAPR}。生成这些综合指标后，原始的气候相关列被移除，以减少冗余。
 	
 	完成变量构造后，代码进一步清理了数据，删除了一些不需要的列（如 \texttt{REF\_DEPTH}、\texttt{LANDMASK}、\texttt{ROOTS} 和 \texttt{ISSOIL}），并将剩余列名统一转化为大写格式。最后，将目标变量 \texttt{RATIO} 与其他特征分离，准备用于模型训练和测试。在建模阶段，代码首先将数据分为训练集和测试集（比例为 7:3），并使用随机森林回归模型作为基模型。为了进一步提升特征选择的科学性与稳健性，代码使用了 \texttt{Boruta} 算法对训练集特征进行重要性排序，
 	
@@ -1476,7 +1476,7 @@
 	
 	为了分析自变量和因变量之间的关系，我们计算了自变量与因变量之间的距离矩阵，采用欧几里得距离度量。在此基础上，我们定义了一个 mantel\_test 函数，计算了自变量和因变量的距离矩阵之间的 Pearson 相关系数和 p 值，来评估它们之间的空间相关性。通过遍历每个自变量列，我们完成了每个自变量与因变量的 Mantel 检验，并将结果保留为两位小数，同时对 p 值小于 0.05 的结果进行加粗显示，表示其具有显著性。
 	
-	大多数气候和土壤变量与响应变量之间具有显著的相关性，特别是太阳辐射 (SARD)、土壤砂含量 (S SAND)、气压 (VAPR)、海拔 (ELEV)、纬度 (LAT) 等与植物病害之间的相关性显示出非常显著的负相关关系。另一方面，风速 (WIND) 和表层土壤砾石含量 (T GRAVEL) 与响应变量之间的相关性并不显著，p 值较高，分别为 0.38 和 0.89。这些结果表明，在这些变量中，有些与植物病害存在较强的负相关关系，而有些则与植物病害的关系较弱或不显著。
+	大多数气候和土壤变量与响应变量之间具有显著的相关性，特别是太阳辐射 (SRAD)、土壤砂含量 (S SAND)、气压 (VAPR)、海拔 (ELEV)、纬度 (LAT) 等与植物病害之间的相关性显示出非常显著的负相关关系。另一方面，风速 (WIND) 和表层土壤砾石含量 (T GRAVEL) 与响应变量之间的相关性并不显著，p 值较高，分别为 0.38 和 0.89。这些结果表明，在这些变量中，有些与植物病害存在较强的负相关关系，而有些则与植物病害的关系较弱或不显著。
 	
 	
 	% 欧几里得距离公式
@@ -1517,7 +1517,7 @@
 			\toprule
 			Variable (Unit) & Simplified Name & Mean & Std Dev & Range \\
 			\midrule
-			SARD (W/m²) & Solar Radiation & 14470.63 & 1171.5 & 10799.58 - 16821.33 \\
+			SRAD (W/m²) & Solar Radiation & 14470.63 & 1171.5 & 10799.58 - 16821.33 \\
 			LON (°) & Longitude & 114.0 & 6.93 & 99.88 - 130.82 \\
 			S SAND (\%) & Soil Sand & 37.97 & 14.11 & 0.00 - 90.00 \\
 			WIND (m/s) & Wind Speed & 27.56 & 7.83 & 13.47 - 51.19 \\
@@ -1550,7 +1550,7 @@
 		\hspace*{-3.17cm}
 		\begin{tabular}{p{1.6cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}}
 			\toprule
-			\multicolumn{1}{c}{Spearman r}  & \textbf{SARD} & \textbf{LON} & \textbf{S} \par \textbf{SAND} & \textbf{WIND} & \textbf{VAPR} & \textbf{ELEV} & \textbf{LAT} & \textbf{MAX} \par \textbf{MAT} & \textbf{AVG} \par \textbf{MAT} & \textbf{MIN} \par \textbf{MAT} & \textbf{MAP} & \textbf{T} \par \textbf{SAND} & \textbf{MU} \par \textbf{GLOBAL} & \textbf{T} \par \textbf{REF} \par \textbf{BULK} & \textbf{S} \par \textbf{CLAY} & \textbf{S} \par \textbf{REF} \par \textbf{BULK} & \textbf{T} \par \textbf{GRAVEL} \\
+			\multicolumn{1}{c}{Spearman r}  & \textbf{SRAD} & \textbf{LON} & \textbf{S} \par \textbf{SAND} & \textbf{WIND} & \textbf{VAPR} & \textbf{ELEV} & \textbf{LAT} & \textbf{MAX} \par \textbf{MAT} & \textbf{AVG} \par \textbf{MAT} & \textbf{MIN} \par \textbf{MAT} & \textbf{MAP} & \textbf{T} \par \textbf{SAND} & \textbf{MU} \par \textbf{GLOBAL} & \textbf{T} \par \textbf{REF} \par \textbf{BULK} & \textbf{S} \par \textbf{CLAY} & \textbf{S} \par \textbf{REF} \par \textbf{BULK} & \textbf{T} \par \textbf{GRAVEL} \\
 			\midrule
 			\textbf{LON} & 0.23* &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
 			\textbf{S SAND} & 0.19* & 0.09* &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
@@ -1581,7 +1581,7 @@
 			\toprule
 			spec.variable & env.variable & Mantel r & p-value \\
 			\midrule
-			Plant Disease & SARD & 0.06 & \textbf{0.0} \\
+			Plant Disease & SRAD & 0.06 & \textbf{0.0} \\
 			Plant Disease & LON & -0.00 & \textbf{0.04} \\
 			Plant Disease & S SAND & 0.08 & \textbf{0.0} \\
 			Plant Disease & WIND & 0.00 & 0.38 \\
@@ -1790,7 +1790,7 @@
 	\section{贝叶斯回归模型}
 	我们使用了贝叶斯回归模型拟合数据并对结果进行总结。首先，通过加载必要的库 \texttt{bayesplot}、\texttt{rstanarm} 和 \texttt{ggplot2}，我们设置工作目录并读取了名为 \texttt{selection.csv} 的数据文件。接着，我们对数据中的自变量进行了标准化，保持因变量 \texttt{RATIO} 不变。然后，使用标准化后的数据进行拟合，得到一个贝叶斯回归模型，并提取其参数。为了展示回归系数的后验分布，我们排除了某些不需要展示的参数，并绘制了一个包含80\%置信区间的 MCMC 后验分布图。接着，我们计算了每个回归系数的点估计（中位数）以及其95\%的置信区间。计算完成后，整理并格式化了一个包含这些结果的数据框，最后使用 \texttt{xtable} 包将该数据框转化为 LaTeX 格式的表格，并打印出相应的 LaTeX 代码。
 	
-	贝叶斯回归分析结果显示了17个气候、地理与土壤变量对响应变量（植物病害）的影响。自变量中，“土壤砂含量”（S SAND）的回归系数为2.82，95\%可信区间为0.45至5.16，表明其对植物病害有显著的正向影响。相比之下，“经度”（LON）和“海拔”（ELEV）的回归系数分别为-0.90和-1.22，95\%可信区间分别为-2.36至0.66和-3.23至0.89，表明它们对植物病害的影响为负。其他变量，如“太阳辐射”（SARD）、“风速”（WIND）和“气压”（VAPR）对植物病害的影响较小，且可信区间较宽，反映出它们的影响较为不确定。此外，“表层土壤砂含量”（T SAND）和“表层土壤砾石含量”（T GRAVEL）也呈负相关，但后者的可信区间包含零，意味着其可能没有显著影响。总体来说，这些结果表明，不同的气候、地理和土壤变量对植物病害有不同程度的影响，其中部分变量呈显著的正向或负向关联，而其他变量则影响较小或较为不确定。
+	贝叶斯回归分析结果显示了17个气候、地理与土壤变量对响应变量（植物病害）的影响。自变量中，“土壤砂含量”（S SAND）的回归系数为2.82，95\%可信区间为0.45至5.16，表明其对植物病害有显著的正向影响。相比之下，“经度”（LON）和“海拔”（ELEV）的回归系数分别为-0.90和-1.22，95\%可信区间分别为-2.36至0.66和-3.23至0.89，表明它们对植物病害的影响为负。其他变量，如“太阳辐射”（SRAD）、“风速”（WIND）和“气压”（VAPR）对植物病害的影响较小，且可信区间较宽，反映出它们的影响较为不确定。此外，“表层土壤砂含量”（T SAND）和“表层土壤砾石含量”（T GRAVEL）也呈负相关，但后者的可信区间包含零，意味着其可能没有显著影响。总体来说，这些结果表明，不同的气候、地理和土壤变量对植物病害有不同程度的影响，其中部分变量呈显著的正向或负向关联，而其他变量则影响较小或较为不确定。
 	
 	
 	\begin{table}[H]
@@ -1801,7 +1801,7 @@
 			\hline
 			Response & Predictor & Estimate & Est.error & 95\% CI \par (Credible intervals) ) \\ 
 			\hline
-			Plant Disease & SARD & -0.70 & 0.86 & -1.56-0.18 \\ 
+			Plant Disease & SRAD & -0.70 & 0.86 & -1.56-0.18 \\ 
 			Plant Disease & LON & -0.90 & 1.46 & -2.36-0.66 \\ 
 			Plant Disease & S SAND & 2.82 & 2.37 & 0.45-5.16 \\ 
 			Plant Disease & WIND & 0.09 & 0.93 & -0.84-0.97 \\ 
@@ -1823,7 +1823,7 @@
 	\section{集成学习模型}
 	我们在特征选择完成后，我们使用随机森林回归模型重新训练了一个模型，获取了各个特征的重要性。我们将特征的重要性值与对应的特征名存储在一个 DataFrame 中，并根据特征的重要性进行排序。为了使特征名更加清晰易懂，我们用 apply() 方法替换了特征名中的下划线为空格。
 	
-	随机森林变量重要性结果显示了17个气候、地理与土壤变量对响应变量（植物病害）的贡献。在这些变量中，气候因素“太阳辐射”（SARD）对植物病害的影响最为显著，其重要性值为0.16。地理因素“经度”（LON）和“纬度”（LAT）以及土壤因素“土壤砂含量”（S SAND）对植物病害的贡献次之，重要性值均为0.08。气候因素“气压”（VAPR）和“风速”（WIND）以及地理因素“海拔”（ELEV）的重要性值分别为0.08和0.07，表明它们对植物病害也具有一定的影响。其他气候因素，如“最大温度”（MAX MAT）、“年均降水量”（MAP）、“平均温度”（AVG MAT）和“最小温度”（MIN MAT），对植物病害的影响较小，重要性值均低于0.06。土壤因素如“土壤黏土含量”（S CLAY）、“表层土壤砂含量”（T SAND）、“土壤参考容重”（T REF BULK）以及“表层土壤参考容重”（S REF BULK）等的贡献更为有限，重要性值均低于0.03。总体而言，气候因素在解释植物病害时占主导地位，而土壤和地理因素的贡献较小。
+	随机森林变量重要性结果显示了17个气候、地理与土壤变量对响应变量（植物病害）的贡献。在这些变量中，气候因素“太阳辐射”（SRAD）对植物病害的影响最为显著，其重要性值为0.16。地理因素“经度”（LON）和“纬度”（LAT）以及土壤因素“土壤砂含量”（S SAND）对植物病害的贡献次之，重要性值均为0.08。气候因素“气压”（VAPR）和“风速”（WIND）以及地理因素“海拔”（ELEV）的重要性值分别为0.08和0.07，表明它们对植物病害也具有一定的影响。其他气候因素，如“最大温度”（MAX MAT）、“年均降水量”（MAP）、“平均温度”（AVG MAT）和“最小温度”（MIN MAT），对植物病害的影响较小，重要性值均低于0.06。土壤因素如“土壤黏土含量”（S CLAY）、“表层土壤砂含量”（T SAND）、“土壤参考容重”（T REF BULK）以及“表层土壤参考容重”（S REF BULK）等的贡献更为有限，重要性值均低于0.03。总体而言，气候因素在解释植物病害时占主导地位，而土壤和地理因素的贡献较小。
 	
 	我们使用了多个机器学习模型来预测气候土壤数据中的植物病害变量，并评估了它们的性能。首先，我们加载并清洗了包含气候和土壤数据的Excel文件，处理了列名并合并了相关的特征。然后，我们根据特征列和目标变量植物病害拆分了数据集，并对数据进行了标准化。接着，我们训练并评估了三种模型：XGBoost、随机森林和LightGBM，分别计算了它们的均方误差（MSE）和$R^2$评分，并记录了训练时间。表格展示了基于17个气候、地理与土壤变量的随机森林、XGBoost和LightGBM模型的表现比较，评估指标为$R^2$评分和训练时间。在这三种模型中，随机森林模型的$R^2$评分最高，达到0.2939，表示它对数据的拟合效果较好，但其训练时间也最长，为0.6427。相比之下，XGBoost和LightGBM的$R^2$评分分别为0.2630和0.2607，训练时间显著较短。XGBoost的训练时间为0.2127，而LightGBM则是最快的，仅需0.1158的训练时间。这表明，尽管随机森林提供了稍好的预测性能，但XGBoost和LightGBM在训练时间上更为高效，适用于需要高计算效率的场景。
 	
@@ -1836,7 +1836,7 @@
 			\toprule
 			Response & Feature & Category & Importance \\
 			\midrule
-			Plant Disease & SARD & Climate & 0.16 \\
+			Plant Disease & SRAD & Climate & 0.16 \\
 			Plant Disease & LON & Geography & 0.08 \\
 			Plant Disease & S SAND & Soil & 0.08 \\
 			Plant Disease & LAT & Geography & 0.08 \\
