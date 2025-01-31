@@ -832,175 +832,79 @@ SHAP（SHapley Additive exPlanations）图是一种基于 Shapley 值的解释�
 SHAP 图将特征的 Shapley 值绘制为不同颜色的条形或散点图，其中每个点代表一个样本实例，每个特征的贡献大小和方向可视化地表达为模型预测的加性影响。
 \chapter{结果}
 
-\section{绘制变量变量之间的散点图}
-	
-	
-\subsection{方法}
+\section{贝叶斯回归模型}
+我们使用了贝叶斯回归模型拟合数据并对结果进行总结。首先，通过加载必要的库 \texttt{bayesplot}、\texttt{rstanarm} 和 \texttt{ggplot2}，我们设置工作目录并读取了名为 \texttt{selection.csv} 的数据文件。接着，我们对数据中的自变量进行了标准化，保持因变量 \texttt{RATIO} 不变。然后，使用标准化后的数据进行拟合，得到一个贝叶斯回归模型，并提取其参数。为了展示回归系数的后验分布，我们排除了某些不需要展示的参数，并绘制了一个包含80\%置信区间的 MCMC 后验分布图。接着，我们计算了每个回归系数的点估计（中位数）以及其95\%的置信区间。计算完成后，整理并格式化了一个包含这些结果的数据框，最后使用 \texttt{xtable} 包将该数据框转化为 LaTeX 格式的表格，并打印出相应的 LaTeX 代码。
 
-在 Python 中，绘制变量之间的散点图通常使用 matplotlib 或 seaborn 库。首先，我们可以使用 matplotlib 的 scatter 函数来创建一个基本的散点图。通过传入两个变量的数值，我们可以在坐标轴上绘制出每个数据点的位置。例如，可以使用 plt.scatter(x, y) 来绘制 x 和 y 之间的关系，其中 x 和 y 是待比较的变量。我们还可以添加标题、轴标签以及图例，来增加图形的可读性。在这个过程中，matplotlib 提供了强大的自定义功能，让我们能够设置点的颜色、形状以及其他视觉效果。
+贝叶斯回归分析结果显示了17个气候、地理与土壤变量对响应变量（植物病害）的影响。自变量中，“土壤砂含量”（S SAND）的回归系数为2.82，95\%可信区间为0.45至5.16，表明其对植物病害有显著的正向影响。相比之下，“经度”（LON）和“海拔”（ELEV）的回归系数分别为-0.90和-1.22，95\%可信区间分别为-2.36至0.66和-3.23至0.89，表明它们对植物病害的影响为负。其他变量，如“太阳辐射”（SARD）、“风速”（WIND）和“气压”（VAPR）对植物病害的影响较小，且可信区间较宽，反映出它们的影响较为不确定。此外，“表层土壤砂含量”（T SAND）和“表层土壤砾石含量”（T GRAVEL）也呈负相关，但后者的可信区间包含零，意味着其可能没有显著影响。总体来说，这些结果表明，不同的气候、地理和土壤变量对植物病害有不同程度的影响，其中部分变量呈显著的正向或负向关联，而其他变量则影响较小或较为不确定。
 
-另外，seaborn 是一个基于 matplotlib 的高级库，专门用于绘制更美观的统计图表。seaborn 提供了 scatterplot 函数，可以更加方便地进行散点图的绘制，并且支持直接绘制带有回归线的散点图。通过传入一个包含数据的 DataFrame 和指定 x 和 y 变量，我们可以快速绘制出散点图。与 matplotlib 不同，seaborn 更加注重默认样式的美观，能够帮助我们快速创建更加专业的图表。如果需要在散点图上显示趋势线或回归线，seaborn 提供了 regplot 函数，它会自动在散点图上添加回归线，帮助分析变量间的关系。
-
-总的来说，通过 matplotlib 和 seaborn，我们可以轻松绘制出两个变量之间的关系，并通过图表的美化和定制来提高可视化效果。这些工具非常适合用来分析和展示变量之间的相关性或趋势。
-
-\subsection{结果}
-
-通过这张图，我们可以看到样点的气温和降水和植物病害的严重程度在数值上比较分散，但两端的数据比较少，气温和降水与植物病害之间的线性趋势不太明显。
-
-\section{绘制变量重要性图和相关性图}
-
-
-    	\subsection{方法}
-	
-        为了构建随机森林模型，可以使用 Python 的 \texttt{scikit-learn} 库，\texttt{scikit-learn} 是一个强大的机器学习库，提供了丰富的工具和方法来处理数据、训练模型以及进行评估。随机森林（Random Forest）是一种集成学习方法，通常用于分类和回归问题。它通过生成多棵决策树，并将它们的预测结果综合起来，以提高预测的准确性和鲁棒性。下面我们将通过详细的步骤来实现随机森林模型。
-
-        首先，我们需要准备数据。假设你已经有了一个数据集，我们首先需要将数据分为特征和目标变量。特征是我们用于训练模型的输入数据，而目标变量是我们想要预测的输出。数据准备的第一步是从数据集中提取特征列和目标列。然后，我们将数据分为训练集和测试集，通常可以使用 \texttt{train\_test\_split} 方法将数据按比例划分为 80\% 的训练数据和 20\% 的测试数据，以便用训练数据来训练模型，用测试数据来评估模型的性能。
-        
-        在数据准备完毕后，我们可以开始构建随机森林模型。如果是分类问题，我们将使用 \texttt{RandomForestClassifier}，而如果是回归问题，则使用 \texttt{RandomForestRegressor}。对于分类问题，\texttt{RandomForestClassifier} 会根据决策树的投票结果来做出分类判断；对于回归问题，\texttt{RandomForestRegressor} 会根据多棵树的预测结果来得出最终的预测值。我们可以通过设置 \texttt{n\_estimators} 参数来控制随机森林中树的数量，树的数量越多，模型的性能通常会更好，但也会增加计算开销。
-        
-        在训练模型时，我们使用 \texttt{fit()} 方法将训练数据传入模型进行训练。训练完成后，我们可以使用 \texttt{predict()} 方法在测试集上进行预测，并通过比较预测结果和实际结果来评估模型的性能。对于分类任务，通常使用准确率（Accuracy）来评估模型的效果；对于回归任务，常用的评估指标包括均方误差（MSE）和 R²（决定系数）。如果是回归任务，\texttt{mean\_squared\_error} 函数可以帮助我们计算均方误差，而 \texttt{r2\_score} 函数则计算模型的拟合优度。
-        
-        为了进一步提高模型的性能，我们可以进行超参数调优。超参数调优是通过调整模型的超参数（如树的数量、树的最大深度、每棵树的最小样本数等）来获得最佳模型。 \texttt{GridSearchCV} 是一个非常有用的工具，它可以通过穷举搜索的方式，尝试不同的超参数组合，并返回表现最好的参数组合。这可以显著提升模型的性能，尤其是在处理复杂数据集时。
-        
-        除了模型训练和评估，随机森林还能够提供特征的重要性评分。特征重要性衡量的是各个特征对模型预测的贡献程度。通过 \texttt{feature\_importances\_} 属性，我们可以提取每个特征的重要性分数，进而分析哪些特征对预测最为重要。这对于特征选择和数据分析非常有用，能够帮助我们减少不重要特征的影响，提升模型的解释性。
-        
-        总的来说，\texttt{scikit-learn} 提供的随机森林模型非常强大，能够有效地处理各种数据集。在构建随机森林时，我们需要完成数据的准备、模型的训练和评估、超参数的调优以及特征重要性的分析。通过这些步骤，我们可以构建出一个高效且稳定的模型，用于处理实际问题。
-            
-        \subsection{结果}
-	\begin{table}[H]
-		\centering
-		\begin{tabular}{|l|l|l|}
-			\hline
-			\textbf{特征}                         & \textbf{重要性}    & \textbf{类别} \\ \hline
-			T\_SAND\_T\_SAND                       & 0.08675525093959506 & soil          \\ \hline
-			WC2.1\_5M\_SRAD\_02                    & 0.04203602671996579 & clim          \\ \hline
-			WC2.1\_5M\_SRAD\_06                    & 0.03910457611705827 & clim          \\ \hline
-			WC2.1\_5M\_WIND\_01                    & 0.035945965218077046 & clim         \\ \hline
-			WC2.1\_5M\_SRAD\_08                    & 0.03538660429018564 & clim          \\ \hline
-			T\_GRAVEL\_T\_GRAVEL                   & 0.030788606795708492 & soil         \\ \hline
-			WC2.1\_5M\_SRAD\_07                    & 0.02861490194553107 & clim          \\ \hline
-			WC2.1\_5M\_BIO\_3                       & 0.027730710603594708 & clim         \\ \hline
-			S\_GRAVEL\_S\_GRAVEL                   & 0.027535316006368164 & soil          \\ \hline
-			WC2.1\_5M\_TMAX\_05                    & 0.027177582447563863 & clim         \\ \hline
-			WC2.1\_5M\_SRAD\_12                    & 0.017596982750005874 & clim         \\ \hline
-			T\_PH\_H2O\_T\_PH\_H2O                 & 0.01516888513720121  & soil         \\ \hline
-			WC2.1\_5M\_SRAD\_01                    & 0.01514033090905716 & clim          \\ \hline
-		\end{tabular}
-		\caption{变量重要性}
-		\label{tab:variable_importance}
-	\end{table}
-	
-根据表格中变量的重要性评分结果，可以分析各变量对模型预测的贡献程度。变量的重要性评分表示模型在预测过程中对某特征的依赖程度，评分越高说明该特征对模型的预测影响越显著。从结果来看，\texttt{T\_SAND\_T\_SAND} 的重要性评分最高，为 0.0868，显著高于其他变量。这表明该特征在模型中具有核心作用，对预测结果起到了关键性影响。其他变量中，\texttt{WC2.1\_5M\_SRAD\_02} 和 \texttt{WC2.1\_5M\_SRAD\_06} 分别具有 0.0420 和 0.0391 的重要性评分，表明气候条件中的太阳辐射因素也在模型中起到了重要作用。此外，\texttt{T\_GRAVEL\_T\_GRAVEL} 和 \texttt{S\_GRAVEL\_S\_GRAVEL} 分别以 0.0308 和 0.0275 的评分体现了土壤中砂砾比例对模型预测的影响。
-
-从变量分类来看，特征被划分为土壤特征（\textit{soil}）和气候特征（\textit{clim}）。土壤特征中，\texttt{T\_SAND\_T\_SAND} 明显占据主导地位，表明土壤中砂的含量对目标变量具有核心影响。其他土壤特征如 \texttt{T\_GRAVEL\_T\_GRAVEL} 和 \texttt{S\_PH\_H2O\_S\_PH\_H2O} 的重要性评分虽然相对较低，但仍然对预测结果提供了一定的解释力。气候特征中，\texttt{SRAD}（太阳辐射）相关变量的重要性普遍较高，如 \texttt{WC2.1\_5M\_SRAD\_02} 和 \texttt{WC2.1\_5M\_SRAD\_06}，反映出太阳辐射在模型中的重要性。此外，气候特征整体数量较多，虽然单个特征的重要性评分不及 \texttt{T\_SAND\_T\_SAND}，但其累积贡献不可忽视，表明气候因素对目标变量的预测具有广泛作用。
-
-进一步观察可以发现，变量的重要性评分呈现出一定的集中性。\texttt{T\_SAND\_T\_SAND} 的评分显著高于其他变量，而其余变量的重要性评分均低于 0.04。这种分布特征表明模型对某些核心特征具有较高依赖性，同时也突出了其余变量的相对次要性。
-
-
-\section{多种模型的比较}
-	            
-	\subsection{操作步骤}
-
-	
-	首先从一个 Excel 文件中加载气候和土壤特征数据，并将目标变量与特征分离。接着，将数据集划分为训练集和测试集，并对特征数据进行标准化处理，以提高模型的训练稳定性和预测性能。
-	
-	随后，构建了多个回归模型，包括神经网络、XGBoost、随机森林和 LightGBM。对于神经网络模型，设计了一个包含两层隐藏层的网络结构，使用 ReLU 作为激活函数，并以均方误差作为损失函数。其他模型如 XGBoost、随机森林和 LightGBM 则利用各自的默认参数完成回归任务。
-	
-	最后，为了评估模型性能，代码生成了每个模型的预测结果与真实值之间的可视化对比图。这些图包括散点图、核密度图、理想的参考线和拟合曲线，从多角度展示了模型的拟合效果。所有生成的图像均保存为文件，便于后续分析和使用。
-	
-	总结而言，该方法通过数据预处理、模型训练、预测和可视化四个步骤，全面比较了不同回归模型的性能，为选择最佳模型提供了直观的依据。
-	
-	
-	
-	\subsection{结果}
-		\begin{table}[H]
-			\centering
-			\begin{tabular}{lccc}
-				\toprule
-				\textbf{Model} & \textbf{Time (s)} & \textbf{MSE} & \textbf{R2} \\
-				\midrule
-				Neural Network & 5.024361 & 25.321228 & 0.295341 \\
-				XGBoost        & 0.466127 & 27.281396 & 0.240792 \\
-				Random Forest  & 3.437109 & 25.818668 & 0.281498 \\
-				LightGBM       & 0.240390 & 26.196418 & 0.270985 \\
-				\bottomrule
-			\end{tabular}
-			\caption{Model Performance Results}
-			\label{tab:model_performance}
-		\end{table}
-
-	
-	神经网络模型训练时间最长，为5.02秒，其MSE为25.32，R2值为0.30，表现较好。XGBoost模型是训练时间最短的，
-    仅为0.47秒，但其MSE为27.28，R2值较低，为0.24，表现不如其他模型。随机森林模型的训练时间为3.44秒，MSE为25.82，R2为0.28，整体性能略逊色于神经网络。
-    LightGBM模型训练时间仅为0.24秒，MSE为26.20，R2为0.27，尽管速度较快，但在性能上与其他模型差距不大。总体来看，尽管XGBoost最快，但其MSE和R2表现不如其他模型，特别是神经网络。
-
-\section{绘制shap图}
-
-\subsection{方法}
-SHAP 图的绘制方法旨在通过可视化特征对模型预测的贡献，以增强对模型决策过程的理解。在使用 Python 绘制 SHAP 图之前，首先需要安装相关的库，通常需要安装 \texttt{shap} 和 \texttt{matplotlib} 包。可以通过运行 \texttt{pip install shap matplotlib} 来完成安装。安装完成后，首先加载所需的库，包括 \texttt{shap} 和模型库，例如 \texttt{sklearn} 或 \texttt{xgboost}。接下来，训练一个机器学习模型并使用训练好的模型进行预测。在训练完模型后，使用 SHAP 库中的 \texttt{Explainer} 类来计算每个特征的 Shapley 值。具体地，使用 \texttt{shap.Explainer(model)} 初始化解释器，其中 \texttt{model} 是之前训练的模型。然后，通过调用 \texttt{explainer.shap\_values(X)}，其中 \texttt{X} 是待解释的特征数据集，来计算特征的 Shapley 值。
-
-一旦计算得到 Shapley 值，可以通过调用 \texttt{shap.summary\_plot(shap\_values, X)} 来生成 SHAP 概要图，这将展示每个特征在所有样本中的重要性和影响。此外，还可以使用 \texttt{shap.dependence\_plot()} 方法绘制特征与 SHAP 值之间的关系图，以观察特征对模型输出的影响。该方法通常需要提供特征名称和对应的 SHAP 值。通过这些步骤，SHAP 图能够直观地呈现模型的决策逻辑，帮助用户理解各个特征在预测中的作用。
-\subsection{结果}
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{|l|l|}
+	\caption{17个气候、地理与土壤变量的与响应变量之间的贝叶斯回归分析结果。自变量包括经度 (Longitude)、纬度 (Latitude)、海拔 (Elevation)、太阳辐射 (SolarRadiation)、土壤砂含量 (SoilSand)、气压 (VaporPressure)、风速 (WindSpeed)、最大温度 (MaximumTemperature)、平均温度 (AverageTemperature)、最小温度 (MinimumTemperature)、年均降水量 (MeanAnnualPrecipitation)、表层土壤砂含量 (TopsoilSand)、土壤参考容重 (SoilReferenceBulkDensity)、表层土壤参考容重 (TopsoilReferenceBulkDensity)、土壤黏土含量 (SoilClay)、表层土壤砾石含量 (TopsoilGravel)。}
+	\caption*{Bayesian regression analysis results for 17 climate, geographic, and soil variables with respect to the response variable. The independent variables include Longitude, Latitude, Elevation, Solar Radiation, Soil Sand Content, Vapor Pressure, Wind Speed, Maximum Temperature, Average Temperature, Minimum Temperature, Mean Annual Precipitation, Topsoil Sand Content, Soil Reference Bulk Density, Topsoil Reference Bulk Density, Soil Clay Content, and Topsoil Gravel Content.}
+	\begin{tabular}{ccccc}
 		\hline
-		\textbf{特征}                         & \textbf{SHAP值} \\ \hline
-		T\_SAND\_T\_SAND\_resampled            & 0.632217        \\ \hline
-		WC2.1\_5M\_SRAD\_08                   & 0.467212        \\ \hline
-		T\_SILT\_T\_SILT\_resampled            & 0.428839        \\ \hline
-		WC2.1\_5M\_WIND\_03                   & 0.367951        \\ \hline
-		WC2.1\_5M\_BIO\_3                      & 0.337206        \\ \hline
-		S\_GRAVEL\_S\_GRAVEL\_resampled       & 0.310465        \\ \hline
-		WC2.1\_5M\_SRAD\_02                   & 0.279634        \\ \hline
-		WC2.1\_5M\_TAVG\_09                   & 0.231049        \\ \hline
-		WC2.1\_5M\_SRAD\_01                   & 0.205439        \\ \hline
-		WC2.1\_5M\_SRAD\_06                   & 0.204011        \\ \hline
+		Response & Predictor & Estimate & Est.error & 95\% CI \par (Credible intervals) ) \\ 
+		\hline
+		Plant Disease & SARD & -0.70 & 0.86 & -1.56-0.18 \\ 
+		Plant Disease & LON & -0.90 & 1.46 & -2.36-0.66 \\ 
+		Plant Disease & S SAND & 2.82 & 2.37 & 0.45-5.16 \\ 
+		Plant Disease & WIND & 0.09 & 0.93 & -0.84-0.97 \\ 
+		Plant Disease & VAPR & -0.35 & 2.93 & -3.28-2.54 \\ 
+		Plant Disease & ELEV & -1.22 & 2.01 & -3.23-0.89 \\ 
+		Plant Disease & MAP & -0.63 & 1.52 & -2.15-0.83 \\ 
+		Plant Disease & T SAND & -2.36 & 3.18 & -5.54-0.99 \\ 
+		Plant Disease & MU GLOBAL & 0.09 & 0.60 & -0.51-0.73 \\ 
+		Plant Disease & T REF BULK & -0.02 & 2.74 & -2.76-2.55 \\ 
+		Plant Disease & S CLAY & 1.56 & 1.99 & -0.43-3.54 \\ 
+		Plant Disease & S REF BULK & -1.37 & 0.81 & -2.18--0.58 \\ 
+		Plant Disease & T GRAVEL & -0.50 & 0.48 & -0.98-0 \\ 
+		\hline
 	\end{tabular}
-	\caption{特征与SHAP值}
-	\label{tab:shap_values}
+
+\end{table}
+
+
+\section{集成学习模型}
+我们在特征选择完成后，我们使用随机森林回归模型重新训练了一个模型，获取了各个特征的重要性。我们将特征的重要性值与对应的特征名存储在一个 DataFrame 中，并根据特征的重要性进行排序。为了使特征名更加清晰易懂，我们用 apply() 方法替换了特征名中的下划线为空格。
+
+随机森林变量重要性结果显示了17个气候、地理与土壤变量对响应变量（植物病害）的贡献。在这些变量中，气候因素“太阳辐射”（SARD）对植物病害的影响最为显著，其重要性值为0.16。地理因素“经度”（LON）和“纬度”（LAT）以及土壤因素“土壤砂含量”（S SAND）对植物病害的贡献次之，重要性值均为0.08。气候因素“气压”（VAPR）和“风速”（WIND）以及地理因素“海拔”（ELEV）的重要性值分别为0.08和0.07，表明它们对植物病害也具有一定的影响。其他气候因素，如“最大温度”（MAX MAT）、“年均降水量”（MAP）、“平均温度”（AVG MAT）和“最小温度”（MIN MAT），对植物病害的影响较小，重要性值均低于0.06。土壤因素如“土壤黏土含量”（S CLAY）、“表层土壤砂含量”（T SAND）、“土壤参考容重”（T REF BULK）以及“表层土壤参考容重”（S REF BULK）等的贡献更为有限，重要性值均低于0.03。总体而言，气候因素在解释植物病害时占主导地位，而土壤和地理因素的贡献较小。
+
+\begin{table}[H]
+	\caption{17个气候、地理与土壤变量的与响应变量之间的随机森林变量重要性结果。自变量包括经度 (Longitude)、纬度 (Latitude)、海拔 (Elevation)、太阳辐射 (SolarRadiation)、土壤砂含量 (SoilSand)、气压 (VaporPressure)、风速 (WindSpeed)、最大温度 (MaximumTemperature)、平均温度 (AverageTemperature)、最小温度 (MinimumTemperature)、年均降水量 (MeanAnnualPrecipitation)、表层土壤砂含量 (TopsoilSand)、土壤参考容重 (SoilReferenceBulkDensity)、表层土壤参考容重 (TopsoilReferenceBulkDensity)、土壤黏土含量 (SoilClay)、表层土壤砾石含量 (TopsoilGravel)。}
+	\caption*{The random forest variable importance results for 17 climate, geographic, and soil variables with respect to the response variable. These factors include Longitude, Latitude, Elevation, Solar Radiation, Soil Sand Content, Vapor Pressure, Wind Speed, Maximum Temperature, Average Temperature, Minimum Temperature, Mean Annual Precipitation, Topsoil Sand Content, Soil Reference Bulk Density, Topsoil Reference Bulk Density, Soil Clay Content, and Topsoil Gravel Content.}
+	\label{tab:feature_importance}
+	\begin{tabular}{cccc}
+		\toprule
+		Response & Feature & Category & Importance \\
+		\midrule
+		Plant Disease & SARD & Climate & 0.16 \\
+		Plant Disease & LON & Geography & 0.08 \\
+		Plant Disease & S SAND & Soil & 0.08 \\
+		Plant Disease & LAT & Geography & 0.08 \\
+		Plant Disease & VAPR & Climate & 0.08 \\
+		Plant Disease & WIND & Climate & 0.07 \\
+		Plant Disease & ELEV & Geography & 0.07 \\
+		Plant Disease & MAX MAT & Climate & 0.06 \\
+		Plant Disease & MAP & Climate & 0.05 \\
+		Plant Disease & AVG MAT & Climate & 0.05 \\
+		Plant Disease & MIN MAT & Climate & 0.04 \\
+		Plant Disease & MU GLOBAL & Soill & 0.04 \\
+		Plant Disease & S CLAY & Soil & 0.03 \\
+		Plant Disease & T SAND & Soil & 0.02 \\
+		Plant Disease & T REF BULK & Soil & 0.02 \\
+		Plant Disease & S REF BULK & Soil & 0.02 \\
+		Plant Disease & T GRAVEL & Soil & 0.02 \\
+		\bottomrule
+	\end{tabular}
 \end{table}
 
 
 
-\section{构建预测模型}
 
 
-\subsection{方法}
-根据SHAP值的结果，我们可以看出，在影响模型预测的特征中，\texttt{\break T\_SAND\_T\_SAND\_resampled} 对预测结果的影响最大，SHAP值为 0.632217，表明该特征对模型输出的贡献较大。紧随其后的是 \texttt{WC2.1\_5M\_SRAD\_08}，其SHAP值为 0.467212，也对模型输出有显著影响。此外，\texttt{T\_SILT\_T\_SILT\_resampled}、\texttt{WC2.1\_5M\_WIND\_03} 和 \texttt{WC2.1\_5M\_BIO\_3} 这些特征的SHAP值分别为 0.428839、0.367951 和 0.337206，显示它们也在模型预测中占有一定的重要性。其他特征如 \texttt{S\_GRAVEL\_S\_GRAVEL\_resampled} 和 \texttt{WC2.1\_5M\_SRAD\_02} 的影响相对较小，其SHAP值分别为 0.310465 和 0.279634。最终，\texttt{WC2.1\_5M\_TAVG\_09}、\texttt{WC2.1\_5M\_SRAD\_01} 和 \texttt{WC2.1\_5M\_SRAD\_06} 对模型输出的贡献相对较小，SHAP值分别为 0.231049、0.205439 和 0.204011。
+\section{深度学习模型}
 
-整体而言，这些特征的SHAP值显示了各个特征对模型预测结果的不同贡献程度，可以为特征选择和模型优化提供依据。
-
-
-从多个TIFF文件中提取数据、使用随机森林回归模型进行预测，并将预测结果保存为新的TIFF文件。首先，代码定义了一个名为\texttt{read\_tif\_with\_coords}的方法，用于读取TIFF文件，提取其数据、仿射变换信息以及对应的经纬度坐标。通过\texttt{rasterio}库，这个方法能够将像素的行列号转换为地理坐标。
-
-接着，代码读取一个Excel文件，提取出特征列（以 \texttt{\_resampled} 结尾、以 'wc' 开头的列以及经纬度列）和目标变量（\texttt{ratio}列）。然后，使用\texttt{train\_test\_split}函数将数据集分割为训练集和测试集，之后使用随机森林回归模型\texttt{RandomForestRegressor}进行训练，并对测试集进行预测。模型性能通过均方误差（MSE）和R²得分进行评估。
-
-接下来，代码遍历两个文件夹中的TIFF文件，调用\texttt{read\_tif\_with\_coords}方法读取数据并提取经纬度信息。对于每个TIFF文件，数据被存储在一个列表中，并且只有第一个文件的经纬度信息被保存下来。然后，所有TIFF文件的数据被堆叠成一个三维数组，并且将经纬度信息与TIFF数据一同转换为二维数组，作为模型的输入特征。
-
-接着，代码创建一个\texttt{DataFrame}，将特征和经纬度信息组合在一起，并使用已训练的随机森林模型进行预测。预测结果被转换为二维数组，表示为与原始图像相同大小的预测值。最后，预测结果被保存为一个新的TIFF文件，输出到指定的文件夹中。
-
-通过这种方式，代码实现了对多种环境数据的空间预测，并能够将预测结果以地理空间数据的形式输出。
-\subsection{结果}
-
-
-
-\section{气候变化对植物病害变化的影响}
-\subsection{方法}
-首先，导入所需的库，包括 \texttt{rasterio} 和 \texttt{numpy}。接下来，指定输入的两个 TIFF 文件路径，其中第一个文件 \texttt{tiff\_file1} 为 \texttt{'cropped\_data/result/cropped\_cmip6\_rf.tif'}，第二个文件 \texttt{tiff\_file2} 为 \texttt{'cropped\_data/result/cropped\_predicted\_rf.tif'}，同时指定输出文件路径 \texttt{output\_file} 为 \texttt{'cropped\_data/result/sub\_rf.tif'}。然后，使用 \texttt{rasterio.open()} 函数打开第一个 TIFF 文件，并读取其第一波段的数据，同时获取文件的元数据并存储在变量 \texttt{profile} 中。接着，使用相同的方式打开第二个 TIFF 文件，并读取其第一波段的数据。
-
-在读取完数据后，确保两个数据数组的形状相同。如果两个数组的形状不匹配，则抛出一个 \texttt{ValueError} 错误。之后，执行相减运算，计算 \texttt{data1} 与 \texttt{data2} 的差值，并将结果存储在 \texttt{result\_data} 中。
-
-接下来，更新输出文件的元数据 \texttt{profile}，可以根据需要修改数据类型为 \texttt{'float32'}，并将波段数设置为 1，因为输出文件只包含一个波段。最后，使用 \texttt{rasterio.open()} 函数以写入模式打开输出文件，并将计算结果写入到新的 TIFF 文件中。完成后，打印输出文件的路径，确认输出操作已成功执行。
-
-\subsection{结果}
-
-\section{贝叶斯混合效应模型}
-
-\section{贝叶斯结构方程模型}
-
-\section{随机森林模型}
 
 
 
