@@ -456,6 +456,14 @@
 %		\label{fig:example}  % 设置标签，可以用于交叉引用
 %	\end{figure}
 	
+%	\begin{figure}[H]  % 创建浮动体（figure）
+%		\centering  % 图片居中
+%		\includegraphics[width=0.8\textwidth]{pic/scatter_with_histograms.png}  % 插入图片，指定宽度为页面宽度的80%
+%		\caption{中国地区的771个样点降水与气温的散点直方图}
+%		\caption*{Scatter and Histogram of Precipitation and Temperature for 771 Sample Points in China}
+%		\label{fig:example}  % 设置标签，可以用于交叉引用
+%	\end{figure}
+	
 	\begin{table}[H]
 		\centering
 		\caption{中国地区的771个样点的省市分布}
@@ -565,22 +573,22 @@
 			\toprule
 			Variable (Unit) & Simplified Name & Mean & Std Dev & Range \\
 			\midrule
-			SRAD (W/m²) & Solar Radiation & 14470.63 & 1171.5 & 10799.58 - 16821.33 \\
-			LON (°) & Longitude & 114.0 & 6.93 & 99.88 - 130.82 \\
+			SRAD (W/$m^2$) & Solar Radiation & 14470.63 & 1171.5 & 10799.58 - 16821.33 \\
+			LON ($ ^\circ E$) & Longitude & 114.0 & 6.93 & 99.88 - 130.82 \\
 			S SAND (\%) & Soil Sand & 37.97 & 14.11 & 0.00 - 90.00 \\
-			WIND (m/s) & Wind Speed & 27.56 & 7.83 & 13.47 - 51.19 \\
-			VAPR (hPa) & Vapor Pressure & 16.04 & 5.19 & 5.88 - 27.39 \\
+			WIND (m/s) & Wind Speed & 2.3 & 0.65 & 1.12 - 4.27 \\
+			VAPR (kPa) & Vapor Pressure & 1.34 & 0.43 & 0.49 - 2.28 \\
 			ELEV (m) & Elevation & 469.74 & 529.79 & 0.00 - 2529.00 \\
-			LAT (°) & Latitude & 32.67 & 7.02 & 21.57 - 48.83 \\
-			MAX MAT (°C) & Maximum Temperature & 18.61 & 4.64 & 4.00 - 28.19 \\
-			AVG MAT (°C) & Average Temperature & 13.79 & 5.36 & -2.08 - 23.24 \\
-			MIN MAT (°C) & Minimum Temperature & 8.98 & 6.17 & -8.15 - 19.91 \\
+			LAT ($ ^\circ N$) & Latitude & 32.67 & 7.02 & 21.57 - 48.83 \\
+			MAX MAT ($ ^\circ C$) & Maximum Temperature & 18.61 & 4.64 & 4.00 - 28.19 \\
+			AVG MAT ($ ^\circ C$) & Average Temperature & 13.79 & 5.36 & -2.08 - 23.24 \\
+			MIN MAT ($ ^\circ C$) & Minimum Temperature & 8.98 & 6.17 & -8.15 - 19.91 \\
 			MAP (mm) & Mean Annual Precipitation & 996.48 & 440.85 & 294.00 - 2205.00 \\
 			T SAND (\%) & Topsoil Sand & 39.61 & 15.58 & 10.00 - 89.00 \\
-			MU GLOBAL (g/cm³) & MU Global & 11530.97 & 268.0 & 11009.00 - 11923.00 \\
-			T REF BULK (g/cm³) & Topsoil Reference Bulk Density & 1.39 & 0.09 & 1.22 - 1.70 \\
+			MU GLOBAL (g/$cm^3$) & MU Global & 11530.97 & 268.0 & 11009.00 - 11923.00 \\
+			T REF BULK (g/$cm^3$) & Topsoil Reference Bulk Density & 1.39 & 0.09 & 1.22 - 1.70 \\
 			S CLAY (\%) & Soil Clay & 29.21 & 13.21 & 0.00 - 57.00 \\
-			S REF BULK (g/cm³) & Soil Reference Bulk Density & -50.59 & 719.37 & -9999.00 - 1.71 \\
+			S REF BULK (g/$cm^3$) & Soil Reference Bulk Density & -50.59 & 719.37 & -9999.00 - 1.71 \\
 			T GRAVEL (\%) & Topsoil Gravel & 9.4 & 6.08 & 1.00 - 28.00 \\
 		\end{tabular}
 	\end{table}
@@ -593,9 +601,9 @@
 		
 		\caption{17个气候、地理与土壤变量的与响应变量之间的Spearman相关分析结果。每个相关系数保留两位小数，并根据值的正负性对其进行加粗。如果相关系数对应的 p 值小于 0.05，则在值后添加星号 * 以表示其显著性。 }
 		\caption*{Results of Spearman correlation analysis between 17 climate, geographic, and soil variables and the response variable. Each correlation coefficient is rounded to two decimal places and bolded based on its sign (positive or negative). If the p-value corresponding to a correlation coefficient is less than 0.05, an asterisk (*) is added after the value to indicate its significance.}
-		\label{tab:correlation_matrix}
-		\tiny 
-		\hspace*{-3.17cm}
+		\label{tab:correlation_matrix}                                
+		\tiny                                                         
+		\hspace*{-3.17cm}                                             
 		\begin{tabular}{p{1.6cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}p{0.68cm}}
 			\toprule
 			\multicolumn{1}{c}{Spearman r}  & \textbf{SRAD} & \textbf{LON} & \textbf{S} \par \textbf{SAND} & \textbf{WIND} & \textbf{VAPR} & \textbf{ELEV} & \textbf{LAT} & \textbf{MAX} \par \textbf{MAT} & \textbf{AVG} \par \textbf{MAT} & \textbf{MIN} \par \textbf{MAT} & \textbf{MAP} & \textbf{T} \par \textbf{SAND} & \textbf{MU} \par \textbf{GLOBAL} & \textbf{T} \par \textbf{REF} \par \textbf{BULK} & \textbf{S} \par \textbf{CLAY} & \textbf{S} \par \textbf{REF} \par \textbf{BULK} & \textbf{T} \par \textbf{GRAVEL} \\
@@ -852,9 +860,15 @@
 	\section{集成学习模型}
 	我们在特征选择完成后，我们使用随机森林回归模型重新训练了一个模型，获取了各个特征的重要性。我们将特征的重要性值与对应的特征名存储在一个 DataFrame 中，并根据特征的重要性进行排序。为了使特征名更加清晰易懂，我们用 apply() 方法替换了特征名中的下划线为空格。
 	
-	随机森林变量重要性结果显示了17个气候、地理与土壤变量对响应变量（植物病害）的贡献。在这些变量中，气候因素“太阳辐射”（SRAD）对植物病害的影响最为显著，其重要性值为0.16。地理因素“经度”（LON）和“纬度”（LAT）以及土壤因素“土壤砂含量”（S SAND）对植物病害的贡献次之，重要性值均为0.08。气候因素“气压”（VAPR）和“风速”（WIND）以及地理因素“海拔”（ELEV）的重要性值分别为0.08和0.07，表明它们对植物病害也具有一定的影响。其他气候因素，如“最大温度”（MAX MAT）、“年均降水量”（MAP）、“平均温度”（AVG MAT）和“最小温度”（MIN MAT），对植物病害的影响较小，重要性值均低于0.06。土壤因素如“土壤黏土含量”（S CLAY）、“表层土壤砂含量”（T SAND）、“土壤参考容重”（T REF BULK）以及“表层土壤参考容重”（S REF BULK）等的贡献更为有限，重要性值均低于0.03。总体而言，气候因素在解释植物病害时占主导地位，而土壤和地理因素的贡献较小。
+	随机森林变量重要性结果显示了17个气候、地理与土壤变量对响应变量（植物病害）的贡献。在这些变量中，气候因素“太阳辐射”（SRAD）对植物病害的影响最为显著，其重要性值为0.16。地理因素“经度”（LON）和“纬度”（LAT）以及土壤因素“土壤砂含量”（S SAND）对植物病害的贡献次之，重要性值均为0.08。气候因素“气压”（VAPR）和“风速”（WIND）以及地理因素“海拔”（ELEV）的重要性值分别为0.08和0.07，表明它们对植物病害也具有一定的影响。其他气候因素，如“最大温度”（MAX MAT）、“年均降水量”（MAP）、“平均温度”（AVG MAT）和“最小温度”（MIN MAT），对植物病害的影响较小，重要性值均低于0.06。土壤因素如“土壤黏土含量”（S CLAY）、“表层土壤砂含量”（T SAND）、“土壤参考容重”（T REF BULK）以及“表层土壤参考容重”（S REF BULK）等的贡献更为有限，重要性值均低于0.03。总体而言，气候因素在解释植物病害时占主导地位，而土壤和地理因素的贡献较小。在完成特征选择后，我们基于排序靠前的 17 个特征训练了 XGBoost 回归模型，并将数据集划分为训练集和测试集，模型在测试集上的均方误差（MSE）以及 R² 分数表明其性能良好。模型训练完成后，我们使用 joblib 将训练好的模型保存到指定目录中，以便后续使用。
+	
+	为了进一步解释模型，我们利用 SHAP 值（Shapley Additive Explanations）评估了每个特征对模型预测的影响，并生成了 SHAP 值的可视化图表。通过计算每个特征的平均绝对 SHAP 值以及置信区间，我们总结出了对模型影响最大的特征，并绘制了 SHAP 总结图以展示各特征的重要性和方向性变化。最终，我们将 SHAP 图保存为 PNG 文件，以便进行结果展示和报告撰写。整个过程结合了数据处理、机器学习模型训练和模型解释，为目标变量预测和结果分析提供了全面的支持。
+	
 	
 	我们使用了多个机器学习模型来预测气候土壤数据中的植物病害变量，并评估了它们的性能。首先，我们加载并清洗了包含气候和土壤数据的Excel文件，处理了列名并合并了相关的特征。然后，我们根据特征列和目标变量植物病害拆分了数据集，并对数据进行了标准化。接着，我们训练并评估了三种模型：XGBoost、随机森林和LightGBM，分别计算了它们的均方误差（MSE）和$R^2$评分，并记录了训练时间。表格展示了基于17个气候、地理与土壤变量的随机森林、XGBoost和LightGBM模型的表现比较，评估指标为$R^2$评分和训练时间。在这三种模型中，随机森林模型的$R^2$评分最高，达到0.2939，表示它对数据的拟合效果较好，但其训练时间也最长，为0.6427。相比之下，XGBoost和LightGBM的$R^2$评分分别为0.2630和0.2607，训练时间显著较短。XGBoost的训练时间为0.2127，而LightGBM则是最快的，仅需0.1158的训练时间。这表明，尽管随机森林提供了稍好的预测性能，但XGBoost和LightGBM在训练时间上更为高效，适用于需要高计算效率的场景。
+	
+	
+	在本研究中，我们结合气候数据和土壤数据，采用随机森林算法对目标变量进行了预测。首先，我们从多个 \texttt{.tif} 文件中读取了空间栅格数据，并提取了经纬度信息作为特征。随后，我们通过特定规则对数据的列名进行了标准化处理，例如去除无关后缀以及重复部分。通过筛选和处理，我们生成了新的气候变量，包括年降水总量（MAP）、平均风速（WIND）、最高温度均值（TMAX）、最低温度均值（TMIN）、平均温度（TAVG）、太阳辐射（SRAD）和水汽压（VAPR），并删除了与上述变量相关的原始列。误差（MSE）和决定系数（$R^2$）评估模型的性能。模型在测试集上表现良好，具备较高的预测能力。接下来，我们对多个栅格文件的像素数据进行了预测。为此，我们读取了包含不同空间特征的栅格文件，将其数据堆叠为多维数组，同时保留经纬度信息。基于预训练的随机森林模型，我们对这些数据进行了预测，并将预测结果重新转换为二维栅格格式。
 	
 	
 	\begin{table}[H]
@@ -885,6 +899,15 @@
 			\bottomrule
 		\end{tabular}
 	\end{table}
+%	\begin{figure}[H]  % 创建浮动体（figure）
+%		\centering  % 图片居中
+%		\includegraphics[width=0.8\textwidth]{pic/shap_summary_plot.png}  
+%		\caption{中国地区植物病害xgboost模型的shap图}
+%		\caption*{SHAP Plot of the XGBoost Model for Plant Diseases in China}
+%		
+%		\label{fig:example}  % 设置标签，可以用于交叉引用
+%	\end{figure}
+	
 	
 	\begin{table}[H]
 		\caption{基于17个气候、地理与土壤变量的随机森林、XGBoost和LightGBM模型的表现比较，包括$R^2$评分和训练时间。} 
@@ -900,6 +923,24 @@
 			\bottomrule
 		\end{tabular}
 	\end{table}
+	
+%	\begin{figure}[H]  % 创建浮动体（figure）
+%		\centering  % 图片居中
+%		\includegraphics[width=0.8\textwidth]{pic/shap_summary_plot.png}  
+%		\caption{中国地区的随机森林预测得到的植物病害严重程度结果}
+%		\caption*{Predicted severity of plant diseases in China using the Random Forest model}
+%		
+%		\label{fig:example}  % 设置标签，可以用于交叉引用
+%	\end{figure}
+	
+%	\begin{figure}[H]  % 创建浮动体（figure）
+%		\centering  % 图片居中
+%		\includegraphics[width=0.8\textwidth]{pic/cropped_predicted_rf.png}  
+%		\caption{中国地区的随机森林预测得到的植物病害严重程度结果}
+%		\caption*{Predicted severity of plant diseases in China using the Random Forest model}
+%		
+%		\label{fig:example}  % 设置标签，可以用于交叉引用
+%	\end{figure}
 	
 	
 	
