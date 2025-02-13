@@ -1,5 +1,4 @@
-\begin{equation}
-	% !TEX TS-program = xelatex
+% !TEX TS-program = xelatex
 % !TEX encoding = UTF-8 Unicode
 
 % \documentclass[AutoFakeBold]{LZUThesis}
@@ -567,9 +566,9 @@
 	在遍历每个自变量列时，我们计算每个自变量与因变量之间的 Mantel 检验，并将结果保留为两位小数。对于 \( p\text{-值} < 0.05 \) 的结果，我们进行加粗显示，表示其具有显著性。
 	\begin{table}[H]
 		\caption{中国地区的771个样点的17个气候、地理与土壤变量的统计值。这些变量包括了经度 (Longitude)、纬度 (Latitude)、
-		海拔 (Elevation)、太阳辐射 (SolarRadiation)、降水季节性(PSEA)、气温季节性(PSEA)、土壤砂含量 (SoilSand)、
-		气压 (VaporPressure)、风速 (WindSpeed)、最大温度 (MaximumTemperature)、平均温度 (AverageTemperature)、
-		最小温度 (MinimumTemperature)、年均降水量 (MeanAnnualPrecipitation)、表层土壤砂含量 (TopsoilSand)、表层土壤实际容重(Topsoil Bulk Density)、表层土壤参考容重 (TopsoilReferenceBulkDensity)、土壤黏土含量 (SoilClay)。}
+			海拔 (Elevation)、太阳辐射 (SolarRadiation)、降水季节性(PSEA)、气温季节性(PSEA)、土壤砂含量 (SoilSand)、
+			气压 (VaporPressure)、风速 (WindSpeed)、最大温度 (MaximumTemperature)、平均温度 (AverageTemperature)、
+			最小温度 (MinimumTemperature)、年均降水量 (MeanAnnualPrecipitation)、表层土壤砂含量 (TopsoilSand)、表层土壤实际容重(Topsoil Bulk Density)、表层土壤参考容重 (TopsoilReferenceBulkDensity)、土壤黏土含量 (SoilClay)。}
 		\caption*{The statistics of climate, geographical, and soil variables for 771 sample points in China, including Longitude, Latitude, Elevation, Solar Radiation, Soil Sand Content, Vapor Pressure, Wind Speed, Maximum Temperature, Average Temperature, Minimum Temperature, Mean Annual Precipitation, Topsoil Sand Content, Soil Reference Bulk Density, Topsoil Reference Bulk Density, Soil Clay Content, and Topsoil Gravel Content.}
 		
 		\label{tab:range}
@@ -862,27 +861,15 @@
 	
 	
 	\section{集成学习模型}
+	
+	\subsection{展示变量的重要性}
 	我们在特征选择完成后，我们使用随机森林回归模型重新训练了一个模型，获取了各个特征的重要性。我们将特征的重要性值与对应的特征名存储在一个 DataFrame 中，并根据特征的重要性进行排序。为了使特征名更加清晰易懂，我们用 apply() 方法替换了特征名中的下划线为空格。
 	
-	随机森林变量重要性结果显示了17个气候、地理与土壤变量对响应变量（植物病害）的贡献。在这些变量中，气候因素“太阳辐射”（SRAD）对植物病害的影响最为显著，其重要性值为0.16。地理因素“经度”（LON）和“纬度”（LAT）以及土壤因素“土壤砂含量”（S SAND）对植物病害的贡献次之，重要性值均为0.08。气候因素“气压”（VAPR）和“风速”（WIND）以及地理因素“海拔”（ELEV）的重要性值分别为0.08和0.07，表明它们对植物病害也具有一定的影响。其他气候因素，如“最大温度”（MAX MAT）、“年均降水量”（MAP）、“平均温度”（AVG MAT）和“最小温度”（MIN MAT），对植物病害的影响较小，重要性值均低于0.06。土壤因素如“土壤黏土含量”（S CLAY）、“表层土壤砂含量”（T SAND）、“土壤参考容重”（T REF BULK）以及“表层土壤参考容重”（S REF BULK）等的贡献更为有限，重要性值均低于0.03。总体而言，气候因素在解释植物病害时占主导地位，而土壤和地理因素的贡献较小。在完成特征选择后，我们基于排序靠前的 17 个特征训练了 XGBoost 回归模型，并将数据集划分为训练集和测试集，模型在测试集上的均方误差（MSE）以及 R² 分数表明其性能良好。模型训练完成后，我们使用 joblib 将训练好的模型保存到指定目录中，以便后续使用。
+	随机森林变量重要性结果显示了17个气候、地理与土壤变量对响应变量（植物病害）的贡献。在这些变量中，气候因素“太阳辐射”（SRAD）对植物病害的影响最为显著，其重要性值为0.16。地理因素“经度”（LON）和“纬度”（LAT）以及土壤因素“土壤砂含量”（S SAND）对植物病害的贡献次之，重要性值均为0.08。气候因素“气压”（VAPR）和“风速”（WIND）以及地理因素“海拔”（ELEV）的重要性值分别为0.08和0.07，表明它们对植物病害也具有一定的影响。其他气候因素，如“最大温度”（MAX MAT）、“年均降水量”（MAP）、“平均温度”（AVG MAT）和“最小温度”（MIN MAT），对植物病害的影响较小，重要性值均低于0.06。土壤因素如“土壤黏土含量”（S CLAY）、“表层土壤砂含量”（T SAND）、“土壤参考容重”（T REF BULK）以及“表层土壤参考容重”（S REF BULK）等的贡献更为有限，重要性值均低于0.03。总体而言，气候因素在解释植物病害时占主导地位，而土壤和地理因素的贡献较小。在完成特征选择后，我们基于排序靠前的 17 个特征训练了 XGBoost 回归模型，并将数据集划分为训练集和测试集，模型在测试集上的均方误差（MSE）以及 R 方 分数表明其性能良好。模型训练完成后，我们使用 joblib 将训练好的模型保存到指定目录中，以便后续使用。
 	
 	为了进一步解释模型，我们利用 SHAP 值（Shapley Additive Explanations）评估了每个特征对模型预测的影响，并生成了 SHAP 值的可视化图表。通过计算每个特征的平均绝对 SHAP 值以及置信区间，我们总结出了对模型影响最大的特征，并绘制了 SHAP 总结图以展示各特征的重要性和方向性变化。最终，我们将 SHAP 图保存为 PNG 文件，以便进行结果展示和报告撰写。整个过程结合了数据处理、机器学习模型训练和模型解释，为目标变量预测和结果分析提供了全面的支持。
 	
 	
-	我们使用了多个机器学习模型来预测气候土壤数据中的植物病害变量，并评估了它们的性能。首先，我们加载并清洗了包含气候和土壤数据的Excel文件，处理了列名并合并了相关的特征。然后，我们根据特征列和目标变量植物病害拆分了数据集，并对数据进行了标准化。接着，我们训练并评估了三种模型：XGBoost、随机森林和LightGBM，分别计算了它们的均方误差（MSE）和$R^2$评分，并记录了训练时间。表格展示了基于17个气候、地理与土壤变量的随机森林、XGBoost和LightGBM模型的表现比较，评估指标为$R^2$评分和训练时间。在这三种模型中，随机森林模型的$R^2$评分最高，达到0.2939，表示它对数据的拟合效果较好，但其训练时间也最长，为0.6427。相比之下，XGBoost和LightGBM的$R^2$评分分别为0.2630和0.2607，训练时间显著较短。XGBoost的训练时间为0.2127，而LightGBM则是最快的，仅需0.1158的训练时间。这表明，尽管随机森林提供了稍好的预测性能，但XGBoost和LightGBM在训练时间上更为高效，适用于需要高计算效率的场景。
-	
-	
-	在本研究中，我们结合气候数据和土壤数据，采用随机森林算法对目标变量进行了预测。
-	首先，我们从多个 \texttt{.tif} 文件中读取了空间栅格数据，并提取了经纬度信息作为特征。
-	随后，我们通过特定规则对数据的列名进行了标准化处理，例如去除无关后缀以及重复部分。
-	通过筛选和处理，我们生成了新的气候变量，包括年降水总量（MAP）、平均风速（WIND）、最高温度均值（TMAX）、最低温度均值（TMIN）、平均温度（TAVG）、太阳辐射（SRAD）和水汽压（VAPR），并删除了与上述变量相关的原始列。误差（MSE）和决定系数（$R^2$）评估模型的性能。模型在测试集上表现良好，具备较高的预测能力。接下来，我们对多个栅格文件的像素数据进行了预测。为此，我们读取了包含不同空间特征的栅格文件，将其数据堆叠为多维数组，同时保留经纬度信息。基于预训练的随机森林模型，我们对这些数据进行了预测，并将预测结果重新转换为二维栅格格式。
-	我们首先使用 Albers 等面积投影坐标系（\texttt{AlbersEqualArea}）进行地图投影设置，并加载了包含中华人民共和国边界的 GeoJSON 数据。通过 \texttt{geopandas} 库，我们将 GeoJSON 数据的坐标系转换为与目标地图一致的自定义投影坐标系。如果数据的坐标系与目标不一致，则进行了转换。接着，我们定义了一些 TIFF 格式的栅格数据文件，这些数据分别表示不同的时间点或区域。
-	
-	在绘制图形时，我们使用了 \texttt{matplotlib} 创建了一个 2x2 的子图布局，
-	每个子图显示一个 TIFF 文件。对于每个 TIFF 文件，首先提取其文件名并作为标题，
-	在每个子图上绘制了之前加载的 GeoJSON 数据边界。同时，使用 \texttt{rasterio} 读取 TIFF 数据，
-	并处理无效值（\texttt{no\_data\_value}），将其替换为 NaN。
-	栅格数据被映射到颜色映射上，并使用一个从蓝色到绿色再到红色的自定义颜色映射进行可视化。
 	
 	\begin{table}[H]
 		\caption{17个气候、地理与土壤变量的与响应变量之间的随机森林变量重要性结果。自变量包括经度 (Longitude)、纬度 (Latitude)、海拔 (Elevation)、太阳辐射 (SolarRadiation)、土壤砂含量 (SoilSand)、气压 (VaporPressure)、风速 (WindSpeed)、最大温度 (MaximumTemperature)、平均温度 (AverageTemperature)、最小温度 (MinimumTemperature)、年均降水量 (MeanAnnualPrecipitation)、表层土壤砂含量 (TopsoilSand)、土壤参考容重 (SoilReferenceBulkDensity)、表层土壤参考容重 (TopsoilReferenceBulkDensity)、土壤黏土含量 (SoilClay)、表层土壤砾石含量 (TopsoilGravel)。}
@@ -912,71 +899,127 @@
 			\bottomrule
 		\end{tabular}
 	\end{table}
-	%	\begin{figure}[H]  % 创建浮动体（figure）
-		%		\centering  % 图片居中
-		%		\includegraphics[width=0.8\textwidth]{pic/shap_summary_plot.png}  
-		%		\caption{中国地区植物病害xgboost模型的shap图}
-		%		\caption*{SHAP Plot of the XGBoost Model for Plant Diseases in China}
-		%		
-		%		\label{fig:example}  % 设置标签，可以用于交叉引用
-		%	\end{figure}
+%	\begin{figure}[H]  % 创建浮动体（figure）
+%		\centering  % 图片居中
+%		\includegraphics[width=0.8\textwidth]{pic/shap_summary_plot.png}  
+%		\caption{中国地区植物病害xgboost模型的shap图}
+%		\caption*{SHAP Plot of the XGBoost Model for Plant Diseases in China}
+%		
+%		\label{fig:example}  % 设置标签，可以用于交叉引用
+%	\end{figure}
+	
+	\subsection{模型的优化与选择}
+	
+	我们使用了 LazyRegressor 工具对数据集进行了回归模型的比较分析，以便快速评估不同模型的性能。目标变量是 植物病害，而特征由其余变量组成。数据集被划分为训练集和测试集，采用 8:2 的比例。LazyRegressor 自动训练了多种回归模型，并对它们在测试集上的性能进行了评估，主要通过调整后的 R 方（Adjusted R-Squared）、R 方（R-Squared）、均方根误差（RMSE）以及模型运行时间（Time Taken）这几个指标来比较。
+	
+	结果表明，GradientBoostingRegressor 在所有模型中表现最佳，其 Adjusted R-Squared 和 R-Squared 值分别为 0.22 和 0.31，同时 RMSE 为 4.99。这表明它在预测目标变量方面有较高的拟合度。RandomForestRegressor 和 HistGradientBoostingRegressor 分别排名第二和第三，它们的 R-Squared 值分别为 0.29 和 0.27，表现仅次于 GradientBoostingRegressor。值得注意的是，虽然某些模型的计算时间较长，例如 RandomForestRegressor（0.43 秒），但性能提升可能值得权衡。
+	
+	我们对每个模型进行了两种不同的训练方式：一种是直接训练模型，另一种是通过网格搜索（GridSearchCV）来优化超参数。首先，我们读取了气候和土壤数据集，并进行了数据预处理。预处理步骤包括列名清理、特征工程（如计算平均气温、风速、降水量等），并删除了一些不相关的特征。
+	
+	在数据处理后，我们将数据分为训练集和测试集，并使用上述回归模型进行训练。对于使用网格搜索的模型，我们定义了超参数网格并进行了交叉验证，以优化模型性能。随后，我们在测试集上进行了预测，并计算了每个模型的均方误差（MSE）和决定系数（R2）以评估其性能。为了进一步比较不同模型的表现，我们将结果按 R2 值排序，并将模型的评估结果保存为 CSV 文件和 LaTeX 格式的表格，以供后续分析和报告使用。
+	
+	综上所述，通过本次比较，我们能够快速筛选出表现较好的模型，这为进一步的优化提供了基础。尤其是 GradientBoostingRegressor 的表现突出，可以作为后续深入分析的重点。
+	
 	
 	
 	\begin{table}[H]
-		\caption{基于17个气候、地理与土壤变量的随机森林、XGBoost和LightGBM模型的表现比较，包括$R^2$评分和训练时间。} 
-		\caption*{Comparison of the performance of Random Forest, XGBoost, and LightGBM models based on 17 climate, geographic, and soil variables, including  $R^2$ scores and training time.}
-		\label{tab:model_performance}
+		\centering
+		\caption{基于17个气候、地理与土壤变量的LazyRegressor前8个模型的性能，包括$R^2$评分和训练时间。}
+		\caption*{Performance comparison of the top 8 models from LazyRegressor based on 17 climate, geographic, and soil variables, including $R^2$ scores and training time.}
+		
+		\begin{tabular}{lrrrr}
+			\toprule
+			& Adjusted R-Squared & R-Squared & RMSE & Time Taken \\
+			Model &  &  &  &  \\
+			\midrule
+			GradientBoostingRegressor & 0.22 & 0.31 & 4.99 & 0.18 \\
+			RandomForestRegressor & 0.20 & 0.29 & 5.07 & 0.43 \\
+			HistGradientBoostingRegressor & 0.18 & 0.27 & 5.11 & 0.19 \\
+			LGBMRegressor & 0.18 & 0.27 & 5.13 & 0.06 \\
+			ExtraTreeRegressor & 0.17 & 0.26 & 5.14 & 0.01 \\
+			ExtraTreesRegressor & 0.17 & 0.26 & 5.15 & 0.19 \\
+			BaggingRegressor & 0.17 & 0.26 & 5.15 & 0.06 \\
+			DecisionTreeRegressor & 0.17 & 0.26 & 5.15 & 0.01 \\
+			\bottomrule
+		\end{tabular}
+		\label{tab:models_performance}
+	\end{table}
+	
+	
+	\begin{table}[H]
+		\centering
+		\caption{基于17个气候、地理与土壤变量的模型的网格搜索模型的表现比较，包括$R^2$评分。}
+		\caption*{Comparison of model performance with grid search based on 17 climate, geographical, and soil variables, including the $R^2$ score.}
+		
 		\begin{tabular}{lrr}
 			\toprule
-			Model & $R^2$ Score & Training Time \\
+			Model & MSE & R2 \\
 			\midrule
-			Random Forest & 0.2939 & 0.6427 \\
-			XGBoost & 0.2630 & 0.2127 \\
-			LightGBM & 0.2607 & 0.1158 \\
+			QuantileRandomForest (With GridSearch) & 24.86 & 0.31 \\
+			GradientBoosting (No GridSearch) & 25.24 & 0.30 \\
+			GradientBoosting (With GridSearch) & 25.65 & 0.29 \\
+			RandomForest (No GridSearch) & 25.71 & 0.28 \\
+			RandomForest (With GridSearch) & 25.75 & 0.28 \\
+			QuantileRandomForest (No GridSearch) & 27.07 & 0.25 \\
 			\bottomrule
 		\end{tabular}
 	\end{table}
 	
-	%	\begin{figure}[H]  % 创建浮动体（figure）
-		%		\centering  % 图片居中
-		%		\includegraphics[width=0.8\textwidth]{pic/cropped_predicted_rf.png}  
-		%		\caption{中国地区的随机森林预测得到的植物病害严重程度结果}
-		%		\caption*{Predicted severity of plant diseases in China using the Random Forest model}
-		%		
-		%		\label{fig:example}  % 设置标签，可以用于交叉引用
-		%	\end{figure}
+	\subsection{绘制预测图}
+	\par
+	在本研究中，我们结合气候数据和土壤数据，采用随机森林算法对目标变量进行了预测。
+	首先，我们从多个 \texttt{.tif} 文件中读取了空间栅格数据，并提取了经纬度信息作为特征。
+	随后，我们通过特定规则对数据的列名进行了标准化处理，例如去除无关后缀以及重复部分。
+	通过筛选和处理，我们生成了新的气候变量，包括年降水总量（MAP）、平均风速（WIND）、最高温度均值（TMAX）、最低温度均值（TMIN）、平均温度（TAVG）、太阳辐射（SRAD）和水汽压（VAPR），并删除了与上述变量相关的原始列。误差（MSE）和决定系数（$R^2$）评估模型的性能。模型在测试集上表现良好，具备较高的预测能力。接下来，我们对多个栅格文件的像素数据进行了预测。为此，我们读取了包含不同空间特征的栅格文件，将其数据堆叠为多维数组，同时保留经纬度信息。基于预训练的随机森林模型，我们对这些数据进行了预测，并将预测结果重新转换为二维栅格格式。
+	我们首先使用 Albers 等面积投影坐标系（\texttt{AlbersEqualArea}）进行地图投影设置，并加载了包含中华人民共和国边界的 GeoJSON 数据。通过 \texttt{geopandas} 库，我们将 GeoJSON 数据的坐标系转换为与目标地图一致的自定义投影坐标系。如果数据的坐标系与目标不一致，则进行了转换。接着，我们定义了一些 TIFF 格式的栅格数据文件，这些数据分别表示不同的时间点或区域。
+	
+	在绘制图形时，我们使用了 \texttt{matplotlib} 创建了一个 2x2 的子图布局，
+	每个子图显示一个 TIFF 文件。对于每个 TIFF 文件，首先提取其文件名并作为标题，
+	在每个子图上绘制了之前加载的 GeoJSON 数据边界。同时，使用 \texttt{rasterio} 读取 TIFF 数据，
+	并处理无效值（\texttt{no\_data\_value}），将其替换为 NaN。
+	栅格数据被映射到颜色映射上，并使用一个从蓝色到绿色再到红色的自定义颜色映射进行可视化。
 	
 	
-		% \begin{figure}[H]  % 创建浮动体（figure）
-		% 	\centering  % 图片居中
-		% 	\caption{a：2040年ssp1.26方案植物病害预测严重程度结果,b：2040年ssp2.45方案植物病害预测严重程度结果,
-		% 	c：2040年ssp3.70方案植物病害预测严重程度结果,d：2040年ssp5.85方案植物病害预测严重程度结果}
-		% 	\caption*{a: Predicted plant disease severity in 2040 under the SSP1-2.6 scenario,
-		% 	b: Predicted plant disease severity in 2040 under the SSP2-4.5 scenario,
-		% 	c: Predicted plant disease severity in 2040 under the SSP3-7.0 scenario,
-		% 	d: Predicted plant disease severity in 2040 under the SSP5-8.5 scenario}
-		% 	\includegraphics[width=0.8\textwidth]{pic/all_scenarios_rf.png}  
-			
-		% 	\label{fig:example}  % 设置标签，可以用于交叉引用
-		% \end{figure}	
-
-		% \begin{figure}[H]  % 创建浮动体（figure）
-		% 	\centering  % 图片居中
-		% 	\caption{a：当前与2040年ssp1.26方案植物病害严重程度结果的变化,b：当前与2040年ssp2.45方案植物病害严重程度结果的变化,
-		% 	c：当前与2040年ssp3.70方案植物病害严重程度结果的变化,d：当前与2040年ssp5.85方案植物病害严重程度结果的变化}
-		% 	\caption*n{a: Changes in plant disease severity between the current period and 2040 under the SSP1-2.6 scenario,
-		% 	b: Changes in plant disease severity between the current period and 2040 under the SSP2-4.5 scenario,
-		% 	c: Changes in plant disease severity between the current period and 2040 under the SSP3-7.0 scenario,
-		% 	d: Changes in plant disease severity between the current period and 2040 under the SSP5-8.5 scenario}
-			
-		% 	\includegraphics[width=0.8\textwidth]{pic/all_sub_rf.png}  
-			
-		% 	\label{fig:example}  % 设置标签，可以用于交叉引用
-		% \end{figure}	
-	
-	\section{深度学习模型}
 	
 	
+	
+	
+%	\begin{figure}[H]  % 创建浮动体（figure）
+%		\centering  % 图片居中
+%		\includegraphics[width=0.8\textwidth]{pic/cropped_predicted_rf.png}  
+%		\caption{中国地区的随机森林预测得到的植物病害严重程度结果}
+%		\caption*{Predicted severity of plant diseases in China using the Random Forest model}
+%		
+%		\label{fig:example}  % 设置标签，可以用于交叉引用
+%	\end{figure}
+	
+	
+%	\begin{figure}[H]  % 创建浮动体（figure）
+%		\centering  % 图片居中
+%		\caption{a：2040年ssp1.26方案植物病害预测严重程度结果,b：2040年ssp2.45方案植物病害预测严重程度结果,
+%			c：2040年ssp3.70方案植物病害预测严重程度结果,d：2040年ssp5.85方案植物病害预测严重程度结果}
+%		\caption*{a: Predicted plant disease severity in 2040 under the SSP1-2.6 scenario,
+%			b: Predicted plant disease severity in 2040 under the SSP2-4.5 scenario,
+%			c: Predicted plant disease severity in 2040 under the SSP3-7.0 scenario,
+%			d: Predicted plant disease severity in 2040 under the SSP5-8.5 scenario}
+%		\includegraphics[width=0.8\textwidth]{pic/all_scenarios_rf.png}  
+%		
+%		\label{fig:example}  % 设置标签，可以用于交叉引用
+%	\end{figure}	
+	
+%	\begin{figure}[H]  % 创建浮动体（figure）
+%		\centering  % 图片居中
+%		\caption{a：当前与2040年ssp1.26方案植物病害严重程度结果的变化,b：当前与2040年ssp2.45方案植物病害严重程度结果的变化,
+%			c：当前与2040年ssp3.70方案植物病害严重程度结果的变化,d：当前与2040年ssp5.85方案植物病害严重程度结果的变化}
+%		\caption*n{a: Changes in plant disease severity between the current period and 2040 under the SSP1-2.6 scenario,
+%			b: Changes in plant disease severity between the current period and 2040 under the SSP2-4.5 scenario,
+%			c: Changes in plant disease severity between the current period and 2040 under the SSP3-7.0 scenario,
+%			d: Changes in plant disease severity between the current period and 2040 under the SSP5-8.5 scenario}
+%		
+%		\includegraphics[width=0.8\textwidth]{pic/all_sub_rf.png}  
+%		
+%		\label{fig:example}  % 设置标签，可以用于交叉引用
+%	\end{figure}	
 	
 	
 	
@@ -1019,7 +1062,6 @@
 	\Thanks
 	
 	感谢刘向老师三年以来的指导和培养，感谢父母在学费，生活费给与的支持，感谢同班同学，师兄师姐的关心与帮助。
-
-
-	\end{document}
-\end{equation}
+	
+	
+\end{document}
