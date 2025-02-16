@@ -448,21 +448,21 @@
 	而是有一定的非线性相关，温度较低的区间，气温增加对于降水的影响较小，
 	而温度较高的区间，气温对降水的影响较大。
 	
-	%	\begin{figure}[H]  % 创建浮动体（figure）
-		%		\centering  % 图片居中
-		%		\includegraphics[width=0.8\textwidth]{pic/sample.png}  % 插入图片，指定宽度为页面宽度的80%
-		%		\caption{中国地区的771个样点的样点分布图}
-		%		\caption*{Point Distribution Map of 771 Sample Points in China}
-		%		\label{fig:example}  % 设置标签，可以用于交叉引用
-		%	\end{figure}
+%	\begin{figure}[H]  % 创建浮动体（figure）
+%		\centering  % 图片居中
+%		\includegraphics[width=0.8\textwidth]{pic/sample.png}  % 插入图片，指定宽度为页面宽度的80%
+%		\caption{中国地区的771个样点的样点分布图}
+%		\caption*{Point Distribution Map of 771 Sample Points in China}
+%		\label{fig:example}  % 设置标签，可以用于交叉引用
+%	\end{figure}
 	
-	%	\begin{figure}[H]  % 创建浮动体（figure）
-		%		\centering  % 图片居中
-		%		\includegraphics[width=0.8\textwidth]{pic/scatter_with_histograms.png}  % 插入图片，指定宽度为页面宽度的80%
-		%		\caption{中国地区的771个样点降水与气温的散点直方图}
-		%		\caption*{Scatter and Histogram of Precipitation and Temperature for 771 Sample Points in China}
-		%		\label{fig:example}  % 设置标签，可以用于交叉引用
-		%	\end{figure}
+%	\begin{figure}[H]  % 创建浮动体（figure）
+%		\centering  % 图片居中
+%		\includegraphics[width=0.8\textwidth]{pic/scatter_with_histograms.png}  % 插入图片，指定宽度为页面宽度的80%
+%		\caption{中国地区的771个样点降水与气温的散点直方图}
+%		\caption*{Scatter and Histogram of Precipitation and Temperature for 771 Sample Points in China}
+%		\label{fig:example}  % 设置标签，可以用于交叉引用
+%	\end{figure}
 	
 	\begin{table}[H]
 		\centering
@@ -593,6 +593,7 @@
 			T BULK DEN (g/$cm^3$)& Topsoil Bulk Density & 1.36 & 0.11 & 0.28 - 1.54 \\
 			T REF BULK (g/$cm^3$)& Topsoil ReferenceBulk Density & 1.39 & 0.09 & 1.22 - 1.70 \\
 			S CLAY (\%) & Soil Clay & 29.21 & 13.21 & 0.00 - 57.00 \\
+			\bottomrule
 		\end{tabular}
 	\end{table}
 	
@@ -781,7 +782,7 @@
 	在环境监测领域，Liang 等（2018）利用LightGBM进行了气候变化对植被生长影响的研究\cite{liang2018}。通过结合遥感影像、气候数据和土壤特征，使用LightGBM对植被生长状况进行了预测。研究结果显示，LightGBM能够有效整合多源数据，准确捕捉气候变化对植被生长的影响，特别是在多层次、非线性的关系建模上展现了强大的能力。这项研究不仅在植被生长监测中取得了良好的效果，还展示了LightGBM在生态环境研究中的潜力。
 	
 	在生态灾害监测中，Zhang 等（2019）应用LightGBM对森林火灾发生的风险进行了预测\cite{zhang2019}。研究结合遥感数据、气象数据和地理信息，通过LightGBM建立了火灾风险预测模型。研究结果表明，LightGBM在处理火灾风险评估中的表现优于传统模型，特别是在高维度特征和数据稀疏的情况下，其预测精度和计算效率得到了显著提高。
-
+	
 	\subsection{分位数随机森林}
 	
 	分位数回归（Quantile Regression）是一种用于估计不确定性的传统方法，其输出能够反映未观测数据点的不确定性范围（上界和下界）。尽管传统的分位数回归主要基于线性模型，但近年来，该方法已被扩展至随机森林，形成了分位数随机森林（Quantile Random Forest, QRF）。  
@@ -809,7 +810,7 @@
 	\end{equation}
 	
 	其中，\( \alpha \) 是介于 0 和 1 之间的分位数值，例如 \( \alpha = 0.05 \) 对应 5\% 分位数（下界），\( \alpha = 0.95 \) 对应 95\% 分位数（上界）。通过估计这些分位数，QRF 能够提供比传统均值回归更丰富的不确定性信息，在气候预测、金融风险管理等领域具有广泛应用。
-		\subsection{shap图}
+	\subsection{shap图}
 	
 	
 	
@@ -929,6 +930,7 @@
 			\bottomrule
 		\end{tabular}
 	\end{table}
+	
 %	\begin{figure}[H]  % 创建浮动体（figure）
 %		\centering  % 图片居中
 %		\includegraphics[width=0.8\textwidth]{pic/shap_summary_plot.png}  
@@ -1016,9 +1018,10 @@
 	
 %	\begin{figure}[H]  % 创建浮动体（figure）
 %		\centering  % 图片居中
-%		\includegraphics[width=0.8\textwidth]{pic/cropped_predicted_rf.png}  
 %		\caption{中国地区的随机森林预测得到的植物病害严重程度结果}
 %		\caption*{Predicted severity of plant diseases in China using the Random Forest model}
+%		
+%		\includegraphics[width=0.8\textwidth]{pic/cropped_predicted_rf.png}  
 %		
 %		\label{fig:example}  % 设置标签，可以用于交叉引用
 %	\end{figure}
@@ -1050,6 +1053,41 @@
 %		
 %		\label{fig:example}  % 设置标签，可以用于交叉引用
 %	\end{figure}	
+	
+	\section{深度学习模型}
+	我们分别使用 PyTorch 和 TensorFlow 构建并训练了神经网络模型。对于 PyTorch，我们定义了一个包含三层全连接层的神经网络，使用 LeakyReLU 激活函数和 Dropout 层，并通过 Adam 优化器和均方误差损失函数进行训练。为了避免过拟合，我们还使用了早停（early stopping）机制，当验证损失连续若干个 epoch 没有改善时停止训练。对于 TensorFlow，我们采用了类似的神经网络结构，使用 Keras 提供的 Sequential API 构建模型，优化器为 Adam，损失函数为均方误差，并使用了学习率衰减和早停回调。我们训练了两个模型并记录了训练和验证损失，接着将两者的损失曲线绘制在左右并排的图表中，方便直观对比。
+	
+	此外，我们还计算了每个模型在测试集上的预测性能，通过均方误差（MSE）和决定系数（R方）来评估模型的准确性。
+	
+	\begin{table}[H]
+		\centering
+		\caption{神经网络回归模型的训练与验证损失曲线MSE和R方}
+		\caption*{Training and Validation Loss Curves of Neural Network Regression Model: MSE and R²}
+		
+		\begin{tabular}{lrr}
+			\toprule
+			Model & MSE & R方 \\ 
+			\midrule
+			PyTorch & 24.8267 & 0.3091 \\
+			TensorFlow & 24.8613 & 0.3081 \\
+			\bottomrule
+		\end{tabular}
+		
+		\label{tab:model_comparison}
+	\end{table}
+	
+%	\begin{figure}[H]  % 创建浮动体（figure）
+%		\centering  % 图片居中
+%		\caption{神经网络回归模型的训练与验证损失曲线}
+%		\caption*{The training and validation loss curve of the neural network regression model.}
+%		
+%		\includegraphics[width=0.8\textwidth]{pic/loss_comparison.png}  
+%		
+%		\label{fig:example}  % 设置标签，可以用于交叉引用
+%	\end{figure}
+	
+	
+	
 	
 	
 	
