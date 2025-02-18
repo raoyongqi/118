@@ -122,6 +122,8 @@
 
 \geometry{headheight=1cm, footskip=0.54cm} % 显式设置页眉和页脚高度
 \RequirePackage{changepage}
+\RequirePackage{rotating}
+\RequirePackage{pdflscape}
 
 
 %=======package
