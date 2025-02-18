@@ -26,7 +26,7 @@
 	%  如： 短标题 \title{{第一行}},
 	% 	      长标题 \title{{第一行}{第二行}}
 	%             超长标题\tiitle{{第一行}{...}{第N行}}
-	\title{{基于机器学习的植物病害分析与预测模型构建}}
+	\title{{基于机器学习的植物病害预测模型构建}}
 	
 	% 标题样式 使用 \entitle{{}}; 使用时必须保证至少两个外侧括号
 	%  如： 短标题 \entitle{{First row}},
@@ -105,38 +105,35 @@
 	
 	
 	%中文摘要
-	\ZhAbstract{在中国，农业生产覆盖广阔的地理区域，植物病害的发生具有显著的空间和时间变化特征。传统的植物病害预测方法依赖于人工观察和诊断，这种方法既费时又容易受到人为因素的影响。此外，植物病害的症状通常具有相似性，且在不同气候和环境条件下表现不一，传统方法的准确性和适应性有限。尽管遥感技术和传感器技术的进步提高了病害检测的精度，但这些技术通常依赖大量人工干预，难以实现自动化和实时监控，特别是在广泛区域的农业生产中。
+	\	\ZhAbstract{俗话说，民以食为天。粮食的生产直接关系到人类的生存与发展，而植物病害是影响粮食安全的重要因素之一。植物在生长过程中会受到病原菌的侵染，进而导致大范围的农作物减产甚至绝收。植物病害的发生受到多种环境因素的影响，具有显著的空间和时间变化特征。然而，目前对于环境变量（如气候和土壤）如何驱动病害的发生仍存在较大的不确定性。此外，传统的植物病害预测方法主要依赖于人工观察和诊断，费时费力且易受人为误差的影响。植物病害的发生具有显著的空间和时间变化特征，但环境和土壤对植物病害的影响尚不确定。本研究整合多源大尺度环境数据（包括气候数据、土壤数据等），并利用机器学习方法构建了植物病害的预测模型，具体研究流程如下：
+	\par 一、数据收集与预处理
+	\par 本研究基于中国草地的实地调查数据，共收集了193个样点的植物病害数据，覆盖全国26个省级行政区。每个样点包含3-4个样方，共计记录了770条详细数据。结合全球气候数据库（WorldClim version 2.1）提取每个样点的气候数据，并从全球协调世界土壤数据库（HWSD）提取土壤数据。随后，我们在地图上可视化了样点的空间分布，并分析了各环境变量的取值范围及其相关性。
+	\par 二、贝叶斯建模分析
+	\par 采用贝叶斯统计模型，分析各个环境变量对植物病害严重程度的影响。结果表明，“土壤砂含量”对植物病害的发生具有显著的正向影响，而“经度”和“海拔”则呈现负相关关系。此外，“太阳辐射”、“风速”和“气压”的影响较为不确定，但可能在不同条件下具有不同的作用。
+	\par 三、集成学习模型比较与预测
+	\par 采用多种集成学习方法（如随机森林、梯度提升机等）进行植物病害的预测分析，并评估各变量的重要性。结果表明，“太阳辐射”是影响植物病害的最重要因素，地理因素（经度、纬度）和土壤因素（土壤砂含量）次之，而“气压”和“风速”的重要性值分别为0.08和0.07，表明它们对植物病害亦具有一定影响。此外，我们利用LazyRegressor优化模型选择，发现GradientBoostingRegressor（GBR）在所有模型中表现最佳。基于GBR的预测结果，我们绘制了中国地区植物病害的大尺度预测图，并进一步模拟了气候变化条件下的植物病害分布。
+	\par 四、深度学习建模与优化
+	\par 采用PyTorch和TensorFlow分别构建神经网络模型，并进行训练和优化。通过绘制训练集与测试集的R²变化曲线，评估模型的收敛情况和泛化能力。结果表明，PyTorch和TensorFlow的训练效果相似，但PyTorch的收敛速度稍慢。
+
+	\par 本研究提出了一种基于多源大尺度环境数据的植物病害预测方法，并揭示了气候和土壤因子对植物病害的影响机制。研究结果不仅有助于理解植物病害的环境驱动因素，也可为全球气候变化背景下的病害防控提供科学依据。
+	}{机器学习，大尺度研究}
+	\\EnAbstract{
+		Food security is a fundamental concern for human survival and development, and plant diseases are one of the major factors threatening global agricultural production. During their growth, plants are susceptible to pathogen infections, which can result in widespread crop yield losses or even total failure. The occurrence of plant diseases is influenced by multiple environmental factors and exhibits significant spatial and temporal variability. However, the extent to which environmental variables (such as climate and soil conditions) drive disease outbreaks remains uncertain. Furthermore, traditional plant disease prediction methods rely heavily on manual observation and diagnosis, which are time-consuming, labor-intensive, and prone to human error. To address these challenges, this study integrates multi-source large-scale environmental data (including climate and soil data) and employs machine learning methods to develop a predictive model for plant diseases. The research framework is as follows:
 		
-		集成学习方法能够有效应对这一挑战。常见的集成学习算法如随机森林（Random Forest, RF）、提升树（Boosting）方法如XGBoost和LightGBM，以及袋装（Bagging）方法如Adaboost，在植物病害预测中均取得了显著成果。这些算法通过结合多个弱学习器的预测结果，提高了模型在复杂农业数据环境中的稳定性和准确性。通过融合来自不同来源的大尺度数据，如气象数据、土壤数据、农田管理信息等，集成学习能够识别并提取出与病害发生相关的关键特征，从而进行精准的预测。
+		\par 1. Data Collection and Preprocessing
+		\par This study is based on field survey data collected from grasslands in China, covering 193 sampling sites across 26 provincial-level administrative regions. Each site consists of 3–4 quadrats, resulting in a total of 770 detailed records. Climate data for each site were extracted from the WorldClim version 2.1 global climate database, while soil data were obtained from the Harmonized World Soil Database (HWSD). The spatial distribution of sampling sites was visualized on a map, and the ranges and correlations of environmental variables were analyzed.
 		
-		在中国，气候变化、季节性降水、土壤条件等因素的多样性使得植物病害的发生呈现区域性和时间性差异。为了提高病害预测的准确性，集成学习方法特别适合处理这些大尺度和多维度的数据。气象数据（如温度、湿度、降水量）和土壤数据（如土壤湿度、pH值、养分含量）为集成学习模型提供了重要的输入变量。此外，农作物生长季节的变化和不同地理区域的病害历史数据也能够作为训练集的重要组成部分，通过数据融合，集成学习能够准确捕捉到病害的潜在规律。
+		\par 2. Bayesian Modeling Analysis
+		\par A Bayesian statistical model was employed to analyze the impact of various environmental variables on plant disease severity. The results indicate that "soil sand content" has a significant positive effect on plant diseases, whereas "longitude" and "altitude" show a negative correlation. The effects of other factors, such as "solar radiation," "wind speed," and "air pressure," remain uncertain but may vary under different conditions.
 		
-		土地利用和植被覆盖度的变化对植物病害的发生和传播有着重要影响。土地利用的变化会影响农田的生态环境和病害的传播路径，而植被覆盖度的变化则直接影响病原的生存环境和传播速度。因此，研究土地利用变化及植被覆盖度的动态变化，不仅有助于了解病害发生的空间分布，还能为病害的预测提供更全面的数据支持。集成学习模型可以结合土地利用数据和植被覆盖度变化的数据，进一步提高植物病害预测的精度。
+		\par 3. Comparison and Prediction Using Ensemble Learning Models
+		\par Multiple ensemble learning methods (e.g., random forest and gradient boosting) were applied to predict plant disease occurrence, and the importance of different variables was assessed. The results reveal that "solar radiation" is the most influential factor in plant disease outbreaks, followed by geographic factors (longitude and latitude) and soil properties (soil sand content). The importance values of "air pressure" and "wind speed" are 0.08 and 0.07, respectively, indicating that they also play a role in disease occurrence. Additionally, the LazyRegressor package was used to optimize model selection, and GradientBoostingRegressor (GBR) demonstrated the best predictive performance among all models. Using GBR predictions, large-scale maps of plant disease distribution in China were generated, and further simulations were conducted to predict disease distribution under climate change scenarios.
 		
-		集成学习模型在训练过程中，能够自动学习和优化来自不同数据源的信息，并对不同特征赋予适当的权重。通过这种方式，集成学习模型能够克服单一模型的局限性，提高对复杂数据模式的识别能力。在植物病害预测中，集成学习方法不仅能够处理空间数据，还能够结合时间序列数据，如历史病害数据和气象预测数据，进行时空分析，进一步提高预测精度。
+		\par 4. Deep Learning Model Development and Optimization
+		\par Deep learning models were constructed and trained using PyTorch and TensorFlow. The R² variation curves for the training and test datasets were plotted to evaluate model convergence and generalization ability. The results show that PyTorch and TensorFlow yield similar predictive performance, though PyTorch exhibits a slower convergence rate.
 		
-		然而，尽管集成学习在植物病害预测中取得了良好效果，仍然面临一些挑战。首先，数据的质量和数量是集成学习成功应用的关键。由于植物病害发生的复杂性，现有的数据往往存在噪声，并且缺乏全面性和代表性，这可能影响模型的训练效果。其次，集成学习模型的训练过程通常需要较长时间和较高的计算资源，尤其是在大尺度区域的应用中，需要处理大量的地理和气象数据。最后，集成学习模型的可解释性问题仍未得到完全解决，农业领域的从业人员需要能够理解模型的预测结果，以便做出合理的决策。
-		
-		随着计算能力和数据采集技术的进步，未来集成学习在植物病害预测中的应用将越来越广泛。未来的研究应进一步注重多模态数据的融合，通过结合气象数据、土壤数据、农作物信息、土地利用和植被覆盖度变化数据以及历史病害数据，提升模型的准确性和鲁棒性。此外，考虑到不同地区病害的差异性，集成学习模型应具备自适应学习能力，能够根据不同区域的环境和气候条件进行调整，以实现跨地区、跨作物的预测能力。
-		
-		总之，集成学习在植物病害分析与预测中展现了巨大的应用潜力。特别是在中国这样的大规模农业生产背景下，集成学习能够利用丰富的气象、土壤、农作物生长数据以及土地利用和植被覆盖度变化数据，为农民提供及时、准确的病害预警和防治方案。随着技术的发展和数据的进一步积累，集成学习将在促进精准农业和提高农作物产量方面发挥更加重要的作用。}{集成学习，大尺度研究}
-	%英文摘要
-	\EnAbstract{In China, agricultural production covers vast geographical areas, and the occurrence of plant diseases exhibits significant spatial and temporal variability. Traditional plant disease prediction methods rely on manual observation and diagnosis, which are time-consuming and prone to human error. Moreover, the symptoms of plant diseases are often similar and can manifest differently under varying climatic and environmental conditions, limiting the accuracy and adaptability of traditional methods. Although advances in remote sensing and sensor technologies have improved disease detection accuracy, these methods typically require extensive manual intervention, making it difficult to achieve automation and real-time monitoring, particularly in large-scale agricultural production areas.
-		
-		Ensemble learning methods can effectively address this challenge. Common ensemble learning algorithms, such as Random Forest (RF), Boosting methods like XGBoost and LightGBM, and Bagging methods like Adaboost, have achieved significant success in plant disease prediction. These algorithms combine the predictions of multiple weak learners to improve the model's stability and accuracy in complex agricultural data environments. By integrating large-scale data from different sources, such as meteorological data, soil data, and farm management information, ensemble learning can identify and extract key features related to disease occurrence, enabling precise predictions.
-		
-		In China, the diversity of factors such as climate change, seasonal precipitation, and soil conditions results in regional and temporal differences in plant disease occurrence. To improve disease prediction accuracy, ensemble learning methods are particularly well-suited for handling large-scale, multidimensional data. Meteorological data (such as temperature, humidity, and precipitation) and soil data (such as soil moisture, pH, and nutrient content) provide important input variables for ensemble learning models. Additionally, changes in the growing seasons of crops and historical disease data from different geographical areas can serve as important components of the training set. Through data fusion, ensemble learning can accurately capture potential patterns of disease occurrence.
-		
-		Land use and vegetation cover changes significantly impact the occurrence and spread of plant diseases. Land use changes affect the ecological environment of farmland and disease transmission pathways, while vegetation cover changes directly influence the habitat and spread rate of pathogens. Therefore, studying the dynamic changes in land use and vegetation cover not only helps understand the spatial distribution of diseases but also provides more comprehensive data support for disease prediction. Ensemble learning models can integrate land use and vegetation cover change data to further improve plant disease prediction accuracy.
-		
-		During the training process, ensemble learning models can automatically learn and optimize information from different data sources and assign appropriate weights to different features. In this way, ensemble learning models can overcome the limitations of individual models and enhance the ability to identify complex data patterns. In plant disease prediction, ensemble learning methods can handle spatial data as well as time series data, such as historical disease data and meteorological forecast data, enabling spatiotemporal analysis and further improving prediction accuracy.
-		
-		However, despite the good performance of ensemble learning in plant disease prediction, some challenges remain. First, the quality and quantity of data are key to the successful application of ensemble learning. Due to the complexity of plant disease occurrence, existing data often contain noise and lack comprehensiveness and representativeness, which may affect the model's training performance. Second, the training process of ensemble learning models typically requires a long time and substantial computational resources, especially when dealing with large-scale regional applications that involve processing massive amounts of geographic and meteorological data. Lastly, the interpretability of ensemble learning models remains unresolved, and agricultural practitioners need to understand the model's prediction results to make informed decisions.
-		
-		With the advancement of computing power and data collection technologies, the application of ensemble learning in plant disease prediction will become increasingly widespread. Future research should focus on further integrating multimodal data, combining meteorological data, soil data, crop information, land use and vegetation cover change data, and historical disease data, to enhance the model's accuracy and robustness. Additionally, considering the regional differences in disease occurrence, ensemble learning models should have adaptive learning capabilities that can adjust to different environmental and climatic conditions in various regions, enabling cross-regional and cross-crop prediction capabilities.
-		
-		In conclusion, ensemble learning demonstrates immense potential for application in plant disease analysis and prediction. Especially in large-scale agricultural production settings such as China, ensemble learning can leverage rich data on meteorology, soil, crop growth, land use, and vegetation cover changes to provide timely and accurate disease warnings and control strategies for farmers. As technology advances and data accumulation continues, ensemble learning will play an increasingly important role in promoting precision agriculture and improving crop yields.    % \fontspec{Times New Roman} {Times New Roman}
-	}{Ensemble Learning, Large-Scale Research}
+		\par This study proposes a plant disease prediction approach based on multi-source large-scale environmental data and reveals the impact of climate and soil factors on disease occurrence. The findings contribute to a better understanding of the environmental drivers of plant diseases and provide scientific insights for disease prevention and management in the context of global climate change.
+		}{Machine Learning, Large-Scale Study}
 	
 	
 	%文章主体
@@ -149,12 +146,14 @@
 	\section{植物病害概述}
 	
 	
-	对植物病害认识的深化过程，如同人类对自然规律理解的不断推进，是一段漫长而充满智慧的旅程。
-	早在古罗马时期，人们对作物生长和病害的了解更多依赖经验和传统。
-	罗马农学家科尔梅拉（Columella）和普林尼（Pliny the Elder）在他们的著作中提到了一些作物病害现象，但常将其归因于天罚或神灵的干预，这种朴素的认识反映了当时人类对微观世界的无知。
-	中世纪的农业发展较为停滞，但到中国北魏时期的《齐民要术》中，可以看到对植物病害更系统的经验总结。作者贾思勰通过观察与实践，记录了病害发生的环境因素，如湿度、土壤和作物生长的关系，提出了简单的防治措施。这种从经验中提炼规律的方式，是认识深化的一个重要阶段。
-	到了文艺复兴后期，科学革命带来了观察和实验的兴起，列文虎克的显微镜发明掀开了微观世界的面纱。
-	他首次通过显微镜观察到微生物的存在，为人类认识植物病害的病原奠定了基础。虽然他并未直接研究植物病害，但他的发现激发了后人从科学角度探索病害成因的兴趣。随着植物病理学的兴起，人们逐渐认识到真菌、细菌和病毒等微生物是许多植物病害的主要原因。
+	对植物病害识认的深化过程，如同人类对自然规律理解的不断推进，是一段漫长而充满智慧的旅程。
+
+	早在古罗马时期，人们对作物生长和病害的了解更多依赖经验和传统。罗马农学家科尔梅拉 (Columella) 和普林尼 (Pliny the Elder) 在他们的著作中提到了一些作物病害现象，但常将其归因于天罚或神灵的干预，这种朴素的识认反映了当时人类对微观世界的无知\cite{columella1941agriculture}。
+	
+	中世纪的农业发展较为停滞，但到中国北魏时期的《齐民要术》中，可以看到对植物病害更系统的经验总结。作者贾思勰通过观察与实践，记录了病害发生的环境因素，如湿度、土壤和作物生长的关系，提出了简单的防治措施\cite{jia535qimin}。这种从经验中提炼规律的方式，是识认深化的一个重要阶段。
+	
+	到了文艺复兴后期，科学革命带来了观察和实验的兴起，列文虎克 (Antonie van Leeuwenhoek) 的显微镜发明揭开了微观世界的面纱。他首次通过显微镜观察到微生物的存在，为人类识认植物病害的病原基础。虽然他并未直接研究植物病害，但他的发现激发了后人从科学角度探索病害成因的兴趣\cite{leeuwenhoek1683observations}。
+	随着植物病理学的养成，人们逐渐识认到真菌、细菌和病毒等微生物是许多植物病害的主要原因\cite{agrios2005plant}。
 	这一认识过程贯穿了人类历史，从神秘主义的解释到经验总结，再到科学观察与验证，展现了人类对自然界认识的不断深化。
 	这种进步不仅推动了农业生产技术的发展，也为现代植物病害的防治奠定了科学基础，为保障粮食安全和生态平衡作出了不可磨灭的贡献。
 	
@@ -386,44 +385,31 @@
 		
 		
 		
-		\begin{figure}[H]  % 创建浮动体（figure）
-			\centering  % 图片居中
-			\caption{构建植物病害预测分析的数据流程图}
-			\caption*{Data Flow Diagram for Constructing Plant Disease Prediction Analysis}
-			
-			
-			\includegraphics[width=0.8\textwidth]{pic/flowchart.png}  
-			
-			\label{fig:example}  % 设置标签，可以用于交叉引用
-		\end{figure}
-
-
-	将通过与实际病害发生数据的比对来检验模型的预测能力，并在此基础上不断调整和优化模型参数，提高预测的准确性。
-	然后，借助建立的预测模型，我们将分析植物病害的空间分布规律和时间变化趋势，揭示气候变化、植物多样性等因素对病害发生的影响机制。
-	随着气候变化的不断演变，未来的气候情境对植物病害的影响不可忽视。
-	因此，本文还将结合未来气候变化情境进行模拟，分析气候变化对植物病害发生的潜在影响，预测不同气候条件下植物病害的发展趋势。
-	最后，基于预测结果，我们将提出具体的病害防控建议和管理策略，包括对病害高发区域的预警、合理的作物种植布局以及在气候变化情境下的适应性管理措施。
-	通过这一技术路线，本文旨在为植物病害的预测与防控提供科学依据，帮助农业生产者有效应对气候变化带来的潜在挑战，并推动可持续农业管理和生态安全的实现。
-	
+%		\begin{figure}[H]  % 创建浮动体（figure）
+%			\centering  % 图片居中
+%			\caption{构建植物病害预测分析的数据流程图}
+%			\caption*{Data Flow Diagram for Constructing Plant Disease Prediction Analysis}
+%			
+%			
+%			\includegraphics[width=0.8\textwidth]{pic/flowchart.png}  
+%			
+%			\label{fig:example}  % 设置标签，可以用于交叉引用
+%		\end{figure}\item 
 	\chapter{数据来源}
+		\subsection{收集WorldClim数据}
 	
-	\subsection{收集WorldClim数据}
-	
-	WorldClim数据集气候数据通常通过全球气象站点的观测数据进行插值，生成高分辨率的气候图层。这些数据广泛用于生态和环境科学研究，如物种分布模型、气候变化影响评估等。高分辨率气候图层能够提供详细的区域气候信息，使得研究人员可以在较小的地理尺度上进行精细化分析，从而获得更精确的结果。这种空间分布图对于理解气候模式和趋势非常有用。例如，通过观察太阳辐射的季节性变化，可以分析不同区域的太阳能潜力，进而影响能源政策的制定。同样，通过分析气温的空间分布，可以了解温度的季节性变化，帮助农业、生态和城市规划等领域进行相应调整。
-	总体来看，这些气候变量的空间分布图不仅展示了不同时间点和气候变量的空间变化，还为进一步的气候研究提供了宝贵的数据支持。通过这些图，可以更直观地理解和分析气候变化对不同区域的影响，为相关领域的决策提供科学依据。 这张图展示了某一地理区域的多个气候变量的空间分布情况。图像中包含了2个不同的气候变量，每个变量分别在一个子图中呈现，通过观察图像，我们可以发现青藏高原的草地具有较高的海拔和较低的年最高温等。结合WorldClim数据集（可参见WorldClim官方网站），这些变量反映了不同的气候特征。通过颜色的渐变可以看出不同变量在不同区域的变化情况。这些数据有助于理解该区域的气候特征，并可用于气候研究、生态模型以及环境管理等领域
+	为了量化每个研究样点的气候数据，我们根据每个样点的坐标从全球气候
+	数据库中 Worldclim version 2.1（http://www.worldclim.org; ~1 千米分辨率; Fick 
+	\& Hijmans, 2017 ） 提 取 了 每 个 样 点 的 年 平 均 气 温 （ MAT, mean annual 
+	temperature）、年平均降水量（MAP, mean annual precipitation）、气温季节性
+	（ TSEA, temperature seasonality ）和降水季节性（ PSEA, precipitation 
+	seasonality）。
 	
 	\subsection{收集土壤数据}
+	为了量化每个研究样点的土壤数据，我们根据每个样点的坐标从全球协调世界土壤数据库（HWSD）提取了
+	土壤砂含量 (SoilSand)、表层土壤砂含量 (TopsoilSand)、表层土壤参考容重 (TopsoilReferenceBulkDensity)、
+	土壤黏土含量 (SoilClay)等。
 	
-	
-	协调世界土壤数据库 （HWSD）是 FAO（联合国粮食及农业组织）和 IIASA（国际应用系统分析研究所）以及其他合作伙伴（如 ISRIC – 世界土壤信息和欧洲土壤局网络 （ESBN） 的合作成果。
-	
-	在全面更新全球农业生态区研究的背景下，联合国粮食及农业组织（FAO）和国际应用系统分析研究所（IIASA）认识到，迫切需要整合全球现有的区域和国家土壤信息更新，并将其与1971-1981年间编制的、但大部分已不再反映当前土壤资源实际状况的1:5,000,000比例尺FAO-UNESCO世界土壤图相结合。为此，他们与主要负责开发区域土壤和地形数据库（SOTER）的国际土壤参考资料和信息中心（ISRIC）以及近年来对欧洲和欧亚北部土壤信息进行重大更新的欧洲土壤局网络（ESBN）建立了合作伙伴关系。此外，通过与中国科学院土壤科学研究所的合作，将1:1,000,000比例尺的中国土壤图纳入其中，成为重要补充。
-	
-	为了以统一的方式估算土壤属性，研究团队利用实际土壤剖面数据和土壤传递规则的开发，与ISRIC和ESBN合作，借鉴了WISE土壤剖面数据库以及Batjes等人（1997; 2002）和Van Ranst等人（1995）的早期工作。国际应用系统分析研究所（IIASA）负责确保数据的和谐化和在地理信息系统（GIS）中的输入，而所有合作伙伴则负责数据库的验证。
-	
-	该产品的主要目的是为模型构建者提供实用工具，并为农业生态区划、粮食安全和气候变化影响等前瞻性研究服务。因此，选择了大约1公里（30弧秒×30弧秒）的分辨率。生成的栅格数据库由21,600行和43,200列组成，其中包含2.21亿个网格单元，覆盖了全球陆地。
-	
-	在协调一致的全球土壤数据库（HWSD）中，识别出超过16,000个不同的土壤制图单元，这些单元与协调一致的属性数据相关联。标准化的结构允许将属性数据与GIS相结合，以显示或查询土壤单元的组成以及选定土壤参数的特征（如有机碳、pH值、蓄水能力、土壤深度、阳离子交换能力、粘土含量、总可交换养分、石灰和石膏含量、钠交换百分比、盐度、质地类别和粒度分布）。
 	
 	\subsection{下载cmip6数据}
 	首先，确保安装和加载所需的R包，使用\texttt{remotes}包来从GitHub安装\texttt{geodata}包。在加载\texttt{geodata}包后，使用\texttt{getwd()}获取当前工作目录，并通过\texttt{setwd()}设置工作目录为\texttt{"C:/Users/r/Desktop/cmip6"}，以便后续数据下载和存储都在该目录下。
