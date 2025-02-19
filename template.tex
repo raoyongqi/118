@@ -762,13 +762,13 @@
 	
 	
 	
-	\subsection{xgboost}
+	\subsection{XGBoost}
 
-	XGBoost 是一种基于决策树的机器学习算法，因其速度和性能在处理大规模数据和复杂问题时非常受欢迎 \cite{chen2016xgboost}。
+	XGBoost是一种基于决策树的机器学习算法，因其速度和性能在处理大规模数据和复杂问题时非常受欢迎 \cite{chen2016xgboost}。
 	它的优势在于强大的计算效率和高精度，这得益于其内置的并行计算和对硬件的优化。XGBoost 通过梯度提升技术逐步减少误差，能够很好地处理分类和回归任务。此外，它还支持特征的自动化选择和缺失值处理，增强了模型的鲁棒性。
-	XGBoost 通过优化损失函数和增加正则化项，减少过拟合风险，同时加速模型的训练过程。其关键特性之一是实现了并行计算，使得在处理大规模数据集时具有显著的速度优势。此外，XGBoost 还提供了多种灵活的参数配置，使得用户能够针对具体问题进行调优。该模型不仅适用于分类和回归任务，还在许多机器学习竞赛中表现出色，成为数据科学家和机器学习工程师的热门选择。由于其强大的性能和灵活性，XGBoost 广泛应用于金融、医疗、广告和推荐系统等多个领域，是现代机器学习中不可或缺的重要工具。
+	XGBoost通过优化损失函数和增加正则化项，减少过拟合风险，同时加速模型的训练过程。其关键特性之一是实现了并行计算，使得在处理大规模数据集时具有显著的速度优势。此外，XGBoost 还提供了多种灵活的参数配置，使得用户能够针对具体问题进行调优。该模型不仅适用于分类和回归任务，还在许多机器学习竞赛中表现出色，成为数据科学家和机器学习工程师的热门选择。由于其强大的性能和灵活性，XGBoost 广泛应用于金融、医疗、广告和推荐系统等多个领域，是现代机器学习中不可或缺的重要工具。
 	然而，XGBoost 也有一些缺点。首先，它相较于其他简单的模型如线性回归，需要更多的时间和资源来训练，尤其是当数据量非常大时。
-	次，XGBoost 的超参数调优较为复杂，错误的设置可能导致模型表现不佳。此外，尽管 XGBoost 的强大性能在大多数情况下表现出色，但它的解释性较差，不如简单模型容易解读。
+	次，XGBoost的超参数调优较为复杂，错误的设置可能导致模型表现不佳。此外，尽管 XGBoost 的强大性能在大多数情况下表现出色，但它的解释性较差，不如简单模型容易解读。
 	对于某些问题，XGBoost 的复杂性可能带来过拟合风险，尤其是当训练数据的规模和质量不足时。
 	总体来说，XGBoost 非常适合高维度数据集和需要高精度的应用场景，但在某些情况下可能需要平衡其复杂性与可解释性。
 	Liu 等（2018）在其研究中使用了 XGBoost 算法对中国的土地覆盖进行分类，证明了该方法在复杂地理环境下的高效性\cite{liu2018}。
@@ -818,7 +818,7 @@
 	
 	其中，\( \alpha \) 是介于 0 和 1 之间的分位数值，例如 \( \alpha = 0.05 \) 对应 5\% 分位数（下界），\( \alpha = 0.95 \) 对应 95\% 分位数（上界）。通过估计这些分位数，QRF 能够提供比传统均值回归更丰富的不确定性信息，在气候预测、金融风险管理等领域具有广泛应用。
 	
-	\subsection{shap图}
+	\subsection{SHAP图}
 	
 	SHAP（SHapley Additive exPlanations）图是一种基于 Shapley 值的解释工具，用于揭示机器学习模型中的特征贡献。
 	Shapley 值最早来自合作博弈论，用于衡量每个参与者对总体收益的贡献；在模型解释中，每个特征的贡献被视为参与者。
@@ -1158,7 +1158,8 @@
 %	\end{figure}
 	
 	\subsection{模型的优化与选择}
-	\subsubsection{LazyRegressor}
+	
+	
 	
 	我们使用了 \texttt{LazyRegressor} \cite{lazyregressor} 工具对数据集进行了回归模型的比较分析。，以便快速评估不同模型的性能。目标变量是 植物病害，而特征由其余变量组成。数据集被划分为训练集和测试集，采用 8:2 的比例。LazyRegressor 自动训练了多种回归模型，并对它们在测试集上的性能进行了评估，主要通过调整后的 R 方（Adjusted R-Squared）、R 方（R-Squared）、均方根误差（RMSE）以及模型运行时间（Time Taken）这几个指标来比较。
 	
@@ -1187,7 +1188,19 @@
 		\label{tab:models_performance}
 	\end{table}
 	
-	\subsubsection{超参数调优}
+
+	调优一个随机森林回归模型，并评估不同\texttt{ntree}和\texttt{mtry}参数配置下的模型表现。我们首先导入所需的库，包括\texttt{numpy}、\texttt{matplotlib}、\texttt{sklearn}和\texttt{pandas}，这些库提供了生成数据、训练模型、计算评估指标和可视化结果的功能。接着，我们设置随机种子（\texttt{random\_state} = 42），以确保实验结果的可重复性。然后，我们从数据集中加载数据，并将数据分为自变量（\texttt{X}）和因变量（\texttt{y}）。自变量包括所有列，除了\texttt{RATIO}，而\texttt{RATIO}列作为目标变量。我们使用\texttt{train\_test\_split}函数将数据集拆分成训练集和测试集，其中训练集占90\%，测试集占10\%。接下来，我们定义了不同的\texttt{ntree}和\texttt{mtry}值范围。\texttt{ntree\_values}从10到200，步长为20，表示我们将尝试不同数量的决策树来训练模型；\texttt{mtry\_values}从3到10，表示我们将尝试不同的特征选择数量，以控制每棵树可以使用的特征数。在接下来的部分，我们初始化了两个字典\texttt{rmse\_dict}和\texttt{r2\_dict}，用于存储每次实验（不同的\texttt{ntree}和\texttt{mtry}值组合）计算的RMSE和$R^2$值。通过嵌套循环，我们对每一种\texttt{mtry}和\texttt{ntree}组合训练一个随机森林回归模型。每次模型训练后，我们用测试集进行预测，并计算RMSE和$R^2$。实现了对随机森林回归模型的调参过程，比较了不同的\texttt{ntree}和\texttt{mtry}参数配置对模型性能的影响，并通过图表可视化了评估指标，同时将结果保存为文件供后续分析使用。
+%		
+%	\begin{figure}[H]  % 创建浮动体（figure）
+%		\centering  % 图片居中
+%		\includegraphics[width=0.8\textwidth]{pic/ntreemtry.png}  
+%	\caption{基于17个气候、地理与土壤变量的随机森林模型使用不同mtry,ntree的训练结果。}
+%	\caption*{Training results of the random forest model based on 17 climate, geographic, and soil variables using different mtry and ntree values.}
+%		
+%		\label{fig:example}  % 设置标签，可以用于交叉引用
+%	\end{figure}
+%	
+	
 
 	我们对每个模型进行了两种不同的训练方式：一种是直接训练模型，另一种是通过网格搜索（GridSearchCV）\cite{scikit-learn} 来优化超参数。首先，我们读取了气候和土壤数据集，并进行了数据预处理。预处理步骤包括列名清理、特征工程（如计算平均气温、风速、降水量等），并删除了一些不相关的特征。
 	
