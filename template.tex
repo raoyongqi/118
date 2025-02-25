@@ -105,7 +105,7 @@
 	
 	
 	%中文摘要
-	\	\ZhAbstract{俗话说，民以食为天。粮食的生产直接关系到人类的生存与发展，而植物病害是影响粮食安全的重要因素之一。植物在生长过程中会受到病原菌的侵染，进而导致大范围的农作物减产甚至绝收。植物病害的发生受到多种环境因素的影响，具有显著的空间和时间变化特征。然而，目前对于环境变量（如气候和土壤）如何驱动病害的发生仍存在较大的不确定性。此外，传统的植物病害预测方法主要依赖于人工观察和诊断，费时费力且易受人为误差的影响。植物病害的发生具有显著的空间和时间变化特征，但环境和土壤对植物病害的影响尚不确定。本研究整合多源大尺度环境数据（包括气候数据、土壤数据等），并利用机器学习方法构建了植物病害的预测模型，具体研究流程如下：
+		\ZhAbstract{俗话说，民以食为天。粮食的生产直接关系到人类的生存与发展，而植物病害是影响粮食安全的重要因素之一。植物在生长过程中会受到病原菌的侵染，进而导致大范围的农作物减产甚至绝收。植物病害的发生受到多种环境因素的影响，具有显著的空间和时间变化特征。然而，目前对于环境变量（如气候和土壤）如何驱动病害的发生仍存在较大的不确定性。此外，传统的植物病害预测方法主要依赖于人工观察和诊断，费时费力且易受人为误差的影响。植物病害的发生具有显著的空间和时间变化特征，但环境和土壤对植物病害的影响尚不确定。本研究整合多源大尺度环境数据（包括气候数据、土壤数据等），并利用机器学习方法构建了植物病害的预测模型，具体研究流程如下：
 	\par 一、数据收集与预处理
 	\par 本研究基于中国草地的实地调查数据，共收集了193个样点的植物病害数据，覆盖全国26个省级行政区。每个样点包含3-4个样方，共计记录了770条详细数据。结合全球气候数据库（WorldClim version 2.1）提取每个样点的气候数据，并从全球协调世界土壤数据库（HWSD）提取土壤数据。随后，我们在地图上可视化了样点的空间分布，并分析了各环境变量的取值范围及其相关性。
 	\par 二、贝叶斯建模分析
@@ -113,7 +113,7 @@
 	\par 三、集成学习模型比较与预测
 	\par 采用多种集成学习方法（如随机森林、梯度提升机等）进行植物病害的预测分析，并评估各变量的重要性。结果表明，“太阳辐射”是影响植物病害的最重要因素，地理因素（经度、纬度）和土壤因素（土壤砂含量）次之，而“气压”和“风速”的重要性值分别为0.08和0.07，表明它们对植物病害亦具有一定影响。此外，我们利用LazyRegressor优化模型选择，发现GradientBoostingRegressor（GBR）在所有模型中表现最佳。基于GBR的预测结果，我们绘制了中国地区植物病害的大尺度预测图，并进一步模拟了气候变化条件下的植物病害分布。
 	\par 四、深度学习建模与优化
-	\par 采用PyTorch和TensorFlow分别构建神经网络模型，并进行训练和优化。通过绘制训练集与测试集的R²变化曲线，评估模型的收敛情况和泛化能力。结果表明，PyTorch和TensorFlow的训练效果相似，但PyTorch的收敛速度稍慢。
+	\par 采用PyTorch和TensorFlow分别构建神经网络模型，并进行训练和优化。通过绘制训练集与测试集的R方变化曲线，评估模型的收敛情况和泛化能力。结果表明，PyTorch和TensorFlow的训练效果相似，但PyTorch的收敛速度稍慢。
 
 	\par 本研究提出了一种基于多源大尺度环境数据的植物病害预测方法，并揭示了气候和土壤因子对植物病害的影响机制。研究结果不仅有助于理解植物病害的环境驱动因素，也可为全球气候变化背景下的病害防控提供科学依据。
 	}{机器学习，大尺度研究}
@@ -130,7 +130,7 @@
 		\par Multiple ensemble learning methods (e.g., random forest and gradient boosting) were applied to predict plant disease occurrence, and the importance of different variables was assessed. The results reveal that "solar radiation" is the most influential factor in plant disease outbreaks, followed by geographic factors (longitude and latitude) and soil properties (soil sand content). The importance values of "air pressure" and "wind speed" are 0.08 and 0.07, respectively, indicating that they also play a role in disease occurrence. Additionally, the LazyRegressor package was used to optimize model selection, and GradientBoostingRegressor (GBR) demonstrated the best predictive performance among all models. Using GBR predictions, large-scale maps of plant disease distribution in China were generated, and further simulations were conducted to predict disease distribution under climate change scenarios.
 		
 		\par 4. Deep Learning Model Development and Optimization
-		\par Deep learning models were constructed and trained using PyTorch and TensorFlow. The R² variation curves for the training and test datasets were plotted to evaluate model convergence and generalization ability. The results show that PyTorch and TensorFlow yield similar predictive performance, though PyTorch exhibits a slower convergence rate.
+		\par Deep learning models were constructed and trained using PyTorch and TensorFlow. The R Squared variation curves for the training and test datasets were plotted to evaluate model convergence and generalization ability. The results show that PyTorch and TensorFlow yield similar predictive performance, though PyTorch exhibits a slower convergence rate.
 		
 		\par This study proposes a plant disease prediction approach based on multi-source large-scale environmental data and reveals the impact of climate and soil factors on disease occurrence. The findings contribute to a better understanding of the environmental drivers of plant diseases and provide scientific insights for disease prevention and management in the context of global climate change.
 		}{Machine Learning, Large-Scale Study}
