@@ -406,16 +406,9 @@
 	
 	\subsection{下载cmip6数据}
 
-	首先，确保安装和加载所需的R包，使用\texttt{remotes}包\cite{remotes}来从GitHub安装\texttt{geodata}包\cite{geodata}。
+	首先，确保安装和加载所需的R包，使用\texttt{remotes}包\cite{remotes}来从GitHub安装\texttt{geodata}包\cite{geodata}。在加载\texttt{geodata}包后，使用\texttt{getwd()}获取当前工作目录，并通过\texttt{setwd()}设置工作目录为\texttt{"C:/Users/r/Desktop/cmip6"}，以便后续数据下载和存储都在该目录下。接下来，定义模型、情景和变量。这里仅指定一个模型\texttt{"ACCESS-CM2"}，并设置情景为\texttt{"126"}、\texttt{"245"}、\texttt{"370"}和\texttt{"585"}，选择需要下载的变量\texttt{"tmin"}、\texttt{"tmax"}、\texttt{"prec"}和\texttt{"bioc"}。时间范围设定为\texttt{"2021-2040"}、\texttt{"2041-2060"}、\texttt{"2061-2080"}和\texttt{"2081-2100"}，并指定数据保存路径为\texttt{"CMIP6"}。
 	
-	在加载\texttt{geodata}包后，使用\texttt{getwd()}获取当前工作目录，并通过\texttt{setwd()}设置工作目录为\texttt{"C:/Users/r/Desktop/cmip6"}，以便后续数据下载和存储都在该目录下。
-	
-	接下来，定义模型、情景和变量。这里仅指定一个模型\texttt{"ACCESS-CM2"}，并设置情景为\texttt{"126"}、\texttt{"245"}、\texttt{"370"}和\texttt{"585"}，选择需要下载的变量\texttt{"tmin"}、\texttt{"tmax"}、\texttt{"prec"}和\texttt{"bioc"}。时间范围设定为\texttt{"2021-2040"}、\texttt{"2041-2060"}、\texttt{"2061-2080"}和\texttt{"2081-2100"}，并指定数据保存路径为\texttt{"CMIP6"}。
-	
-	在下载数据之前，检查主目录\texttt{CMIP6}是否存在，如果不存在则使用\texttt{dir.create()}创建该目录。接下来，定义一个名为\texttt{download\_data}的函数，该函数接受模型、情景和时间范围作为参数。在函数内部，根据模型和情景构建文件夹路径，并使用\texttt{dir.create()}创建相应的文件夹。
-	
-	然后，针对每个变量，构建文件名和下载URL。
-	最后，使用嵌套循环遍历模型、情景和时间范围，调用\texttt{download\_data}函数进行数据下载。通过这一系列步骤，可以有效地批量下载指定模型和情景下的气候数据，并将数据保存在指定的目录结构中。
+	在下载数据之前，检查主目录\texttt{CMIP6}是否存在，如果不存在则使用\texttt{dir.create()}创建该目录。接下来，定义一个名为\texttt{download\_data}的函数，该函数接受模型、情景和时间范围作为参数。在函数内部，根据模型和情景构建文件夹路径，并使用\texttt{dir.create()}创建相应的文件夹。然后，针对每个变量，构建文件名和下载URL。最后，使用嵌套循环遍历模型、情景和时间范围，调用\texttt{download\_data}函数进行数据下载。通过这一系列步骤，可以有效地批量下载指定模型和情景下的气候数据，并将数据保存在指定的目录结构中。
 	
 	
 	\subsection{植物病害的基础信息的掌握}
