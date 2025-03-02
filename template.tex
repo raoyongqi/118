@@ -1032,7 +1032,7 @@
 	% \end{figure}
 
 
-	我们使用了 \texttt{LazyRegressor} \cite{lazyregressor} 工具对数据集进行了回归模型的比较分析。，以便快速评估不同模型的性能。目标变量是 植物病害，而特征由其余变量组成。数据集被划分为训练集和测试集，采用 8:2 的比例。LazyRegressor 自动训练了多种回归模型，并对它们在测试集上的性能进行了评估，主要通过调整后的 R 方（Adjusted R-Squared）、R 方（R-Squared）、均方根误差（RMSE）以及模型运行时间（Time Taken）这几个指标来比较。
+	我们使用了 \texttt{LazyRegressor} \cite{lazyregressor} 工具对数据集进行了回归模型的比较分析，以便快速评估不同模型的性能。目标变量是 植物病害，而特征由其余变量组成。数据集被划分为训练集和测试集，采用 8:2 的比例。LazyRegressor 自动训练了多种回归模型，并对它们在测试集上的性能进行了评估，主要通过调整后的 R 方（Adjusted R-Squared）、R 方（R-Squared）、均方根误差（RMSE）以及模型运行时间（Time Taken）这几个指标来比较。
 	
 	结果表明，\texttt{GradientBoostingRegressor} \cite{gradientboosting} 在所有模型中表现最佳，其 Adjusted R-Squared 和 R-Squared 值分别为 0.22 和 0.31，同时 RMSE 为 4.99。这表明它在预测目标变量方面有较高的拟合度。\texttt{RandomForestRegressor} \cite{randomforest} 和 \texttt{HistGradientBoostingRegressor} \cite{histgradientboosting} 分别排名第二和第三，它们的 R-Squared 值分别为 0.29 和 0.27，表现仅次于 \texttt{GradientBoostingRegressor}。值得注意的是，虽然某些模型的计算时间较长，例如 RandomForestRegressor（0.43 秒），但性能提升可能值得权衡。
 
