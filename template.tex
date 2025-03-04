@@ -111,12 +111,15 @@
 	\par 二、贝叶斯建模分析
 	\par 采用贝叶斯统计模型，分析各个环境变量对植物病害严重程度的影响。结果表明，“土壤砂含量”对植物病害的发生具有显著的正向影响，而“经度”和“海拔”则呈现负相关关系。此外，“太阳辐射”、“风速”和“气压”的影响较为不确定，但可能在不同条件下具有不同的作用。
 	\par 三、集成学习模型比较与预测
-	\par 采用多种集成学习方法（如随机森林、梯度提升机等）进行植物病害的预测分析，并评估各变量的重要性。结果表明，“太阳辐射”是影响植物病害的最重要因素，地理因素（经度、纬度）和土壤因素（土壤砂含量）次之，而“气压”和“风速”的重要性值分别为0.08和0.07，表明它们对植物病害亦具有一定影响。此外，我们利用LazyRegressor优化模型选择，发现GradientBoostingRegressor（GBR）在所有模型中表现最佳。基于GBR的预测结果，我们绘制了中国地区植物病害的大尺度预测图，并进一步模拟了气候变化条件下的植物病害分布。
+	\par 采用多种集成学习方法（如随机森林、梯度提升机等）进行植物病害的预测分析，比较了多种模型的优劣，并评估各变量的重要性。基于随机森林的预测结果，我们绘制了中国地区植物病害的大尺度预测图，并进一步模拟了气候变化条件下的植物病害分布。
 	\par 四、深度学习建模与优化
-	\par 采用PyTorch和TensorFlow分别构建神经网络模型，并进行训练和优化。通过绘制训练集与测试集的R方变化曲线，评估模型的收敛情况和泛化能力。结果表明，PyTorch和TensorFlow的训练效果相似，但PyTorch的收敛速度稍慢。
+	\par 采用PyTorch和TensorFlow分别构建神经网络模型，并进行训练和优化。比较了卷积神经网络和全连接神经网络等深度学习模型的预测精度。
+
+	
 
 	\par 本研究提出了一种基于多源大尺度环境数据的植物病害预测方法，并揭示了气候和土壤因子对植物病害的影响机制。研究结果不仅有助于理解植物病害的环境驱动因素，也可为全球气候变化背景下的病害防控提供科学依据。
 	}{机器学习，大尺度研究}
+	
 	\EnAbstract{
 		Food security is a fundamental concern for human survival and development, and plant diseases are one of the major factors threatening global agricultural production. During their growth, plants are susceptible to pathogen infections, which can result in widespread crop yield losses or even total failure. The occurrence of plant diseases is influenced by multiple environmental factors and exhibits significant spatial and temporal variability. However, the extent to which environmental variables (such as climate and soil conditions) drive disease outbreaks remains uncertain. Furthermore, traditional plant disease prediction methods rely heavily on manual observation and diagnosis, which are time-consuming, labor-intensive, and prone to human error. To address these challenges, this study integrates multi-source large-scale environmental data (including climate and soil data) and employs machine learning methods to develop a predictive model for plant diseases. The research framework is as follows:
 		
@@ -127,10 +130,10 @@
 		\par A Bayesian statistical model was employed to analyze the impact of various environmental variables on plant disease severity. The results indicate that "soil sand content" has a significant positive effect on plant diseases, whereas "longitude" and "altitude" show a negative correlation. The effects of other factors, such as "solar radiation," "wind speed," and "air pressure," remain uncertain but may vary under different conditions.
 		
 		\par 3. Comparison and Prediction Using Ensemble Learning Models
-		\par Multiple ensemble learning methods (e.g., random forest and gradient boosting) were applied to predict plant disease occurrence, and the importance of different variables was assessed. The results reveal that "solar radiation" is the most influential factor in plant disease outbreaks, followed by geographic factors (longitude and latitude) and soil properties (soil sand content). The importance values of "air pressure" and "wind speed" are 0.08 and 0.07, respectively, indicating that they also play a role in disease occurrence. Additionally, the LazyRegressor package was used to optimize model selection, and GradientBoostingRegressor (GBR) demonstrated the best predictive performance among all models. Using GBR predictions, large-scale maps of plant disease distribution in China were generated, and further simulations were conducted to predict disease distribution under climate change scenarios.
+		\par Various ensemble learning methods (such as random forests, gradient boosting machines, etc.) were employed for plant disease prediction analysis. The strengths and weaknesses of multiple models were compared, and the importance of each variable was assessed. Based on the prediction results of the random forest model, a large-scale prediction map of plant diseases across China was created, and further simulations of plant disease distribution under climate change scenarios were conducted.
 		
 		\par 4. Deep Learning Model Development and Optimization
-		\par Deep learning models were constructed and trained using PyTorch and TensorFlow. The R Squared variation curves for the training and test datasets were plotted to evaluate model convergence and generalization ability. The results show that PyTorch and TensorFlow yield similar predictive performance, though PyTorch exhibits a slower convergence rate.
+		\par Neural network models were constructed using PyTorch and TensorFlow, followed by training and optimization. The prediction accuracy of convolutional neural networks and fully connected neural networks, among other deep learning models, was compared.
 		
 		\par This study proposes a plant disease prediction approach based on multi-source large-scale environmental data and reveals the impact of climate and soil factors on disease occurrence. The findings contribute to a better understanding of the environmental drivers of plant diseases and provide scientific insights for disease prevention and management in the context of global climate change.
 		}{Machine Learning, Large-Scale Study}
@@ -515,7 +518,7 @@
 	\]
 	如果 \( p\text{值} < 0.05 \)，则认为自变量和因变量之间具有显著的空间相关性。在遍历每个自变量列时，我们计算每个自变量与因变量之间的 Mantel 检验，并将结果保留为两位小数。对于 \( p\text{值} < 0.05 \) 的结果，我们进行加粗显示，表示其具有显著性。
 	
-	大多数气候和土壤变量与响应变量之间具有显著的相关性，特别是太阳辐射 (SRAD)、土壤砂含量 (S SAND)、气压 (VAPR)、海拔 (ELEV)、纬度 (LAT) 等与植物病害之间的相关性显示出非常显著的负相关关系。另一方面，风速 (WIND) 和表层土壤砾石含量 (T GRAVEL) 与响应变量之间的相关性并不显著，p 值较高，分别为 0.38 和 0.89。这些结果表明，在这些变量中，有些与植物病害存在较强的负相关关系，而有些则与植物病害的关系较弱或不显著。
+	大多数气候和土壤变量与响应变量之间具有显著的相关性，特别是太阳辐射 (SRAD)、土壤砂含量 (S SAND)、气压 (VAPR)、海拔 (ELEV)、纬度 (LAT) 等与植物病害之间的相关性显示出非常显著的负相关关系。另一方面，风速 (WIND) 和表层土壤砾石含量 (T GRAVEL) 与响应变量之间的相关性并不显著，p 值较高，分别为 0.38 和 0.89。
 	
 	\begin{table}[H]
 		\caption{中国地区的771个样点的17个气候、地理与土壤变量的统计值。这些变量包括了经度 (Longitude)、纬度 (Latitude)、
@@ -632,7 +635,7 @@
 	\section{地理信息处理方式}
 	
 	本文的地理信息处理方式依赖于GDAL库 \cite{gdal2020}。
-	GDAL（Geospatial Data Abstraction Library）是一个开源的地理空间数据处理库，广泛应用于地理信息系统（GIS）领域，具有强大的数据读写和处理功能 \cite{mitchell1999}。
+	GDAL（Geospatial Data Abstraction Library）是一个开源的地理空间数据处理库，广泛应用于地理信息系统（GIS）领域，具有强大的数据读写和处理功能 \cite{Warmerdam2008}。
 	GDAL支持多种栅格和矢量数据格式，如GeoTIFF、Shapefile、KML、GeoJSON等，使其能够在不同的数据格式之间进行转换和处理，这为数据的集成和分析提供了极大的便利。
 	此外，GDAL的跨平台特性使得它能够在Windows、Linux、macOS等多种操作系统上运行，确保了它的广泛适用性。
 	GDAL还提供了高效的性能，特别是在处理大规模数据时，它能快速读取、写入以及进行各种数据处理操作，如投影转换、栅格运算和矢量数据的操作等。
@@ -647,7 +650,7 @@
 
 	\section{贝叶斯回归模型}
 	贝叶斯回归模型是一种基于贝叶斯定理的统计推断方法，广泛应用于回归分析中，特别是在处理带有不确定性的数据时 \cite{bishop2006pattern}。
-	贝叶斯回归的核心思想是将回归问题转化为对模型参数的概率推断，而不是通过点估计来确定参数值 \cite{gelman2013bayesian}。
+	贝叶斯回归的核心思想是将回归问题转化为对模型参数的概率推断，而不是通过点估计来确定参数值 \cite{gelman1995bayesian}。
 	具体来说，贝叶斯回归通过引入先验分布，结合观测数据，通过后验分布来推断未知参数。
 	给定数据集 $\{(x_i, y_i)\}_{i=1}^N$，贝叶斯回归模型的目标是通过最大化后验分布来估计参数。
 	
@@ -691,7 +694,7 @@
 	
 	构方程模型（Structural Equation Modeling，简称 SEM）是一种用于分析变量之间复杂关系的统计方法。它通过同时估计多个回归关系，以探讨潜在变量（即不可直接观测的变量）与观测变量之间的关系，提供了对因果推断的量化分析。SEM广泛应用于心理学、社会科学、市场营销、教育研究等领域，能够处理多个依赖关系、多个因果路径和测量误差等复杂情形。
 	
-	结构方程模型的基本框架包括两个主要部分：测量模型和结构模型。测量模型用于描述潜在变量与观测变量之间的关系，通常通过因子分析来构建。结构模型则用于描述潜在变量之间的因果关系。潜在变量通常是通过一组与之相关的观测变量来进行测量的，而测量误差会对变量间的关系产生影响，这一点在 SEM 中得到了明确的处理\cite{wang2010}。在 SEM 中，通常将模型分为两个部分：一是测量模型（Measurement Model），它描述了潜在变量与观测变量之间的关系，二是结构模型（Structural Model），它描述了潜在变量之间的因果关系。测量模型通常使用因子分析来建模，而结构模型则通过回归方程来表示因果关系\cite{byrne2010}。结构方程模型的数学表达式通常涉及到回归方程，潜在变量和观测变量之间的关系可以用以下的公式来表示：
+	结构方程模型的基本框架包括两个主要部分：测量模型和结构模型。测量模型用于描述潜在变量与观测变量之间的关系，通常通过因子分析来构建。结构模型则用于描述潜在变量之间的因果关系。潜在变量通常是通过一组与之相关的观测变量来进行测量的，而测量误差会对变量间的关系产生影响，这一点在 SEM 中得到了明确的处理\cite{jenatabadi2015tutorialanalyzingstructuralequation}。在 SEM 中，通常将模型分为两个部分：一是测量模型（Measurement Model），它描述了潜在变量与观测变量之间的关系，二是结构模型（Structural Model），它描述了潜在变量之间的因果关系。测量模型通常使用因子分析来建模，而结构模型则通过回归方程来表示因果关系\cite{byrne2010}。结构方程模型的数学表达式通常涉及到回归方程，潜在变量和观测变量之间的关系可以用以下的公式来表示：
 	
 	\[
 	\mathbf{Y} = \mathbf{B} \mathbf{X} + \mathbf{E}
@@ -761,7 +764,7 @@
 	
 	\subsection{XGBoost}
 
-	XGBoost是一种基于决策树的机器学习算法，因其速度和性能在处理大规模数据和复杂问题时非常受欢迎 \cite{chen2016xgboost}。
+	XGBoost是一种基于决策树的机器学习算法，因其速度和性能在处理大规模数据和复杂问题时非常受欢迎 \cite{10.1145/2939672.2939785}。
 	XGBoost通过优化损失函数和增加正则化项，减少过拟合风险，同时加速模型的训练过程。其关键特性之一是实现了并行计算，使得在处理大规模数据集时具有显著的速度优势。此外，XGBoost 还提供了多种灵活的参数配置，使得用户能够针对具体问题进行调优。该模型不仅适用于分类和回归任务，还在许多机器学习竞赛中表现出色。由于其强大的性能和灵活性，XGBoost 广泛应用于金融、医疗、广告和推荐系统等多个领域，是现代机器学习中不可或缺的重要工具。然而，XGBoost 也有一些缺点。首先，它相较于其他简单的模型如线性回归，需要更多的时间和资源来训练，尤其是当数据量非常大时。其次，XGBoost的超参数调优较为复杂，错误的设置可能导致模型表现不佳。此外，尽管 XGBoost 的强大性能在大多数情况下表现出色，但它的解释性较差，不如简单模型容易解读。
 	对于某些问题，XGBoost 的复杂性可能带来过拟合风险，尤其是当训练数据的规模和质量不足时。
 	总体来说，XGBoost 非常适合高维度数据集和需要高精度的应用场景，但在某些情况下可能需要平衡其复杂性与可解释性。
@@ -770,7 +773,7 @@
 	
 	\subsection{LightGBM}
 	
-	LightGBM（Light Gradient Boosting Machine）是一种高效的梯度提升框架，专为处理大规模数据集和高维特征而设计 \cite{ke2017lightgbm}。
+	LightGBM（Light Gradient Boosting Machine）是一种高效的梯度提升框架，专为处理大规模数据集和高维特征而设计 \cite{NIPS2017_6449f44a}。
 	它由微软的 DMTK（Distributed Machine Learning Toolkit）团队开发，旨在提高模型训练的速度和效率。
 	LightGBM采用基于直方图的学习算法，将连续特征分桶为离散的直方图，这样不仅减少了内存使用，还加速了计算过程。
 	与传统的梯度提升方法相比，LightGBM具有多个显著优势。首先，它支持按叶子生长的树结构，而非按层生长，这使得模型能更好地捕捉数据的复杂性，并提高预测的准确性。
@@ -782,7 +785,7 @@
 	
 	\subsection{分位数随机森林}
 	
-	分位数回归（Quantile Regression）是一种用于估计不确定性的传统方法 \cite{koenker2005quantile}，其输出能够反映未观测数据点的不确定性范围（上界和下界）。
+	分位数回归（Quantile Regression）是一种用于估计不确定性的传统方法 \cite{10.1257/jep.15.4.143}，其输出能够反映未观测数据点的不确定性范围（上界和下界）。
 	尽管传统的分位数回归主要基于线性模型，但近年来，该方法已被扩展至随机森林，形成了分位数随机森林（Quantile Random Forest, QRF） \cite{meinshausen2006quantile}。
 	与传统随机森林仅估计目标变量 \( y \) 在给定输入特征 \( x \) 时的条件均值 \( E(y|x) \) 不同，分位数随机森林能够估计整个条件概率分布 \( p(y|x) \)。
 	该概率密度的估计依赖于从训练好的随机森林模型中提取的数值权重 \( \omega_i (x) \)，这些权重用于衡量每个训练样本点对新数据点的贡献。  
@@ -812,7 +815,7 @@
 	
 	SHAP（SHapley Additive exPlanations）图是一种基于 Shapley 值的解释工具，用于揭示机器学习模型中的特征贡献。
 	Shapley 值最早来自合作博弈论，用于衡量每个参与者对总体收益的贡献；在模型解释中，每个特征的贡献被视为参与者。
-	SHAP 图利用了 Shapley 值的加性特性，将各个特征的贡献加和成模型的预测值，以可视化模型输出对输入特征的敏感性和依赖性 \cite{lundberg2017unified}。	在计算单个特征的 SHAP 值时，所有可能的特征组合都被考虑，并通过求取平均边际贡献来表示该特征的贡献大小。
+	SHAP 图利用了 Shapley 值的加性特性，将各个特征的贡献加和成模型的预测值，以可视化模型输出对输入特征的敏感性和依赖性 \cite{NIPS2017_8a20a862}。	在计算单个特征的 SHAP 值时，所有可能的特征组合都被考虑，并通过求取平均边际贡献来表示该特征的贡献大小。
 	
 	给定一个机器学习模型 \( f \) 和输入特征集合 \( \mathbf{x} \)，某一特征 \( x_i \) 的 Shapley 值 \( \phi_i \) 定义如下：
 	
@@ -827,7 +830,7 @@
 	\subsection{TensorFlow}
 	
 	TensorFlow 是一个广泛使用的开源深度学习框架，由Google Brain团队于2015年发布，具有高度的灵活性和可扩展性，
-	适合开发各种规模和复杂度的机器学习模型 \cite{tensorflow2015-whitepaper}。
+	适合开发各种规模和复杂度的机器学习模型 \cite{abadi2016tensorflowlargescalemachinelearning}。
 	TensorFlow的设计是高度模块化的，提供了多个层次的抽象，使得开发者可以根据需求选择合适的操作层级。从底层的低级API（如TensorFlow Core）到更高级的API（如Keras），都可以轻松使用。Keras 是 TensorFlow 官方推荐的高级 API \cite{keras}，它简化了深度学习模型的构建、训练和评估过程，使得即使是新手也能轻松上手。
 	TensorFlow不仅适用于研究和开发人员，还广泛应用于生产环境，支持模型的部署和推理。TensorFlow Serving是一个专门为生产环境优化的模型服务框架，它能够高效地部署和管理机器学习模型。TensorFlow Lite则专注于移动设备和嵌入式系统上的推理任务 \cite{tensorflowlite}，TensorFlow.js 使得模型可以直接在浏览器中运行，适合开发 Web 应用 \cite{tensorflowjs}。
 	
@@ -856,7 +859,7 @@
 	\chapter{结果}
 	
 	\section{贝叶斯回归模型}
-	通过加载必要的库 \texttt{bayesplot} \cite{bayesplot}、\texttt{rstanarm} \cite{rstanarm} 和 \texttt{ggplot2} \cite{ggplot2}，我们设置工作目录并读取数据文件。
+	通过加载必要的库 \texttt{bayesplot} \cite{bayesplot}、\texttt{rstanarm} \cite{rstanarm} 和 \texttt{ggplot2} \cite{Villanueva03072019}，我们设置工作目录并读取数据文件。
 
 	接着，我们对数据中的自变量进行了标准化，保持因变量 \texttt{RATIO} 不变。然后，使用标准化后的数据进行拟合，得到一个贝叶斯回归模型，并提取其参数。
 	为了展示回归系数的后验分布，我们排除了某些不需要展示的参数，并绘制了一个包含80\%置信区间的 MCMC 后验分布图。
@@ -985,7 +988,7 @@
 	
 	\subsection{模型的优化与选择}
 	
-	我们加载了几个常用的 R 包，包括 caret\cite{caret}、ggplot2\cite{ggplot2}、dplyr\cite{dplyr}、tidyr\cite{tidyr} 和 ggthemes\cite{ggthemes}，分别用于机器学习、绘图、数据处理和整理。
+	我们加载了几个常用的 R 包，包括 caret\cite{2015ascl.soft05003K}、ggplot2、dplyr\cite{wickham2015dplyr}、tidyr\cite{tidyr} 和 ggthemes\cite{ggthemes}，分别用于机器学习、绘图、数据处理和整理。
 	我们设定了随机种子，确保实验结果的可复现性。
 	然后，我们通过读取存储在指定路径下的 CSV 文件，导入了数据集。接着，我们定义了一个 10 折重复交叉验证的控制方法，并选择了一个响应变量 RATIO 进行建模。
 	在模型训练部分，我们设定了一个包含多种模型的列表，包括 cubist, rf, xgbLinear 等，并通过循环检查每个模型文件是否已经存在。如果模型已经训练过，则直接加载模型；如果没有，则使用 train 函数进行训练，并将训练好的模型保存到文件中。
@@ -1125,7 +1128,7 @@
 %	\end{figure}	
 	
 	\section{深度学习模型}
-	
+	\section{ PyTorch 和 TensorFlow}
 	我们分别使用 PyTorch 和 TensorFlow 构建并训练了神经网络模型。对于 PyTorch，我们定义了一个包含三层全连接层的神经网络，使用 LeakyReLU 激活函数和 Dropout 层，并通过 Adam 优化器和均方误差损失函数进行训练。为了避免过拟合，我们还使用了早停（early stopping）机制，当验证损失连续若干个 epoch 没有改善时停止训练。对于 TensorFlow，我们采用了类似的神经网络结构，使用 Keras 提供的 Sequential API 构建模型，优化器为 Adam，损失函数为均方误差，并使用了学习率衰减和早停回调。我们训练了两个模型并记录了训练和验证损失，计算了每个模型在测试集上的预测性能，通过均方误差（MSE）和决定系数（R方）来评估模型的准确性。
 	
 	\begin{table}[H]
@@ -1154,7 +1157,7 @@
 %		
 %		\label{fig:example}  % 设置标签，可以用于交叉引用
 %	\end{figure}
-	
+		\section{卷积神经网络模型和全连接神经网络}
 	为了优化模型，我们构建了一个卷积神经网络模型（CNN），用于预测目标变量 "Pathogen Load"（植物病原负荷）。我们通过设置一个最小和最大 epoch 数量，并在每次训练后使用早期停止（EarlyStopping）回调来监控验证集上的损失。如果训练在设置的最小 epoch 数之前提前停止，我们会重新训练模型直到达到所需的 epoch 数量。接下来，我们使用训练好的模型进行预测，并通过 evaluate\_model 和 evaluate函数评估模型性能，计算并输出均方误差（MSE）、R²值和相对百分比误差（RPD）。最后，评估结果以图表的形式展示，左侧图展示了实际值与预测值的散点图以及回归线，右侧图展示了训练过程中验证集与训练集的损失变化曲线。所有的评估图表都被保存为 PNG 文件，并且结果通过打印输出。最终，我们得到了训练过程中表现的相关评估指标，模型在900个 epoch 后达到了早期停止条件。
 %		\begin{figure}[H]  % 创建浮动体（figure）
 %		\centering  % 图片居中
@@ -1165,7 +1168,7 @@
 %		% 设置标签，可以用于交叉引用
 %	\end{figure}
 	
-	为了提高神经网络的准确性，我们参考了文献中的方法 \cite{goodfellow2016deep, glorot2011deep, kingma2015adam, james2013introduction, chollet2018deep}，构建并训练了一个多个全连接层（Dense Layer）组成，每一层都采用ReLU激活函数的神经网络模型，通常被称为全连接神经网络（Fully Connected Neural Network,FCNN），用于预测目标变量。首先，我们为每个输入创建了独立的全连接层（NN1\_Dense 到 NN6\_Dense），然后将这些层按两两组合进行拼接（merge1、merge2、merge3），以形成输入的综合表示。随后，这些合并后的表示通过进一步的全连接层（NN\_merge1、NN\_merge2、NN\_merge3）进行处理，最终得出预测结果。
+	为了提高神经网络的准确性，我们参考了文献中的方法 \cite{goodfellow2016deep,pmlr-v15-glorot11a, kingma2015adam, james2013introduction, chollet2018deep}，构建并训练了一个多个全连接层（Dense Layer）组成，每一层都采用ReLU激活函数的神经网络模型，通常被称为全连接神经网络（Fully Connected Neural Network,FCNN），用于预测目标变量。首先，我们为每个输入创建了独立的全连接层（NN1\_Dense 到 NN6\_Dense），然后将这些层按两两组合进行拼接（merge1、merge2、merge3），以形成输入的综合表示。随后，这些合并后的表示通过进一步的全连接层（NN\_merge1、NN\_merge2、NN\_merge3）进行处理，最终得出预测结果。
 
 	模型使用Adam优化器和均方误差（MSE）损失函数进行了编译。训练过程中，我们通过一个回调函数在每个完成的训练周期（epoch）后打印一个点，以便追踪训练进度。模型被训练了1000个周期，验证集比例为20\%。训练完成后，我们绘制了平均绝对误差（MAE）和均方误差（MSE）随训练周期变化的图表，以便观察训练集和验证集的表现。
 
@@ -1183,9 +1186,11 @@
 		
 	% 	\label{fig:example}  % 设置标签，可以用于交叉引用
 	% \end{figure}
-	DenseNet是一个包含多个密集块（DenseBlock）和过渡层（TransitionLayer）的网络架构。密集块使用了瓶颈层（BottleneckLayer）来提取特征，每个瓶颈层由两个卷积层组成，用以捕捉数据的不同层次信息。过渡层则用于降低特征图的尺寸，同时保持有用的特征信息。每个密集块和过渡层的组合帮助模型在处理数据时逐步提取更高级的特征。
 	
-	同时我们实现了一个基于WaveNet架构的回归模型，用于预测病原负荷（Pathogen Load）。WaveNet架构，这是一种基于扩张卷积（dilated convolution）的神经网络架构，旨在捕捉时间序列中的长期依赖关系。模型将特征经过多个卷积层后，通过Dropout层来防止过拟合，最终输出一个表示病原负荷的数值。在卷积层的设计中，采用了不同的扩张率来捕获不同尺度的时间特征，从而增强了模型对复杂模式的学习能力。在模型编译和训练过程中，采用了均方误差（MSE）作为损失函数，并使用Adam优化器进行优化。为了避免过拟合，训练过程中使用了早停策略（EarlyStopping），当验证集上的损失不再改善时，提前停止训练。训练过程中，模型的最佳权重会被保存下来。在第一个子图中，我们将各个模型的训练损失曲线绘制出来，横坐标是训练的 epoch 数，纵坐标是损失值；第二个子图绘制了每个模型的验证损失曲线，展示了验证阶段的损失变化。两个子图的 Y 轴范围都设置为 10 到 50，以便于比较不同模型的损失变化趋势，并且为每个曲线添加了图例，方便区分不同模型。接下来，我们使用另外一组文件（包含每个模型的实际值与预测值对比数据）来绘制实际值与预测值之间的关系。首先，denseNet 在最优训练集和验证集损失上表现较好，最优训练集损失为 41.26，而最优验证集损失则为 35.57，这表明该模型能够较好地拟合数据，并在验证集上保持较低的误差。相比之下，wavenet1 的最优训练集损失为 771.14，验证集损失为 145.74，显示出该模型在训练过程中存在较大波动，未能达到较好的拟合效果。对于 wavenet2，其最优训练集损失为 21.29，最优验证集损失为 21.38，二者接近，且验证集损失为所有模型中最低，表明该模型在训练集和验证集上的表现都较为优秀，可能存在较为平衡的拟合情况。最后，wavenet5 的最优训练集损失为 16.30，最优验证集损失为 22.81，虽然训练集损失较低，但验证集损失相对较高，可能表明该模型在训练集上过拟合，无法很好地推广到验证集。综合来看，wavenet2 在所有模型中表现最佳，其验证集损失最低，而 wavenet1 的表现相对较差。
+	\section{密集神经网络模型和扩张卷积神经网络}
+	密集神经网络模型（DenseNet）是一个包含多个密集块（DenseBlock）和过渡层（TransitionLayer）的网络架构。密集块使用了瓶颈层（BottleneckLayer）来提取特征，每个瓶颈层由两个卷积层组成，用以捕捉数据的不同层次信息。过渡层则用于降低特征图的尺寸，同时保持有用的特征信息。每个密集块和过渡层的组合帮助模型在处理数据时逐步提取更高级的特征。
+	
+	同时我们实现了一个基于扩张卷积（WaveNet）架构的回归模型，用于预测病原负荷（Pathogen Load）。WaveNet架构，这是一种基于扩张卷积（dilated convolution）的神经网络架构，旨在捕捉时间序列中的长期依赖关系。模型将特征经过多个卷积层后，通过Dropout层来防止过拟合，最终输出一个表示病原负荷的数值。在卷积层的设计中，采用了不同的扩张率来捕获不同尺度的时间特征，从而增强了模型对复杂模式的学习能力。在模型编译和训练过程中，采用了均方误差（MSE）作为损失函数，并使用Adam优化器进行优化。为了避免过拟合，训练过程中使用了早停策略（EarlyStopping），当验证集上的损失不再改善时，提前停止训练。训练过程中，模型的最佳权重会被保存下来。在第一个子图中，我们将各个模型的训练损失曲线绘制出来，横坐标是训练的 epoch 数，纵坐标是损失值；第二个子图绘制了每个模型的验证损失曲线，展示了验证阶段的损失变化。两个子图的 Y 轴范围都设置为 10 到 50，以便于比较不同模型的损失变化趋势，并且为每个曲线添加了图例，方便区分不同模型。接下来，我们使用另外一组文件（包含每个模型的实际值与预测值对比数据）来绘制实际值与预测值之间的关系。首先，denseNet 在最优训练集和验证集损失上表现较好，最优训练集损失为 41.26，而最优验证集损失则为 35.57，这表明该模型能够较好地拟合数据，并在验证集上保持较低的误差。相比之下，wavenet1 的最优训练集损失为 771.14，验证集损失为 145.74，显示出该模型在训练过程中存在较大波动，未能达到较好的拟合效果。对于 wavenet2，其最优训练集损失为 21.29，最优验证集损失为 21.38，二者接近，且验证集损失为所有模型中最低，表明该模型在训练集和验证集上的表现都较为优秀，可能存在较为平衡的拟合情况。最后，wavenet5 的最优训练集损失为 16.30，最优验证集损失为 22.81，虽然训练集损失较低，但验证集损失相对较高，可能表明该模型在训练集上过拟合，无法很好地推广到验证集。综合来看，wavenet2 在所有模型中表现最佳，其验证集损失最低，而 wavenet1 的表现相对较差。
 	
 	
 \chapter{讨论}
